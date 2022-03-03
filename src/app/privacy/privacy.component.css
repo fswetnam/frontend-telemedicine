@@ -1,0 +1,27 @@
+h1 {
+    color: black;
+    padding-left: 20px;
+  }
+  
+  h2 {
+    color: black;
+    padding: 20px;
+  
+  }
+  
+  h3 {
+    color:black;
+    padding: 20px;
+  }
+  
+  p {
+    color: black;
+    padding: 15px;
+    font-size: 20px;
+  }
+  
+  li {
+    padding: 10px;
+    font-size: 20px;
+  }
+  

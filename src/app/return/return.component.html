@@ -1,0 +1,26 @@
+<html>
+<body>
+  <form name="myForm" method="post">
+  <div class="container">
+    <h1>Welcome Back to Telemedicine</h1>
+    <p>Please login with the correct information.</p>
+    <hr>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" id="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+
+
+    <input type="submit" name="log" id= "loginbtn" value="Login" (click)="myReturn()" class="returnbtn">
+  </div>
+  
+  <div class="container return">
+    <p>Don't have an account? <a href="new">Sign up</a>.</p>
+    <a href="forgot">Forgot Password?</a>
+  </div>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<html>
+<body>
+<form name="myForm" method="post" #myForm="ngForm" (ngSubmit)="myFunction(myForm)">
+  <div class="container">
+    <h1>Adminstration Login</h1>
+    <hr>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" ngModel placeholder="Enter Email" name="email" id="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" ngModel placeholder="Enter Password" name="psw" id="psw" required>
+
+
+    <input type="submit" name="log" id= "loginbtn" value="Login" (click)="myFunction(myForm)" class="returnbtn" [disabled]="myForm.invalid">
+  </div>
+  
+  <div class="container return">
+    <p>Please contact HR for Username and Password</p>
+  </div>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <title>Patient Portal</title>
+  <meta charset="UTF-8">
+  <style>
+    /*Styling the body*/
+    body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+  }
+  /*Header styling*/
+  .header{
+    padding: 30px;
+    text-align: left;
+    background: #2d5ee3;
+    color: white;
+  }
+    /*Fixing Title font*/
+  .title{
+    font-size: 32px;
+  }
+  /*CSS for top bar*/
+  .top-btn-group button{
+    background-color: #2d5ee3;
+    border: none;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    display: inline-block;
+    font-size: 18px;
+    margin: 10px 10px;
+    margin-left: 120px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+  }
+
+  /*Hover element for top bar buttons*/
+  .top-btn-group button:hover{
+    border-radius: 8px;
+    background-color: Green;
+  }
+
+  /*Schedule An Appointment button CSS*/
+  .schedApptBtn{
+    margin: 10px 10px;
+    margin-top: 80px;
+    margin-left: 25%;
+    padding: 20px 20px;
+    font-size: 15px;
+    background-color: #2d5ee3;
+    color: white;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    border-radius: 8px;
+    width: 50%;
+  }
+
+  /*Schedule Appt Button hover element*/  
+  .schedApptBtn:hover{
+    font-weight: bold;
+    background-color: Green;
+    border: solid;
+  }
+
+  /*CSS for middle row of buttons*/
+  .patient-btn-group button{
+    color: white;
+    background-color: #2d5ee3;
+    margin-top: 30px;
+    padding: 20px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    border-radius: 8px;
+    width: 10%;
+  }
+  
+  /*Middle Row Button hover element*/
+  .patient-btn-group button:hover{
+    font-weight: bold;
+    background-color: Green;
+    border: solid;
+  }
+
+  /*Messages Button format*/
+  .msgBtn{
+    margin: 10px 20px;
+    margin-left: 26%;
+  }
+
+  /*Medication Button format*/
+  .medicationBtn{
+    margin: 10px 20px;
+  }
+
+  /*Records Button format*/
+  .recordsBtn{
+    margin: 10px 20px;
+  }
+
+  /*Account Settings Button format*/
+  .accSetBtn{
+    margin: 10px 20px;
+  }
+
+  /*Video Chat Button format*/
+  .vidChatBtn{
+    margin: 10px 10px;
+    margin-top: 30px;
+    margin-left: 25%;
+    padding: 20px 20px;
+    font-size: 15px;
+    background-color: #2d5ee3;
+    color: white;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    border-radius: 8px;
+    width: 50%;
+  }
+
+  /*Video Chat Button hover element*/
+  .vidChatBtn:hover{
+    border: solid;
+    font-weight: bold;
+    background-color: Green;
+  }
+
+  </style>
+</head>
+
+<body>
+  <div class = "patient-options">
+    <button class = "button schedApptBtn">Schedule An Appointment</button>
+    <div class = "patient-btn-group">
+      <button class = "button msgBtn">Messages</button>
+      <button class = "button medicationBtn">Medication</button>
+      <button class = "button recordsBtn">Records</button>
+      <button class = "button accSetBtn">Account Settings</button>
+    </div>
+    <button class = "button vidChatBtn">Video Chat with a Doctor</button>
+  </div>
+
+ 
+
+</body>

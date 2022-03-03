@@ -3,23 +3,51 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import {Routes, RouterModule } from '@angular/router'
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 
+import { AppComponent } from './app.component';
 import { HomeComponent } from 'src/home/home.component';
 import { NewComponent } from './new/new.component';
+import { PatientpComponent } from './patientp/patientp.component';
+import { AdminlComponent } from './adminl/adminl.component';
+import { AboutComponent } from './about/about.component';
+import { PrivacyComponent } from './privacy/privacy.component';
+import { AdminpComponent } from './adminp/adminp.component';
+import { ForgotComponent } from './forgot/forgot.component';
+import { ReturnComponent } from './return/return.component';
+import { TermComponent } from './term/term.component';
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
+  {path: 'patientp', component:PatientpComponent},
+  {path: 'adminl', component:AdminlComponent},
+  {path: 'adminp', component:AdminpComponent},
+  {path: 'about', component:AboutComponent},
+  {path: 'privacy', component:PrivacyComponent},
+  {path: 'forgot', component:ForgotComponent},
+  {path: 'return', component:ReturnComponent},
+  {path: 'term', component:TermComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    NewComponent,
+    PatientpComponent,
+    AdminlComponent,
+    AdminpComponent,
+    AboutComponent,
+    PrivacyComponent,
+    ForgotComponent,
+    ReturnComponent,
+    TermComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot(Routs)
   ],
   providers: [],

@@ -16,6 +16,7 @@ import { AdminpComponent } from './adminp/adminp.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import { ReturnComponent } from './return/return.component';
 import { TermComponent } from './term/term.component';
+import { PatientComponent } from 'src/patient/patient.component';
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
@@ -27,6 +28,7 @@ const Routs: Routes = [
   {path: 'forgot', component:ForgotComponent},
   {path: 'return', component:ReturnComponent},
   {path: 'term', component:TermComponent},
+  {path: 'patient', component:PatientComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -41,7 +43,8 @@ const Routs: Routes = [
     PrivacyComponent,
     ForgotComponent,
     ReturnComponent,
-    TermComponent
+    TermComponent,
+    PatientComponent,
   ],
   imports: [
     BrowserModule,

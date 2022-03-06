@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { BehaviorSubject, Observable } from "rxjs";
-import { Patient } from "./Patient";
-import { PatientService } from "./patient.service";
+import { Patient } from "src/patient/Patient";
+import { PatientService } from "src/patient/patient.service";
 
 @Component({
     selector: 'app-patient',
@@ -12,8 +12,8 @@ import { PatientService } from "./patient.service";
 export class PatientComponent implements OnInit{
     patientState = new BehaviorSubject<Patient>(null);
     patient$ = this.patientState.asObservable().subscribe();
-    patients: Patient[];
-    patient: Patient;
+    patients!: Patient[];
+    patient!: Patient;
     message: any;
     constructor(private patientService: PatientService) {}
 

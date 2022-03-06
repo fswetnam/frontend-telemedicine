@@ -16,7 +16,9 @@ import { AdminpComponent } from './adminp/adminp.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import { ReturnComponent } from './return/return.component';
 import { TermComponent } from './term/term.component';
-import { PatientComponent } from 'src/patient/patient.component';
+import { PatientComponent } from './patient/patient.component';
+import { AddressComponent } from './address/address.component';
+import { InsuranceComponent } from './insurance/insurance.component';
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
@@ -29,6 +31,8 @@ const Routs: Routes = [
   {path: 'return', component:ReturnComponent},
   {path: 'term', component:TermComponent},
   {path: 'patient', component:PatientComponent},
+  {path: 'address', component:AddressComponent},
+  {path: 'insurance', component:InsuranceComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -45,6 +49,8 @@ const Routs: Routes = [
     ReturnComponent,
     TermComponent,
     PatientComponent,
+    AddressComponent,
+    InsuranceComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,49 +18,10 @@
                         <td> {{ insurance.consultingFeesCovered }}</td>
                         <td> {{ insurance.percentInsured }}</td>
                         <td>
-                            <span><button name="delete" style="margin: 5px 10px;" (click)="delete(insurance.id)">Delete</button></span>
-                            <span><button name="update" style="margin: 5px 10px;" data-toggle="modal" data-target="#updateInsurance">Update</button></span>
+                            <span><button name="delete" style="margin: 5px 10px;" (click)="delete(insurance)">Delete</button></span>
+                            <span><button name="update" style="margin: 5px 10px;" data-toggle="modal" data-target="#updateInsurance" (click)="setInsurance(insurance)">Update</button></span>
 
-                            <div id="updateInsurance" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
-                              
-                                  <!-- Modal content-->
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Update Insurance</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                      <form #updateInsuranceForm="ngForm" (ngSubmit)="update(updateInsuranceForm, insurance)">
-                                        <p>Please fill in this form to update values.</p>
-                                        <hr>
-                                    
-                                        <label for="name"><b>Name</b></label>
-                                        <input type="text" ngModel placeholder="Enter Name" name="name" id="name">
-                                        
-                                        <label for="allCareCoverage"><b>All Care Coverage</b></label>
-                                        <p>
-                                            <input type="radio" ngModel value="yes" name="allCareCoverage" [value]="true" required > Yes
-                                            <input type="radio" ngModel value="no" name="allCareCoverage" [value]="false" required > No
-                                         </p> 
-                                    
-                                        <label for="consultingFeesCovered"><b>Consulting Fees Covered</b></label>
-                                        <p>
-                                            <input type="radio" ngModel value="yes" name="consultingFeesCovered" [value]="true" required > Yes
-                                            <input type="radio" ngModel value="no" name="consultingFeesCovered" [value]="false" required > No
-                                         </p> 
-                                    
-                                        <label for="percentInsured"><b>Percent Insured</b></label>
-                                        <input type="text" ngModel placeholder="Enter Percent Insured" name="percentInsured" id="percentInsured">
-                                      </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="submit" data-dismiss="modal" (click)="update(updateInsuranceForm, insurance)">Update</button>
-                                    </div>
-                                  </div>
-                              
-                                </div>
-                            </div>
+                            
                         </td>
                     </tr>
                 </tbody>
@@ -80,7 +41,7 @@
           <h4 class="modal-title">Save Insurance</h4>
         </div>
         <div class="modal-body">
-          <form #newInsuranceForm="ngForm" (ngSubmit)="save(newInsuranceForm)">
+          <form #newInsuranceForm="ngForm">
             <p>Please fill in this form to create a new Insurance.</p>
             <hr>
             <label for="name"><b>Name</b></label>
@@ -110,4 +71,43 @@
     </div>
 </div>
 
-  
+<div id="updateInsurance" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Update Insurance</h4>
+      </div>
+      <div class="modal-body">
+        <form #updateInsuranceForm="ngForm" (ngSubmit)="update(updateInsuranceForm)">
+          <p>Please fill in this form to update values.</p>
+          <hr>
+      
+          <label for="name"><b>Name</b></label>
+          <input type="text" ngModel placeholder="Enter Name" name="name" id="name">
+          
+          <label for="allCareCoverage"><b>All Care Coverage</b></label>
+          <p>
+              <input type="radio" ngModel value="yes" name="allCareCoverage" [value]="true" required > Yes
+              <input type="radio" ngModel value="no" name="allCareCoverage" [value]="false" required > No
+           </p> 
+      
+          <label for="consultingFeesCovered"><b>Consulting Fees Covered</b></label>
+          <p>
+              <input type="radio" ngModel value="yes" name="consultingFeesCovered" [value]="true" required > Yes
+              <input type="radio" ngModel value="no" name="consultingFeesCovered" [value]="false" required > No
+           </p> 
+      
+          <label for="percentInsured"><b>Percent Insured</b></label>
+          <input type="text" ngModel placeholder="Enter Percent Insured" name="percentInsured" id="percentInsured">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" data-dismiss="modal" (click)="update(updateInsuranceForm)">Update</button>
+      </div>
+    </div>
+
+  </div>
+</div>

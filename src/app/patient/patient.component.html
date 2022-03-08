@@ -21,46 +21,9 @@
                         <td> {{ patient.cellphone }}</td>
                         <td> {{ patient.userpassword }}</td>
                         <td>
-                            <span><button name="delete" style="margin: 5px 10px;" (click)="delete(patient.id)">Delete</button></span>
-                            <span><button name="update" style="margin: 5px 10px;" data-toggle="modal" data-target="#updatePatient">Update</button></span>
+                            <span><button name="delete" style="margin: 5px 10px;" (click)="delete(patient)">Delete</button></span>
+                            <span><button name="update" style="margin: 5px 10px;" data-toggle="modal" data-target="#updatePatient" (click)="setPatient(patient)">Update</button></span>
 
-                            <div id="updatePatient" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
-                              
-                                  <!-- Modal content-->
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Update Patient</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                      <form #updatePatientForm="ngForm" (ngSubmit)="update(updatePatientForm, patient)">
-                                        <p>Please fill in this form to update values.</p>
-                                        <hr>
-                                    
-                                        <label for="fname"><b>First Name</b></label>
-                                        <input type="text" ngModel placeholder="Enter First Name" name="fname" id="fname">
-                                    
-                                        <label for="lname"><b>Last Name</b></label>
-                                        <input type="text" ngModel placeholder="Enter Last Name" name="lname" id="lname">
-                                    
-                                        <label for="email"><b>Email</b></label>
-                                        <input type="text" ngModel placeholder="Enter Email" name="email" id="email">
-                                    
-                                        <label for="cellphone"><b>Phone Number</b></label>
-                                        <input type="text" ngModel placeholder="Enter Phone Number" name="cellphone" id="cellphone">
-                                    
-                                        <label for="userpassword"><b>Password</b></label>
-                                        <input type="password" ngModel placeholder="Enter Password" name="userpassword" id="userpassword">
-                                      </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="submit" data-dismiss="modal" (click)="update(updatePatientForm, patient)">Update</button>
-                                    </div>
-                                  </div>
-                              
-                                </div>
-                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -80,7 +43,7 @@
           <h4 class="modal-title">Save Patient</h4>
         </div>
         <div class="modal-body">
-          <form #newPatientForm="ngForm" (ngSubmit)="save(newPatientForm)">
+          <form #newPatientForm="ngForm">
             <p>Please fill in this form to create an account.</p>
             <hr>
         
@@ -108,4 +71,41 @@
     </div>
 </div>
 
-  
+
+<div id="updatePatient" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Update Patient</h4>
+      </div>
+      <div class="modal-body">
+        <form #updatePatientForm="ngForm" (ngSubmit)="update(updatePatientForm)">
+          <p>Please fill in this form to update values.</p>
+          <hr>
+      
+          <label for="fname"><b>First Name</b></label>
+          <input type="text" ngModel placeholder="Enter First Name" name="fname" id="fname">
+      
+          <label for="lname"><b>Last Name</b></label>
+          <input type="text" ngModel placeholder="Enter Last Name" name="lname" id="lname">
+      
+          <label for="email"><b>Email</b></label>
+          <input type="text" ngModel placeholder="Enter Email" name="email" id="email">
+      
+          <label for="cellphone"><b>Phone Number</b></label>
+          <input type="text" ngModel placeholder="Enter Phone Number" name="cellphone" id="cellphone">
+      
+          <label for="userpassword"><b>Password</b></label>
+          <input type="password" ngModel placeholder="Enter Password" name="userpassword" id="userpassword">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" data-dismiss="modal" (click)="update(updatePatientForm)">Update</button>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,101 @@
+<div class ="container">
+    <div class = "card">
+        <h3 class="text-center" style="display:inline;"> Medical History List</h3>
+        <div class = "card-body" style="display: block; margin: 0 auto;">
+            <table class="table table-striped">
+                <thead>
+                    <th> Id </th>
+                    <th> Name </th>
+                    <th> Doctor Diagnosed </th>
+                    <th> Date Diagnosed </th>
+                    <th> Description </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let mH of medicalHistories">
+                        <td> {{ mH.id }}</td>
+                        <td> {{ mH.name }}</td>
+                        <td> {{ mH.doctorDiagnosed }}</td>
+                        <td> {{ mH.dateDiagnosed }}</td>
+                        <td> {{ mH.description }}</td>
+                        <td>
+                            <span><button name="delete" style="margin: 5px 10px;" (click)="delete(mH)">Delete</button></span>
+                            <span><button name="update" style="margin: 5px 10px;" data-toggle="modal" data-target="#updateMedicalHistory" (click)="setMedicalHistory(mH)">Update</button></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <span><button name="newMedicalHistory" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newMedicalHistory">New Medical History</button></span>
+        </div>
+    </div>
+</div>
+
+<div id="newMedicalHistory" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Save Medical History</h4>
+        </div>
+        <div class="modal-body">
+          <form #newMedicalHistoryForm="ngForm" >
+            <p>Please fill in this form to create a new Medical History.</p>
+            <hr>
+            <label for="name"><b>Name</b></label>
+            <input type="text" ngModel placeholder="Enter Name" name="name" id="name" required>
+        
+            <label for="doctorDiagnosed"><b>Doctor Diagnosed</b></label>
+            <input type="text" ngModel placeholder="Enter Doctor who Diagnosed" name="doctorDiagnosed" id="doctorDiagnosed" required>
+        
+            <label for="dateDiagnosed"><b>Date Diagnosed</b></label>
+            <input type="text" ngModel placeholder="Enter Date Diagnosed" name="dateDiagnosed" id="dateDiagnosed" required>
+        
+            <label for="description"><b>Description</b></label>
+            <input type="text" ngModel placeholder="Enter Description/Notes" name="description" id="description">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" data-dismiss="modal" [disabled]="newMedicalHistoryForm.invalid" (click)="save(newMedicalHistoryForm)">Save</button>
+        </div>
+      </div>
+  
+    </div>
+</div>
+
+<div id="updateMedicalHistory" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Update Patient</h4>
+      </div>
+      <div class="modal-body">
+        <form #updateMedicalHistoryForm="ngForm" (ngSubmit)="update(updateMedicalHistoryForm)">
+          <p>Please fill in this form to update values.</p>
+          <hr>
+      
+            <label for="name"><b>Name</b></label>
+            <input type="text" ngModel placeholder="Enter Name" name="name" id="name">
+        
+            <label for="doctorDiagnosed"><b>Doctor Diagnosed</b></label>
+            <input type="text" ngModel placeholder="Enter Doctor who Diagnosed" name="doctorDiagnosed" id="doctorDiagnosed">
+        
+            <label for="dateDiagnosed"><b>Date Diagnosed</b></label>
+            <input type="text" ngModel placeholder="Enter Date Diagnosed" name="dateDiagnosed" id="dateDiagnosed">
+        
+            <label for="description"><b>Description</b></label>
+            <input type="text" ngModel placeholder="Enter Description/Notes" name="description" id="description">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" data-dismiss="modal" (click)="update(updateMedicalHistoryForm)">Update</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  

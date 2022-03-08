@@ -19,6 +19,8 @@ import { TermComponent } from './term/term.component';
 import { PatientComponent } from './patient/patient.component';
 import { AddressComponent } from './address/address.component';
 import { InsuranceComponent } from './insurance/insurance.component';
+import { PrescriptionComponent } from './prescription/prescription.component';
+import { MedicalHistoryComponent } from './medicalHistory/medicalHistory.component';
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
@@ -33,6 +35,8 @@ const Routs: Routes = [
   {path: 'patient', component:PatientComponent},
   {path: 'address', component:AddressComponent},
   {path: 'insurance', component:InsuranceComponent},
+  {path: 'prescription', component:PrescriptionComponent},
+  {path: 'medical_history', component:MedicalHistoryComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -51,6 +55,8 @@ const Routs: Routes = [
     PatientComponent,
     AddressComponent,
     InsuranceComponent,
+    PrescriptionComponent,
+    MedicalHistoryComponent
   ],
   imports: [
     BrowserModule,

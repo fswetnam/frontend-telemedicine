@@ -19,10 +19,10 @@ export class InsuranceService{
      }
 
     public deleteInsurance(id: number){
-        return this.http.delete(`${this.url}` + "/id=" + `${id}`);
+        return this.http.delete(`${this.url}/id=${id}`);
     }
 
     public updateInsurance(insurance: Insurance, id: number) {
-        return this.http.put(`${this.url}` + "/id=" + `${id}`, insurance, {responseType: 'text' as 'json'});
+        return this.http.put(`${this.url}/id=${id}`, insurance, {responseType: 'text' as 'json'});
     }
 }

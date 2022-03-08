@@ -18,43 +18,8 @@
                         <td> {{ address.usState }}</td>
                         <td> {{ address.zipcode }}</td>
                         <td>
-                            <span><button name="delete" style="margin: 5px 10px;" (click)="delete(address.id)">Delete</button></span>
-                            <span><button name="update" style="margin: 5px 10px;" data-toggle="modal" data-target="#updateAddress">Update</button></span>
-
-                            <div id="updateAddress" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
-                              
-                                  <!-- Modal content-->
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Update Patient</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                      <form #updateAddressForm="ngForm" (ngSubmit)="update(updateAddressForm, address)">
-                                        <p>Please fill in this form to update values.</p>
-                                        <hr>
-                                    
-                                        <label for="streetAddress"><b>Street Address</b></label>
-                                        <input type="text" ngModel placeholder="Enter Street Address" name="streetAddress" id="streetAddress">
-                                    
-                                        <label for="city"><b>City</b></label>
-                                        <input type="text" ngModel placeholder="Enter City Name" name="city" id="">
-                                    
-                                        <label for="usState"><b>State</b></label>
-                                        <input type="text" ngModel placeholder="Enter State Name" name="usState" id="usState">
-                                    
-                                        <label for="zipcode"><b>Zipcode</b></label>
-                                        <input type="text" ngModel placeholder="Enter Zipcode" name="zipcode" id="zipcode">
-                                      </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="submit" data-dismiss="modal" (click)="update(updateAddressForm, address)">Update</button>
-                                    </div>
-                                  </div>
-                              
-                                </div>
-                            </div>
+                            <span><button name="delete" style="margin: 5px 10px;" (click)="delete(address)">Delete</button></span>
+                            <span><button name="update" style="margin: 5px 10px;" data-toggle="modal" data-target="#updateAddress" (click)="setAddress(address)">Update</button></span>
                         </td>
                     </tr>
                 </tbody>
@@ -74,7 +39,7 @@
           <h4 class="modal-title">Save Address</h4>
         </div>
         <div class="modal-body">
-          <form #newAddressForm="ngForm" (ngSubmit)="save(newAddressForm)">
+          <form #newAddressForm="ngForm" >
             <p>Please fill in this form to create a new Address.</p>
             <hr>
             <label for="streetAddress"><b>Street Address</b></label>
@@ -96,6 +61,41 @@
       </div>
   
     </div>
+</div>
+
+<div id="updateAddress" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Update Address</h4>
+      </div>
+      <div class="modal-body">
+        <form #updateAddressForm="ngForm" (ngSubmit)="update(updateAddressForm)">
+          <p>Please fill in this form to update values.</p>
+          <hr>
+      
+          <label for="streetAddress"><b>Street Address</b></label>
+          <input type="text" ngModel placeholder="Enter Street Address" name="streetAddress" id="streetAddress">
+      
+          <label for="city"><b>City</b></label>
+          <input type="text" ngModel placeholder="Enter City Name" name="city" id="">
+      
+          <label for="usState"><b>State</b></label>
+          <input type="text" ngModel placeholder="Enter State Name" name="usState" id="usState">
+      
+          <label for="zipcode"><b>Zipcode</b></label>
+          <input type="text" ngModel placeholder="Enter Zipcode" name="zipcode" id="zipcode">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" data-dismiss="modal" (click)="update(updateAddressForm)">Update</button>
+      </div>
+    </div>
+
+  </div>
 </div>
 
   

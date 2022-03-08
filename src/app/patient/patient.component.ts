@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { BehaviorSubject, Observable } from "rxjs";
-import { Patient } from "src/patient/Patient";
-import { PatientService } from "src/patient/patient.service";
-
+import { Patient } from "./Patient";
+import { PatientService } from "./patient.service";
 @Component({
     selector: 'app-patient',
     templateUrl: './patient.component.html',
@@ -18,6 +17,10 @@ export class PatientComponent implements OnInit{
     constructor(private patientService: PatientService) {}
 
     ngOnInit(): void {
+       this.getPatients();
+    }
+
+    public getPatients(){
         this.patientService.getPatients().subscribe((data: Patient[]) => {
             console.log(data);
             this.patients = data;
@@ -25,20 +28,32 @@ export class PatientComponent implements OnInit{
     }
 
     public save(form: NgForm){
-        const response =  this.patientService.savePatient(form.value as Patient).subscribe((data) => this.message = data);
-        window.location.reload();
+        const response =  this.patientService.savePatient(form.value as Patient).subscribe((data) => {
+            this.message = data
+            this.getPatients();
+            form.reset();
+        });
         return response;
     }
 
-    public delete(id: number){
-        this.patientService.deletePatient(id).subscribe((data) => this.message = data);
-        window.location.reload();
+    public delete(patient: Patient){
+        this.patientService.deletePatient(patient.id).subscribe((data) => {
+            this.message = data
+            this.getPatients();
+        });
     }
 
-    public update(form: NgForm, p: Patient){
-        const response = this.patientService.updatePatient(form.value as Patient, p.id).subscribe((data) => this.message = data);
-        window.location.reload();
+    public update(form: NgForm){
+        const response = this.patientService.updatePatient(form.value as Patient, this.patient.id).subscribe((data) => {
+            this.message = data
+            this.getPatients();
+            form.reset();
+        });
         return response;
     }
 
-}
+    public setPatient(patient: Patient){
+        console.log(patient);
+        this.patient = patient;
+    }
+} 

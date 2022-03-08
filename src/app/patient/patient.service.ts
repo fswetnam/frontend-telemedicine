@@ -19,10 +19,10 @@ export class PatientService{
      }
 
     public deletePatient(id: number){
-        return this.http.delete(`${this.url}` + "/id=" + `${id}`);
+        return this.http.delete(`${this.url}/id=${id}`);
     }
 
     public updatePatient(patient: Patient, id: number) {
-        return this.http.put(`${this.url}` + "/id=" + `${id}`, patient, {responseType: 'text' as 'json'});
+        return this.http.put(`${this.url}/id=${id}`, patient, {responseType: 'text' as 'json'});
     }
 }

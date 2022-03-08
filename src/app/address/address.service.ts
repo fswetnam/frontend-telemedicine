@@ -19,10 +19,10 @@ export class AddressService{
      }
 
     public deleteAddress(id: number){
-        return this.http.delete(`${this.url}` + "/id=" + `${id}`);
+        return this.http.delete(`${this.url}/id=${id}`);
     }
 
     public updateAddress(address: Address, id: number) {
-        return this.http.put(`${this.url}` + "/id=" + `${id}`, address, {responseType: 'text' as 'json'});
+        return this.http.put(`${this.url}/id=${id}`, address, {responseType: 'text' as 'json'});
     }
 }

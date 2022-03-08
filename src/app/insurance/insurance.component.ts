@@ -19,6 +19,10 @@ export class InsuranceComponent implements OnInit{
     constructor(private insuranceService: InsuranceService) {}
 
     ngOnInit(): void {
+        this.getInsurance();
+    }
+
+    public getInsurance() {
         this.insuranceService.getInsurances().subscribe((data: Insurance[]) => {
             console.log(data);
             this.insurances = data;
@@ -26,19 +30,32 @@ export class InsuranceComponent implements OnInit{
     }
 
     public save(form: NgForm){
-        const response =  this.insuranceService.saveInsurance(form.value as Insurance).subscribe((data) => this.message = data);
-        window.location.reload();
+        const response =  this.insuranceService.saveInsurance(form.value as Insurance).subscribe((data) => {
+            this.message = data
+            this.getInsurance();        
+            form.reset();
+        });
         return response;
     }
 
-    public delete(id: number){
-        this.insuranceService.deleteInsurance(id).subscribe((data) => this.message = data);
-        window.location.reload();
+    public delete(insurance: Insurance){
+        this.insuranceService.deleteInsurance(insurance.id).subscribe((data) => {this.message = data
+            this.getInsurance();
+        });
+        
     }
 
-    public update(form: NgForm, i: Insurance){
-        const response = this.insuranceService.updateInsurance(form.value as Insurance, i.id).subscribe((data) => this.message = data);
-        window.location.reload();
+    public update(form: NgForm){
+        const response = this.insuranceService.updateInsurance(form.value as Insurance, this.insurance.id).subscribe((data) => {
+            this.message = data
+            this.getInsurance();
+            form.reset();
+        });
         return response;
+    }
+
+    public setInsurance(insurance: Insurance){
+        console.log(insurance);
+        this.insurance = insurance;
     }
 }

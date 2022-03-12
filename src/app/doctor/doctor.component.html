@@ -1,0 +1,127 @@
+<div class ="container">
+    <div class = "card">
+        <h3 class="text-center" style="display:inline;"> Doctor List</h3>
+        <div class = "card-body" style="display: block; margin: 0 auto;">
+            <table class="table table-striped">
+                <thead>
+                    <th> Id </th>
+                    <th> First Name </th>
+                    <th> Last Name </th>
+                    <th> Email </th>
+                    <th> Phone </th>
+                    <th> Office Name</th>
+                    <th> Specialty </th>
+                    <th> Password </th>
+                    <th> Actions </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let doctor of doctors">
+                        <td> {{ doctor.id }}</td>
+                        <td> {{ doctor.fname }}</td>
+                        <td> {{ doctor.lname }}</td>
+                        <td> {{ doctor.email }}</td>
+                        <td> {{ doctor.cellphone }}</td>
+                        <td> {{ doctor.officeName }}</td>
+                        <td> {{ doctor.specialty }}</td>
+                        <td> {{ doctor.userpassword }}</td>
+                        <td>
+                            <span><button name="delete" style="margin: 5px 10px;" (click)="delete(doctor)">Delete</button></span>
+                            <span><button name="update" style="margin: 5px 10px;" data-toggle="modal" data-target="#updateDoctor" (click)="setDoctor(doctor)">Update</button></span>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <span><button name="newDoctor" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newDoctor">New Doctor</button></span>
+        </div>
+    </div>
+</div>
+
+<div id="newDoctor" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Save Doctor</h4>
+        </div>
+        <div class="modal-body">
+          <form #newDoctorForm="ngForm">
+            <p>Please fill in this form to create an account.</p>
+            <hr>
+        
+            <label for="fname"><b>First Name</b></label>
+            <input type="text" ngModel placeholder="Enter First Name" name="fname" id="fname" required>
+        
+            <label for="lname"><b>Last Name</b></label>
+            <input type="text" ngModel placeholder="Enter Last Name" name="lname" id="lname" required>
+        
+            <label for="email"><b>Email</b></label>
+            <input type="text" ngModel placeholder="Enter Email" name="email" id="email" required>
+        
+            <label for="cellphone"><b>Phone Number</b></label>
+            <input type="text" ngModel placeholder="Enter Phone Number" name="cellphone" id="cellphone" required>
+
+            <label for="officeName"><b>Office Name</b></label>
+            <input type="text" ngModel placeholder="Enter Office Name" name="officeName" id="officeName" required>
+        
+            <label for="specialty"><b>Specialty</b></label>
+            <input type="text" ngModel placeholder="Enter Specialty" name="specialty" id="specialty" required>
+        
+            <label for="userpassword"><b>Password</b></label>
+            <input type="password" ngModel placeholder="Enter Password" name="userpassword" id="userpassword" required>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" data-dismiss="modal" [disabled]="newDoctorForm.invalid" (click)="save(newDoctorForm)">Save</button>
+        </div>
+      </div>
+  
+    </div>
+</div>
+
+
+<div id="updateDoctor" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Update Doctor</h4>
+      </div>
+      <div class="modal-body">
+        <form #updateDoctorForm="ngForm" (ngSubmit)="update(updateDoctorForm)">
+          <p>Please fill in this form to update values.</p>
+          <hr>
+      
+          <label for="fname"><b>First Name</b></label>
+          <input type="text" ngModel placeholder="Enter First Name" name="fname" id="fname">
+      
+          <label for="lname"><b>Last Name</b></label>
+          <input type="text" ngModel placeholder="Enter Last Name" name="lname" id="lname">
+      
+          <label for="email"><b>Email</b></label>
+          <input type="text" ngModel placeholder="Enter Email" name="email" id="email">
+      
+          <label for="cellphone"><b>Phone Number</b></label>
+          <input type="text" ngModel placeholder="Enter Phone Number" name="cellphone" id="cellphone">
+          
+          <label for="officeName"><b>Office Name</b></label>
+          <input type="text" ngModel placeholder="Enter Office Name" name="officeName" id="officeName" required>
+      
+          <label for="specialty"><b>Specialty</b></label>
+          <input type="text" ngModel placeholder="Enter Specialty" name="specialty" id="specialty" required>
+      
+          <label for="userpassword"><b>Password</b></label>
+          <input type="password" ngModel placeholder="Enter Password" name="userpassword" id="userpassword">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" data-dismiss="modal" (click)="update(updateDoctorForm)">Update</button>
+      </div>
+    </div>
+
+  </div>
+</div>

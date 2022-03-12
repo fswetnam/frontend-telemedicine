@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import {Routes, RouterModule } from '@angular/router'
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,6 +23,7 @@ import { InsuranceComponent } from './insurance/insurance.component';
 import { PrescriptionComponent } from './prescription/prescription.component';
 import { MedicalHistoryComponent } from './medicalHistory/medicalHistory.component';
 import { SappComponent } from './sapp/sapp.component';
+import { MessageComponent } from './message/message.component'
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
@@ -39,6 +41,7 @@ const Routs: Routes = [
   {path: 'prescription', component:PrescriptionComponent},
   {path: 'medical_history', component:MedicalHistoryComponent},
   {path:'sapp', component:SappComponent},
+  {path: 'message', component:MessageComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -59,12 +62,15 @@ const Routs: Routes = [
     InsuranceComponent,
     PrescriptionComponent,
     MedicalHistoryComponent,
-    SappComponent
+    SappComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(Routs)
   ],

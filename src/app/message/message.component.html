@@ -1,0 +1,57 @@
+<html>
+<body>
+  <div class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="row mt-5">
+                <div class="col-12">
+                      <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action" *ngFor="let thread of messageThreads">
+                            {{thread.name}}
+                        </a>
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div id="messages">
+                        <ul class="list-group list-group-flush">
+                            <li *ngFor="let item of messages; let i = index" [attr.data-index]="i" class="list-group-item">
+                                {{item.message}}
+                                <div class="float-right">
+                                    {{item.date}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12">
+                    <!-- Message chat box -->
+                    <form [formGroup]="form" (submit)="submit()">
+                        <div class="form-group">
+                            <input 
+                                #messageInput
+                                formControlName="message"
+                                id="message" 
+                                type="text" 
+                                class="form-control">
+                            <div *ngIf="f['message'].touched && f['message'].invalid" class="alert alert-danger">
+                                <div *ngIf="f['message'].errors && f['message'].errors['required']">Message is required.</div>
+                                <div *ngIf="f['message'].errors && f['message'].errors['minlength']">Message should be 1 character.</div>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </div>
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</body>
+</html>

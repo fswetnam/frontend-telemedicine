@@ -12,4 +12,8 @@ export class PatientpComponent implements OnInit {
   ngOnInit() {
   }
 
+  myApp(){
+    window.location.href="sapp"
+  }
+
 }

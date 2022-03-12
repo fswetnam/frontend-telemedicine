@@ -1,0 +1,21 @@
+<h2>Schedule</h2>
+<hr>
+    <div>
+    <form name="myApp" action="/action_page.php">
+      <label for="doctor">Select your doctor: </label>
+       <select name="doctor" id="doctors">
+       <option value="doc0">------------</option>
+        <option value="doc1">Doctor #1</option>
+        <option value="doc2">Doctor #2</option>
+        <option value="doc3">Doctor #3</option>
+        <option value="doc4">Doctor #4</option>
+      </select>
+      <br>
+      Select Date: 
+      <input type="date" id="date" name="date" value="date" ><br>
+      Select Time:
+      <input type="time" id="start_time" name="time" value="time" />
+    </form>
+  </div>
+    <input type="submit" name="sapp" id= "sappbtn" value="Schedule" (click)="myAppoint()"  class="sapp">
+

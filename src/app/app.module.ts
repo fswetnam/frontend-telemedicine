@@ -21,6 +21,7 @@ import { AddressComponent } from './address/address.component';
 import { InsuranceComponent } from './insurance/insurance.component';
 import { PrescriptionComponent } from './prescription/prescription.component';
 import { MedicalHistoryComponent } from './medicalHistory/medicalHistory.component';
+import { SappComponent } from './sapp/sapp.component';
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
@@ -37,6 +38,7 @@ const Routs: Routes = [
   {path: 'insurance', component:InsuranceComponent},
   {path: 'prescription', component:PrescriptionComponent},
   {path: 'medical_history', component:MedicalHistoryComponent},
+  {path:'sapp', component:SappComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -56,7 +58,8 @@ const Routs: Routes = [
     AddressComponent,
     InsuranceComponent,
     PrescriptionComponent,
-    MedicalHistoryComponent
+    MedicalHistoryComponent,
+    SappComponent
   ],
   imports: [
     BrowserModule,

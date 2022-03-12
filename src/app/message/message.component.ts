@@ -1,13 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { MessageService } from "./message.service"
 
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.css']
 })
-
-
 
 export class MessageComponent implements OnInit  {
 
@@ -20,7 +19,7 @@ export class MessageComponent implements OnInit  {
 
     @ViewChild('messageInput') input; 
 
-    constructor() {
+    constructor(private messageService: MessageService) {
         this.messages = this.getMessages();
         this.messageThreads = this.getMessageThreads();
     }
@@ -33,11 +32,11 @@ export class MessageComponent implements OnInit  {
     }
 
     getSenderId() {
-        return 90
+        return "90"
     }
 
     getRecieverId() {
-        return 88
+        return "88"
     }
 
     getMessageThreads() {
@@ -66,6 +65,7 @@ export class MessageComponent implements OnInit  {
      * @returns array of all messages
      */
     getMessages() {
+        console.log(this.messageService.getMessages(2))
         return [
             {
                 sender_id: 23,
@@ -93,8 +93,8 @@ export class MessageComponent implements OnInit  {
             date: d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
             message: this.form.value.message
         }
+        this.messageService.saveMessage(message)
         this.messages.push(message)
         this.input.nativeElement.value = ''
     }
-
 }

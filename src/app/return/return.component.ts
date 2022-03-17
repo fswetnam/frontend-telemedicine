@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {User} from "../user";
+import {UserService} from "../user/user.service";
+import {LoginuserService} from "../loginuser.service";
 
 @Component({
   selector: 'app-return',
@@ -7,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReturnComponent implements OnInit {
 
-  constructor() { }
+  user:User = new User();
+  constructor(private loginuserservice: LoginuserService) { }
 
   ngOnInit() {
   }
@@ -24,5 +28,12 @@ export class ReturnComponent implements OnInit {
     }else{
       alert("The email and password is not valid")
     }*/
+  }
+
+  userLogin() {
+    console.log(this.user)
+    this.loginuserservice.loginUser(this.user).subscribe(data=>{
+      alert("Login Success")
+    },error=>alert("Please enter correct Username and password"));
   }
 }

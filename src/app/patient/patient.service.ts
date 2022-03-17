@@ -14,6 +14,10 @@ export class PatientService{
         return this.http.get<Patient[]>(`${this.url}` + 's');
      }
 
+    getPatient(id: number): Observable<Patient>{
+        return this.http.get<Patient>(`${this.url}/id=${id}`);
+    }
+
     public savePatient(patient: Patient) {
          return this.http.post(`${this.url}`, patient, {responseType: 'text' as 'json'});
      }

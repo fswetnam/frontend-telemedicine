@@ -26,6 +26,7 @@ import { SappComponent } from './sapp/sapp.component';
 import { MessageComponent } from './message/message.component';
 import { UserComponent } from './user/user.component';
 import { DoctorComponent } from './doctor/doctor.component';
+import { AppointmentComponent } from './appointment/appointment.component';
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
@@ -46,6 +47,7 @@ const Routs: Routes = [
   {path: 'message', component:MessageComponent},
   {path: 'user', component:UserComponent},
   {path: 'doctor', component:DoctorComponent},
+  {path: 'appointment', component:AppointmentComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -70,6 +72,7 @@ const Routs: Routes = [
     MessageComponent,
     UserComponent,
     DoctorComponent,
+    AppointmentComponent,
   ],
   imports: [
     BrowserModule,

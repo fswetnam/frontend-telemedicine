@@ -15,7 +15,6 @@ import { AboutComponent } from './about/about.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { AdminpComponent } from './adminp/adminp.component';
 import { ForgotComponent } from './forgot/forgot.component';
-import { ReturnComponent } from './return/return.component';
 import { TermComponent } from './term/term.component';
 import { PatientComponent } from './patient/patient.component';
 import { AddressComponent } from './address/address.component';
@@ -27,6 +26,7 @@ import { MessageComponent } from './message/message.component';
 import { UserComponent } from './user/user.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { LoginComponent } from './login/login.component';
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
@@ -36,7 +36,6 @@ const Routs: Routes = [
   {path: 'about', component:AboutComponent},
   {path: 'privacy', component:PrivacyComponent},
   {path: 'forgot', component:ForgotComponent},
-  {path: 'return', component:ReturnComponent},
   {path: 'term', component:TermComponent},
   {path: 'patient', component:PatientComponent},
   {path: 'address', component:AddressComponent},
@@ -48,6 +47,7 @@ const Routs: Routes = [
   {path: 'user', component:UserComponent},
   {path: 'doctor', component:DoctorComponent},
   {path: 'appointment', component:AppointmentComponent},
+  {path: 'login', component:LoginComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -61,7 +61,6 @@ const Routs: Routes = [
     AboutComponent,
     PrivacyComponent,
     ForgotComponent,
-    ReturnComponent,
     TermComponent,
     PatientComponent,
     AddressComponent,
@@ -73,6 +72,7 @@ const Routs: Routes = [
     UserComponent,
     DoctorComponent,
     AppointmentComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

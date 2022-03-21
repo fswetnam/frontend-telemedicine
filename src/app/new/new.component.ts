@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Patient } from '../patient/Patient';
-import { PatientService } from '../patient/patient.service';
+import { User } from '../user/User';
+import { UserService } from "../user/user.service"
+
 @Component({
   selector: 'app-new',
   templateUrl: './new.component.html',
@@ -11,7 +12,7 @@ export class NewComponent implements OnInit {
   message: any;
 
 
-  constructor(private patientService: PatientService) { }
+  constructor(private UserService: UserService) { }
 
   ngOnInit() {
   }
@@ -19,7 +20,7 @@ export class NewComponent implements OnInit {
   myNew(form: NgForm){
     let validPsw = this.checkPassword(form.value.userpassword, form.value.pswRepeat)
     if(validPsw == true){
-      const response =  this.patientService.savePatient(form.value as Patient).subscribe((data) => {
+        const response =  this.UserService.createNewUser(form.value as User).subscribe((data) => {
         this.message = data;
         alert("Account Successfully Created!");
         window.location.href="patientp";

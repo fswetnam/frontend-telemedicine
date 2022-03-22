@@ -25,6 +25,9 @@ import { SappComponent } from './sapp/sapp.component';
 import { MessageComponent } from './message/message.component';
 import { UserComponent } from './user/user.component';
 import { DoctorComponent } from './doctor/doctor.component';
+import { ShowapptComponent } from './showappt/showappt.component';
+import { PatientlistComponent } from './patientlist/patientlist.component';
+import { MedreqComponent } from './medreq/medreq.component';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { LoginComponent } from './login/login.component';
 const Routs: Routes = [
@@ -46,6 +49,9 @@ const Routs: Routes = [
   {path: 'message', component:MessageComponent},
   {path: 'user', component:UserComponent},
   {path: 'doctor', component:DoctorComponent},
+  {path: 'showappt', component:ShowapptComponent},
+  {path: 'patientlist', component:PatientlistComponent},
+  {path: 'medreq', component:MedreqComponent},
   {path: 'appointment', component:AppointmentComponent},
   {path: 'login', component:LoginComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
@@ -71,6 +77,9 @@ const Routs: Routes = [
     MessageComponent,
     UserComponent,
     DoctorComponent,
+    ShowapptComponent,
+    PatientlistComponent,
+    MedreqComponent,
     AppointmentComponent,
     LoginComponent
   ],

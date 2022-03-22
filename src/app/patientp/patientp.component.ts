@@ -16,4 +16,8 @@ export class PatientpComponent implements OnInit {
     window.location.href="sapp"
   }
 
+  myMed(){
+    window.location.href="prescription"
+  }
+
 }

@@ -1,21 +1,17 @@
 <h2>Schedule</h2>
 <hr>
     <div>
-    <form name="myApp" action="/action_page.php">
-      <label for="doctor">Select your doctor: </label>
-       <select name="doctor" id="doctors">
-       <option value="doc0">------------</option>
-        <option value="doc1">Doctor #1</option>
-        <option value="doc2">Doctor #2</option>
-        <option value="doc3">Doctor #3</option>
-        <option value="doc4">Doctor #4</option>
+    <form name="myApp" action="/action_page.php" #myApp="ngForm" (ngSubmit)="myAppoint(myApp)">
+      <label for="doctorEmail">Select your doctor: </label>
+       <select ngModel name="doctorEmail" id="doctors" required>
+       <option *ngFor="let doctor of doctors" [value]="doctor.email">Dr.{{doctor.lname}}</option>
       </select>
       <br>
       Select Date: 
-      <input type="date" id="date" name="date" value="date" ><br>
+      <input ngModel type="date" id="dateScheduled" name="dateScheduled" value="dateScheduled" required><br>
       Select Time:
-      <input type="time" id="start_time" name="time" value="time" />
+      <input ngModel type="time" id="timeScheduled" name="timeScheduled" value="timeScheduled" required/>
     </form>
   </div>
-    <input type="submit" name="sapp" id= "sappbtn" value="Schedule" (click)="myAppoint()"  class="sapp">
+    <input type="submit" name="sapp" id= "sappbtn" value="Schedule" (click)="myAppoint(myApp)" [disabled]="myApp.invalid" class="sapp">
 

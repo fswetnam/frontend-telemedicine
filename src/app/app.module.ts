@@ -15,7 +15,6 @@ import { AboutComponent } from './about/about.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { AdminpComponent } from './adminp/adminp.component';
 import { ForgotComponent } from './forgot/forgot.component';
-import { ReturnComponent } from './return/return.component';
 import { TermComponent } from './term/term.component';
 import { PatientComponent } from './patient/patient.component';
 import { AddressComponent } from './address/address.component';
@@ -29,8 +28,8 @@ import { DoctorComponent } from './doctor/doctor.component';
 import { ShowapptComponent } from './showappt/showappt.component';
 import { PatientlistComponent } from './patientlist/patientlist.component';
 import { MedreqComponent } from './medreq/medreq.component';
-
-
+import { AppointmentComponent } from './appointment/appointment.component';
+import { LoginComponent } from './login/login.component';
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
@@ -40,7 +39,6 @@ const Routs: Routes = [
   {path: 'about', component:AboutComponent},
   {path: 'privacy', component:PrivacyComponent},
   {path: 'forgot', component:ForgotComponent},
-  {path: 'return', component:ReturnComponent},
   {path: 'term', component:TermComponent},
   {path: 'patient', component:PatientComponent},
   {path: 'address', component:AddressComponent},
@@ -54,6 +52,8 @@ const Routs: Routes = [
   {path: 'showappt', component:ShowapptComponent},
   {path: 'patientlist', component:PatientlistComponent},
   {path: 'medreq', component:MedreqComponent},
+  {path: 'appointment', component:AppointmentComponent},
+  {path: 'login', component:LoginComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -67,7 +67,6 @@ const Routs: Routes = [
     AboutComponent,
     PrivacyComponent,
     ForgotComponent,
-    ReturnComponent,
     TermComponent,
     PatientComponent,
     AddressComponent,
@@ -81,6 +80,8 @@ const Routs: Routes = [
     ShowapptComponent,
     PatientlistComponent,
     MedreqComponent,
+    AppointmentComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

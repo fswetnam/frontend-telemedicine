@@ -6,15 +6,17 @@ import { Message } from "./message";
 @Injectable({providedIn: 'root'})
 export class MessageService{
     
-    public url = "http://localhost:8080/message";
+    public messageUrl = "http://localhost:8080/message/";
+    public messagesUrl = "http://localhost:8080/messages/";
 
     constructor(private http: HttpClient){}
 
     getMessages(id): Observable<Message[]>{
-        return this.http.get<Message[]>(`${this.url}` + 'id=' + id);
+        return this.http.get<Message[]>(`${this.messagesUrl}` + 'sender_id=' + id);
      }
 
     public saveMessage(message: Message) {
-         return this.http.post(`${this.url}`, message, {responseType: 'text' as 'json'});
+        console.log(message)
+        return this.http.post(`${this.messageUrl}`, message, {responseType: 'text' as 'json'});
      }
 }

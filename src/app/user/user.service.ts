@@ -7,6 +7,7 @@ import { User } from "./User";
 export class UserService{
     
     public url = "http://localhost:8080/user";
+    public registerUrl = "http://localhost:8080/register"
 
     constructor(private http: HttpClient){}
 
@@ -24,5 +25,9 @@ export class UserService{
 
     public updateUser(user: User, id: number) {
         return this.http.put(`${this.url}/id=${id}`, user, {responseType: 'text' as 'json'});
+    }
+
+    public createNewUser(user: User) {
+        return this.http.post(`${this.registerUrl}`, user, {responseType: 'text' as 'json'});
     }
 }

@@ -20,7 +20,7 @@ export class MessageComponent implements OnInit  {
     @ViewChild('messageInput') input; 
 
     constructor(private messageService: MessageService) {
-        this.messages = this.getMessages();
+        this.getMessages();
         this.messageThreads = this.getMessageThreads();
     }
 
@@ -32,7 +32,7 @@ export class MessageComponent implements OnInit  {
     }
 
     getSenderId() {
-        return "90"
+        return "5"
     }
 
     getRecieverId() {
@@ -62,24 +62,9 @@ export class MessageComponent implements OnInit  {
 
     /**
      * Fetched messagesd that have already been sent
-     * @returns array of all messages
      */
     getMessages() {
-        console.log(this.messageService.getMessages(2))
-        return [
-            {
-                sender_id: 23,
-                receiver_id: 88,
-                date: '2022-03-12 08:34:12',
-                message: "This is a test"
-            },
-            {
-                sender_id: 23,
-                receiver_id: 88,
-                date: '2022-03-12 08:45:29',
-                message: "Coming back"
-            }
-        ]
+        this.messageService.getMessages(5).subscribe(message => this.messages = message);
     }
     
     /**
@@ -90,10 +75,11 @@ export class MessageComponent implements OnInit  {
         let message = {
             sender_id: this.getSenderId(),
             receiver_id: this.getRecieverId(),
-            date: d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
-            message: this.form.value.message
+            date: null,
+            content: this.form.value.message,
+            time: null
         }
-        this.messageService.saveMessage(message)
+        this.messageService.saveMessage(message).forEach(m => m)
         this.messages.push(message)
         this.input.nativeElement.value = ''
     }

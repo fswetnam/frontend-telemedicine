@@ -26,6 +26,11 @@ import { SappComponent } from './sapp/sapp.component';
 import { MessageComponent } from './message/message.component';
 import { UserComponent } from './user/user.component';
 import { DoctorComponent } from './doctor/doctor.component';
+import { ShowapptComponent } from './showappt/showappt.component';
+import { PatientlistComponent } from './patientlist/patientlist.component';
+import { MedreqComponent } from './medreq/medreq.component';
+
+
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
@@ -46,6 +51,9 @@ const Routs: Routes = [
   {path: 'message', component:MessageComponent},
   {path: 'user', component:UserComponent},
   {path: 'doctor', component:DoctorComponent},
+  {path: 'showappt', component:ShowapptComponent},
+  {path: 'patientlist', component:PatientlistComponent},
+  {path: 'medreq', component:MedreqComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -70,6 +78,9 @@ const Routs: Routes = [
     MessageComponent,
     UserComponent,
     DoctorComponent,
+    ShowapptComponent,
+    PatientlistComponent,
+    MedreqComponent,
   ],
   imports: [
     BrowserModule,

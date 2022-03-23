@@ -2,6 +2,7 @@ import { HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable} from "rxjs";
 import { Appointment } from "../appointment/Appointment";
+import { Prescription } from "../prescription/Prescription";
 import { Patient } from "./Patient";
 
 @Injectable({providedIn: 'root'})
@@ -21,6 +22,14 @@ export class PatientService{
 
     getAppointments(id: number): Observable<Appointment[]>{
         return this.http.get<Appointment[]>(`${this.url}/id=${id}/appointments`)
+    }
+
+    getPrescriptions(id: number): Observable<Prescription[]>{
+        return this.http.get<Prescription[]>(`${this.url}/id=${id}/prescriptions`)
+    }
+
+    updatePrescription(id: number, p: Prescription){
+        return this.http.put(`${this.url}/id=${id}/prescriptions-update`, p)
     }
 
     public savePatient(patient: Patient) {

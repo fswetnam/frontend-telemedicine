@@ -23,15 +23,13 @@
           <div class = "card-body" style="display: block; margin: 0 auto;">
               <table class="table table-striped">
                   <thead>
-                      <th> Id </th>
                       <th> Date Scheduled </th>
                       <th> Doctor </th>
                       <th> Actions </th>
                   </thead>
                   <tbody>
                       <tr *ngFor = "let app of appointments">
-                          <td> {{ app.id }}</td>
-                          <td> {{ app.schedule }}</td>
+                          <td> {{ app.schedule | date:"short"}}</td>
                           <td> 
                             {{app.doctor.fname + " " + app.doctor.lname + ": " + app.doctor.specialty}}
                           </td>

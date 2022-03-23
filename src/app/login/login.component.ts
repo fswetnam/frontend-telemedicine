@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { HttpClient} from "@angular/common/http";
 import { User } from '../user/User';
+import { UserSession } from '../user/UserSession';
 
 @Component({
   selector: 'app-login',
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit  {
         }
 
         this.http.post(`${this.loginUrl}`, authDetails, {responseType: 'text' as 'json'}).subscribe((data) => {
-            sessionStorage.setItem('user', JSON.stringify(data));
+            UserSession.setUserSession(data)
             window.location.href="patientp";
         }, (error) => {
             let errorMsg = JSON.parse(error.error)

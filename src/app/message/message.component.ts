@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { MessageService } from "./message.service"
+import { UserSession } from '../user/UserSession';
 
 @Component({
   selector: 'app-message',
@@ -16,10 +17,12 @@ export class MessageComponent implements OnInit  {
 
     messageThreads = []
     messages = []
+    user = null;
 
     @ViewChild('messageInput') input; 
 
     constructor(private messageService: MessageService) {
+        this.user = UserSession.getUserSession();
         this.getMessages();
         this.messageThreads = this.getMessageThreads();
     }
@@ -32,7 +35,7 @@ export class MessageComponent implements OnInit  {
     }
 
     getSenderId() {
-        return "5"
+        return this.user.id
     }
 
     getRecieverId() {
@@ -64,7 +67,7 @@ export class MessageComponent implements OnInit  {
      * Fetched messagesd that have already been sent
      */
     getMessages() {
-        this.messageService.getMessages(5).subscribe(message => this.messages = message);
+        this.messageService.getMessages(this.user.id).subscribe(message => this.messages = message);
     }
     
     /**

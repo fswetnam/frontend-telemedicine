@@ -1,17 +1,15 @@
 <div class ="container">
     <div class = "card">
-        <h3 class="text-center" style="display:inline;"> Prescription List</h3>
+        <h3 class="text-center" style="display:inline;"> Medication List</h3>
         <div class = "card-body" style="display: block; margin: 0 auto;">
             <table class="table table-striped">
                 <thead>
-                    <th> Id </th>
                     <th> Name </th>
                     <th> Dosages </th>
                     <th> Description </th>
                 </thead>
                 <tbody>
                     <tr *ngFor = "let ps of prescriptions">
-                        <td> {{ ps.id }}</td>
                         <td> {{ ps.name }}</td>
                         <td> {{ ps.dosages }}</td>
                         <td> {{ ps.description }}</td>

@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { BehaviorSubject, Observable } from "rxjs";
+import { Patient } from "../patient/Patient";
+import { PatientService } from "../patient/patient.service";
+import { UserSession } from "../user/UserSession";
 import { Prescription } from "./Prescription";
 import { PrescriptionService } from "./prescription.service";
 @Component({
@@ -16,24 +19,30 @@ export class PrescriptionComponent implements OnInit{
     prescriptions!: Prescription[];
     prescription!: Prescription;
     message: any;
-    constructor(private prescriptionService: PrescriptionService) {}
+    patient: Patient;
+    constructor(private prescriptionService: PrescriptionService, private patientService: PatientService) {}
 
     ngOnInit(): void {
+        this.patient = UserSession.getUserSession();
         this.getPrescriptions();
     }
 
     public getPrescriptions(){
-        this.prescriptionService.getPrescriptions().subscribe((data: Prescription[]) => {
+        this.patientService.getPrescriptions(this.patient.id).subscribe((data: Prescription[]) => {
             console.log(data);
             this.prescriptions = data;
         });
     }
 
     public save(form: NgForm){
+        let pS = form.value as Prescription;
+        pS.patient = this.patient;
         const response =  this.prescriptionService.savePrescription(form.value as Prescription).subscribe((data) => {
             this.message = data
+            console.log(data)
             this.getPrescriptions();
             form.reset();
+            window.location.reload;
         });
         return response;
     }
@@ -42,6 +51,7 @@ export class PrescriptionComponent implements OnInit{
         this.prescriptionService.deletePrescription(prescription.id).subscribe((data) => {
             this.message = data
             this.getPrescriptions();
+            window.location.reload;
         });
     }
 
@@ -50,6 +60,7 @@ export class PrescriptionComponent implements OnInit{
             this.message = data
             this.getPrescriptions();
             form.reset();
+            window.location.reload;
         });
         return response;
     }

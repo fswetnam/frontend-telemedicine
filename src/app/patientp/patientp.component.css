@@ -13,7 +13,7 @@ body {
   background-color: #778899;
   overflow-x: hidden;
   padding-top: 60px;
-  transition: 0.5s;
+  transition: 0.4s;
 }
 
 .sidebar a {
@@ -59,11 +59,11 @@ body {
 }
 
 #main {
-  transition: margin-left .5s;
+  transition: margin-left 0.4s;
   padding: 20px;
 }
 
 .title {
   font-family: "Montserrat", sans-serif;
-  margin-left: 43%;
+  margin-left: 36%;
 }

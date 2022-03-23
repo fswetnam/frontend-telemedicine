@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-patientlist',
-  templateUrl: './patientlist.component.html',
-  styleUrls: ['./patientlist.component.css']
+  selector: 'app-docchats',
+  templateUrl: './docchats.component.html',
+  styleUrls: ['./docchats.component.css']
 })
-export class PatientlistComponent implements OnInit {
+export class DocchatsComponent implements OnInit {
 
   constructor() { }
+
 
   openNav(){
     document.getElementById("mysideBar").style.width = "400px";

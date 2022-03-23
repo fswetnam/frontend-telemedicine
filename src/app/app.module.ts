@@ -30,6 +30,13 @@ import { PatientlistComponent } from './patientlist/patientlist.component';
 import { MedreqComponent } from './medreq/medreq.component';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { LoginComponent } from './login/login.component';
+import { PchatComponent } from './pchat/pchat.component';
+import { PrecordsComponent } from './precords/precords.component';
+import { VchatComponent } from './vchat/vchat.component';
+import { UploadrepComponent } from './uploadrep/uploadrep.component';
+import { DocchatsComponent } from './docchats/docchats.component';
+import { DocinboxComponent } from './docinbox/docinbox.component';
+
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
@@ -54,6 +61,12 @@ const Routs: Routes = [
   {path: 'medreq', component:MedreqComponent},
   {path: 'appointment', component:AppointmentComponent},
   {path: 'login', component:LoginComponent},
+  {path: 'pchat', component:PchatComponent},
+  {path: 'precords', component:PrecordsComponent},
+  {path: 'vchat', component:VchatComponent},
+  {path: 'uploadrep', component:UploadrepComponent},
+  {path: 'docchats', component:DocchatsComponent},
+  {path: 'docinbox', component:DocinboxComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -81,7 +94,13 @@ const Routs: Routes = [
     PatientlistComponent,
     MedreqComponent,
     AppointmentComponent,
-    LoginComponent
+    LoginComponent,
+    PchatComponent,
+    PrecordsComponent,
+    VchatComponent,
+    UploadrepComponent,
+    DocchatsComponent,
+    DocinboxComponent
   ],
   imports: [
     BrowserModule,

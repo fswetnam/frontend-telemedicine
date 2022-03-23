@@ -11,8 +11,8 @@ export class AdminpComponent implements OnInit {
 
 
   openNav(){
-    document.getElementById("mysideBar").style.width = "300px";
-    document.getElementById("main").style.marginLeft = "300px";
+    document.getElementById("mysideBar").style.width = "400px";
+    document.getElementById("main").style.marginLeft = "400px";
   }
 
   closeNav(){

@@ -18,6 +18,7 @@ export class SappComponent implements OnInit {
 
   constructor(private doctorService: DoctorService, private appointmentService: AppointmentService) { }
 
+  
   ngOnInit() {
     this.getDoctors();
     this.getAppointments();

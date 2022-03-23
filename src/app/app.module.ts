@@ -30,6 +30,7 @@ import { PatientlistComponent } from './patientlist/patientlist.component';
 import { MedreqComponent } from './medreq/medreq.component';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { LoginComponent } from './login/login.component';
+import { SettingsPComponent } from './settingsP/settingsP.component';
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
@@ -54,6 +55,7 @@ const Routs: Routes = [
   {path: 'medreq', component:MedreqComponent},
   {path: 'appointment', component:AppointmentComponent},
   {path: 'login', component:LoginComponent},
+  {path: 'settingsP', component:SettingsPComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({

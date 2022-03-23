@@ -4,6 +4,10 @@ import { Appointment } from '../appointment/Appointment';
 import { AppointmentService } from '../appointment/appointment.service';
 import { Doctor } from '../doctor/Doctor';
 import { DoctorService } from '../doctor/doctor.service';
+import { Patient } from '../patient/Patient';
+import { PatientService } from '../patient/patient.service';
+import { User } from '../user/User';
+import { UserSession } from '../user/UserSession';
 
 @Component({
   selector: 'app-sapp',
@@ -15,10 +19,12 @@ export class SappComponent implements OnInit {
   doctors!: Doctor[];
   appointments!: Appointment[];
   message: any;
+  patient: Patient;
 
-  constructor(private doctorService: DoctorService, private appointmentService: AppointmentService) { }
+  constructor(private doctorService: DoctorService, private appointmentService: AppointmentService, private patientService: PatientService) { }
 
   ngOnInit() {
+    this.patient = UserSession.getUserSession();
     this.getDoctors();
     this.getAppointments();
   }
@@ -31,17 +37,23 @@ export class SappComponent implements OnInit {
   }
 
   public getAppointments(){
-    this.appointmentService.getAppointments().subscribe((data: Appointment[]) => {
+    this.patientService.getAppointments(this.patient.id).subscribe((data: Appointment[]) => {
         this.appointments = data;
         this.appointments.forEach(element => {
-            this.appointmentService.getAppointmentPatient(element.id).subscribe((data) => {
-                element.patient = data;
-            });
             this.appointmentService.getAppointmentDoctor(element.id).subscribe((data) => {
-                element.doctor = data;
+                element.doctor = <Doctor>data;
             });
         });
     });
+}
+
+public delete(appointment: Appointment){
+  console.log(appointment.id);
+  this.appointmentService.deleteAppointment(appointment.id).subscribe((data) => {
+      this.message = data
+      this.getAppointments();
+      window.location.reload;
+  });
 }
 
   myAppoint(form: NgForm){
@@ -60,6 +72,7 @@ export class SappComponent implements OnInit {
     
     let app = <Appointment>{
       dateScheduled: myDate + 'T' + myTime,
+      patient: this.patient,
       doctor: myDoc
     };
     const response =  this.appointmentService.saveAppointment(app).subscribe((data) => {
@@ -67,7 +80,7 @@ export class SappComponent implements OnInit {
       form.reset();
       this.getAppointments();
       alert("Appointment has been set!")
-      window.location.href="patientp"
+      window.location.reload;
     });
   }
 }

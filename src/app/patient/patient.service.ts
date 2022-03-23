@@ -1,6 +1,7 @@
 import { HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable} from "rxjs";
+import { Appointment } from "../appointment/Appointment";
 import { Patient } from "./Patient";
 
 @Injectable({providedIn: 'root'})
@@ -16,6 +17,10 @@ export class PatientService{
 
     getPatient(id: number): Observable<Patient>{
         return this.http.get<Patient>(`${this.url}/id=${id}`);
+    }
+
+    getAppointments(id: number): Observable<Appointment[]>{
+        return this.http.get<Appointment[]>(`${this.url}/id=${id}/appointments`)
     }
 
     public savePatient(patient: Patient) {

@@ -40,13 +40,14 @@ export class LoginComponent implements OnInit  {
             password: this.form.value.password
         }
 
-        // Send password to server;
-        let resp = this.http.post(`${this.loginUrl}`, authDetails, {responseType: 'text' as 'json'});
+        this.http.post(`${this.loginUrl}`, authDetails, {responseType: 'text' as 'json'}).subscribe((data) => {
+            sessionStorage.setItem('user', JSON.stringify(data));
+            window.location.href="patientp";
+        }, (error) => {
+            let errorMsg = JSON.parse(error.error)
+            alert(errorMsg.message)
+        });
 
-        console.log(resp)
-
-        // If success store user in browser session
-
-        // If fail alert user login failed
+       
     }
 }

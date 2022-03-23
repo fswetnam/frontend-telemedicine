@@ -37,6 +37,7 @@ import { UploadrepComponent } from './uploadrep/uploadrep.component';
 import { DocchatsComponent } from './docchats/docchats.component';
 import { DocinboxComponent } from './docinbox/docinbox.component';
 
+import { SettingsPComponent } from './settingsP/settingsP.component';
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
@@ -67,6 +68,7 @@ const Routs: Routes = [
   {path: 'uploadrep', component:UploadrepComponent},
   {path: 'docchats', component:DocchatsComponent},
   {path: 'docinbox', component:DocinboxComponent},
+  {path: 'settingsP', component:SettingsPComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({

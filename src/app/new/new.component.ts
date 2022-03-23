@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Patient } from '../patient/Patient';
 import { PatientService } from '../patient/patient.service';
-import { User } from '../user/User';
 import { UserService } from "../user/user.service"
+import { UserSession } from '../user/UserSession';
 
 @Component({
   selector: 'app-new',
@@ -24,6 +24,7 @@ export class NewComponent implements OnInit {
     if(validPsw == true){
         const response =  this.patientService.savePatient(form.value as Patient).subscribe((data) => {
         this.message = data;
+        UserSession.setUserSession(data);
         alert("Account Successfully Created!");
         window.location.href="patientp";
       });

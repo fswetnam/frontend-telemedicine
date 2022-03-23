@@ -69,33 +69,38 @@ body {
 }
 
 h2 {
-    padding-left: 86px;
-    padding-top: 16px;
-    background-color: white;
-  }
-  
-  div {
-    padding-left: 500px;
-  }
-  
-  select {
-   margin-left: 10px;
-  }
-  
-  input {
-    margin-bottom: 10px;
-  }
-  
-  /* Set a style for the submit button */
-  .sapp {
-    background-color: #1e6de2;
-    color: white;
-    padding: 16px 20px;
-    margin-left: 345px;
-    border: none;
-    cursor: pointer;
-    width: 50%;
-    opacity: 0.9;
-  }
-  
-  
+  padding-left: 86px;
+  padding-top: 16px;
+  background-color: white;
+}
+
+.schApp {
+  padding-left: 500px;
+}
+
+select {
+ margin-left: 295px;
+}
+
+input {
+  align-content: center;
+  margin-left: 345px;
+}
+
+label {
+  align-content: center;
+  margin-left: 345px;
+}
+
+/* Set a style for the submit button */
+.sapp {
+  background-color: #1e6de2;
+  color: white;
+  padding: 16px 20px;
+  margin-left: 345px;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.9;
+}
+

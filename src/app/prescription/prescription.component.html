@@ -1,4 +1,32 @@
-<div class ="container">
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <title>Patient Portal</title>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <div id = "mysideBar" class = "sidebar">
+    <a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav()">&times;</a>
+    <div class = "overlay-content">
+      <a href = "sapp">Schedule an Appointment</a>
+      <br>
+      <a href = "message">Messages</a>
+      <br>
+      <a href = "prescription">My Medications</a>
+      <br>
+      <a href = "precords">Records</a>
+      <br>
+      <a href = "settingsP">Account Settings</a>
+      <br>
+      <a href = "vchat">Video Chat</a>
+    </div>
+  </div>
+  <div class = "main">
+    <button class = "openbtn" (click) = "openNav()">&#9776;</button>
+  </div>
+
+  <div class ="container">
     <div class = "card">
         <h3 class="text-center" style="display:inline;"> Medication List</h3>
         <div class = "card-body" style="display: block; margin: 0 auto;">
@@ -88,3 +116,5 @@
   </div>
 </div>
   
+</body>
+</html>

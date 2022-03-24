@@ -75,7 +75,8 @@ h2 {
 }
 
 .schApp {
-  padding-left: 500px;
+  /*padding-left: 500px;*/
+  align-content: center;
 }
 
 select {

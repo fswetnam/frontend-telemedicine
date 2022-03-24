@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { HttpClient} from "@angular/common/http";
 import { User } from '../user/User';
 import { UserSession } from '../user/UserSession';
+import { UserType } from '../enumeration/UserType';
 
 @Component({
   selector: 'app-login',
@@ -43,7 +44,12 @@ export class LoginComponent implements OnInit  {
 
         this.http.post(`${this.loginUrl}`, authDetails, {responseType: 'text' as 'json'}).subscribe((data) => {
             UserSession.setUserSession(data)
-            window.location.href="patientp";
+            let user = UserSession.getUserSession();
+            if(user.userType === "PATIENT"){
+                window.location.href="patientp";
+            } else if(user.userType === "DOCTOR" || user.userType === "ADMIN"){
+                window.location.href="adminp";
+            }
         }, (error) => {
             let errorMsg = JSON.parse(error.error)
             alert(errorMsg.message)

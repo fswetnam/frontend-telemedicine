@@ -77,6 +77,7 @@ public delete(appointment: Appointment){
       doctor: myDoc
     };
     const response =  this.appointmentService.saveAppointment(app).subscribe((data) => {
+      this.doctorService.addPatient(myDoc.id, this.patient).subscribe((data) => {});
       this.message = data
       form.reset();
       this.getAppointments();

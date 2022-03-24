@@ -67,3 +67,36 @@ body {
     font-family: "Montserrat", sans-serif;
     margin-left: 35%;
   }
+
+  .schApp {
+    /*padding-left: 500px;*/
+    align-content: center;
+  }
+  
+  select {
+   margin-left: 295px;
+  }
+  
+  input {
+    align-content: center;
+    margin-left: 345px;
+  }
+  
+  label {
+    align-content: center;
+    margin-left: 345px;
+  }
+  
+  /* Set a style for the submit button */
+  .sapp {
+    background-color: #1e6de2;
+    color: white;
+    padding: 16px 20px;
+    margin-left: 345px;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    opacity: 0.9;
+  }
+  
+  

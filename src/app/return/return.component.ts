@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../user/User';
+import {UserService} from "../user/user.service";
+import { UserSession } from '../user/UserSession';
 
 @Component({
   selector: 'app-return',
@@ -7,22 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReturnComponent implements OnInit {
 
-  constructor() { }
+  user: any;
+  constructor( ) { }
 
   ngOnInit() {
   }
 
   myReturn(){
-
     window.location.href="patientp"
-
-    /*
-    var em = document.forms["myForm"]["email"].value;
-    var ps = document.forms["myForm"]["psw"].value;
-    if(em =="happychaos@gmail.com" && ps =="06112021"){
-      window.location.href="patientp"
-    }else{
-      alert("The email and password is not valid")
-    }*/
   }
+
+  
 }

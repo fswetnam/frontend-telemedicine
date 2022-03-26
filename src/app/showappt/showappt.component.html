@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <title>Admin Portal</title>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <div id = "mysideBar" class = "sidebar">
+    <a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav()">&times;</a>
+    <div class = "overlay-content">
+      <a href = "adminp">Home</a>
+      <br>
+      <a href = "showappt">Appointments</a>
+      <br>
+      <a href = "patientlist">Patients</a>
+      <br>
+      <a href = "medreq">Medication Requests</a>
+      <br>
+      <a href = "uploadrep">Upload Reports</a>
+      <br>
+      <a href = "docchats">Chats</a>
+      <br>
+      <a href = "docinbox">Inbox</a>
+    </div>
+  </div>
+  <div class = "main">
+    <button class = "openbtn" (click) = "openNav()">&#9776;</button>
+  </div>
+  <h1 class = "title">Scheduled Appointments</h1>
+
+  <div class ="container">
+    <div class = "card">
+        <div class = "card-body" style="display: block; margin: 0 auto;">
+            <table class="table table-striped">
+                <thead>
+                    <th> Date Scheduled </th>
+                    <th> Patient </th>
+                    <th> Actions </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let app of appointments">
+                        <td> {{ app.schedule | date:"short"}}</td>
+                        <td> 
+                          {{app.patient.fname + " " + app.patient.lname}}
+                        </td>
+                        <td>
+                            <span><button name="delete" style="margin: 5px 10px;" (click)="delete(app)">Delete</button></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+
+</body>

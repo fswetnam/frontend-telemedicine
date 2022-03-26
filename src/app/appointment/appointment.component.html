@@ -1,0 +1,126 @@
+<div class ="container">
+    <div class = "card">
+        <h3 class="text-center" style="display:inline;"> Appointment List</h3>
+        <div class = "card-body" style="display: block; margin: 0 auto;">
+            <table class="table table-striped">
+                <thead>
+                    <th> Id </th>
+                    <th> Date Scheduled </th>
+                    <th> Purpose </th>
+                    <th> Patient </th>
+                    <th> Doctor </th>
+                    <th> Actions </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let app of appointments">
+                        <td> {{ app.id }}</td>
+                        <td> {{ app.schedule }}</td>
+                        <td> {{ app.purpose }}</td>
+                        <td> 
+                          {{app.patient.email}}
+                        </td>
+                        <td> 
+                          {{app.doctor.email}}
+                        </td>
+                        <td>
+                            <span><button name="delete" style="margin: 5px 10px;" (click)="delete(app)">Delete</button></span>
+                            <span><button name="update" style="margin: 5px 10px;" data-toggle="modal" data-target="#updateAppointment" (click)="setAppointment(app)">Update</button></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <span><button name="newAppointment" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newAppointment">New Appointment</button></span>
+        </div>
+    </div>
+</div>
+
+<div id="newAppointment" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Save Appointment</h4>
+        </div>
+        <div class="modal-body">
+          <form #newAppointmentForm="ngForm">
+            <p>Please fill in this form to create an appointment.</p>
+            <hr>
+        
+            <label for="dateScheduled"><b>Date</b></label>
+            <br>
+            <input type="date" ngModel placeholder="Select Date" name="dateScheduled" id="dateScheduled" required>
+            <br>
+            <label for="timeScheduled"><b>Time</b></label>
+            <br>
+            <input type="time" ngModel placeholder="Select Time" name="timeScheduled" id="timeScheduled" required>
+            <br>
+            <label for="purpose"><b>Purpose</b></label>
+            <input type="text" ngModel placeholder="Enter Purpose" name="purpose" id="purpose">
+            <br>
+            <label for="doctorEmail">Select the doctor: </label>
+            <select ngModel name="doctorEmail" id="doctors" required>
+            <option *ngFor="let doctor of doctors" [value]="doctor.email">Dr.{{doctor.lname}}</option>
+           </select>
+           <br>
+           <label for="patientEmail">Select the patient: </label>
+           <select ngModel name="patientEmail" id="patients" required>
+           <option *ngFor="let patient of patients" [value]="patient.email">{{patient.fname}} {{patient.lname}}</option>
+          </select>
+            <br>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" data-dismiss="modal" [disabled]="newAppointmentForm.invalid" (click)="save(newAppointmentForm)">Save</button>
+        </div>
+      </div>
+  
+    </div>
+</div>
+
+
+<div id="updateAppointment" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Update Appointment</h4>
+      </div>
+      <div class="modal-body">
+        <form #updateAppointmentForm="ngForm" (ngSubmit)="update(updateAppointmentForm)">
+            <p>Please fill in this form to update values.</p>
+            <hr>
+        
+            <label for="dateScheduled"><b>Date</b></label>
+            <br>
+            <input type="date" ngModel placeholder="Select Date" name="dateScheduled" id="dateScheduled">
+            <br>
+            <label for="timeScheduled"><b>Time</b></label>
+            <br>
+            <input type="time" ngModel placeholder="Select Time" name="timeScheduled" id="timeScheduled">
+            <br>
+            <label for="purpose"><b>Purpose</b></label>
+            <input type="text" ngModel placeholder="Enter Purpose" name="purpose" id="purpose">
+            <br>
+            <label for="doctorEmail">Select the doctor: </label>
+            <select ngModel name="doctorEmail" id="doctors">
+            <option *ngFor="let doctor of doctors" [value]="doctor.email">Dr.{{doctor.lname}}</option>
+           </select>
+           <br>
+           <label for="patientEmail">Select the patient: </label>
+           <select ngModel name="patientEmail" id="patients">
+           <option *ngFor="let patient of patients" [value]="patient.email">{{patient.fname}} {{patient.lname}}</option>
+          </select>
+            <br>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" data-dismiss="modal" (click)="update(updateAppointmentForm)">Update</button>
+      </div>
+    </div>
+
+  </div>
+</div>

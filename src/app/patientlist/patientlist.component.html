@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <title>Admin Portal</title>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <div id = "mysideBar" class = "sidebar">
+    <a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav()">&times;</a>
+    <div class = "overlay-content">
+      <a href = "adminp">Home</a>
+      <br>
+      <a href = "showappt">Appointments</a>
+      <br>
+      <a href = "patientlist">Patients</a>
+      <br>
+      <a href = "medreq">Medication Requests</a>
+      <br>
+      <a href = "uploadrep">Upload Reports</a>
+      <br>
+      <a href = "docchats">Chats</a>
+      <br>
+      <a href = "docinbox">Inbox</a>
+    </div>
+  </div>
+  <div class = "main">
+    <button class = "openbtn" (click) = "openNav()">&#9776;</button>
+  </div>
+  <h1 class = "title">List of Patients for Today</h1>
+
+  <div class ="container">
+    <div class = "card">
+        <h3 class="text-center" style="display:inline;"> Patient List</h3>
+        <div class = "card-body" style="display: block; margin: 0 auto;">
+            <table class="table table-striped">
+                <thead>
+                    <th> First Name </th>
+                    <th> Last Name </th>
+                    <th> Email </th>
+                    <th> Phone </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let patient of patients">
+                        <td> {{ patient.fname }}</td>
+                        <td> {{ patient.lname }}</td>
+                        <td> {{ patient.email }}</td>
+                        <td> {{ patient.cellphone }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>

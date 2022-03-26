@@ -1,26 +1,23 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <a class="navbar-brand" href="home">Telemedicine</a>
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="new">New Patient<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="return">Returning Patient</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="adminl">Admin Portal</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="about">About Us</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-    </form>
-  </div>
-</nav>
+<!DOCTYPE html>
+  <head>
+      <meta charset = "utf-8">
+      <meta http-equiv="X-UA-Compatible" content = "IE=edge">
+      <meta name = "description" content = "">
+      <meta name = "viewport" content = "width=device-width, initial-scale=1">
+      <link rel = "stylesheet" href = "app.component.css">
+  </head>
+  <body>
+    <header>
+    <h1 class = "logo" routerLinkActive routerLink= "home">Telemedicine</h1>
+    <nav>
+        <ul class="nav__links">
+            <li routerLinkActive = "active"><a routerLink = "login">Login</a></li>
+            <li routerLinkActive = "active"><a routerLink = "about">About</a></li>
+            <li><a href = "#">COVID-19</a></li>
+        </ul>
+    </nav>
+    <a class = "cta" href= "#"><button>Contact Us</button></a>
+    </header>
+  </body>
 
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>

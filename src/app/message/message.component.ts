@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { MessageService } from "./message.service"
+import { UserSession } from '../user/UserSession';
 
 @Component({
   selector: 'app-message',
@@ -16,11 +17,13 @@ export class MessageComponent implements OnInit  {
 
     messageThreads = []
     messages = []
+    user = null;
 
     @ViewChild('messageInput') input; 
 
     constructor(private messageService: MessageService) {
-        this.messages = this.getMessages();
+        this.user = UserSession.getUserSession();
+        this.getMessages();
         this.messageThreads = this.getMessageThreads();
     }
 
@@ -32,7 +35,7 @@ export class MessageComponent implements OnInit  {
     }
 
     getSenderId() {
-        return "90"
+        return this.user.id
     }
 
     getRecieverId() {
@@ -62,24 +65,9 @@ export class MessageComponent implements OnInit  {
 
     /**
      * Fetched messagesd that have already been sent
-     * @returns array of all messages
      */
     getMessages() {
-        console.log(this.messageService.getMessages(2))
-        return [
-            {
-                sender_id: 23,
-                receiver_id: 88,
-                date: '2022-03-12 08:34:12',
-                message: "This is a test"
-            },
-            {
-                sender_id: 23,
-                receiver_id: 88,
-                date: '2022-03-12 08:45:29',
-                message: "Coming back"
-            }
-        ]
+        this.messageService.getMessages(this.user.id).subscribe(message => this.messages = message);
     }
     
     /**
@@ -90,11 +78,23 @@ export class MessageComponent implements OnInit  {
         let message = {
             sender_id: this.getSenderId(),
             receiver_id: this.getRecieverId(),
-            date: d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
-            message: this.form.value.message
+            date: null,
+            content: this.form.value.message,
+            time: null
         }
-        this.messageService.saveMessage(message)
+        this.messageService.saveMessage(message).forEach(m => m)
         this.messages.push(message)
         this.input.nativeElement.value = ''
     }
+
+    openNav(){
+        document.getElementById("mysideBar").style.width = "400px";
+        document.getElementById("main").style.marginLeft = "400px";
+      }
+    
+      closeNav(){
+        document.getElementById("mysideBar").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+      }
+      
 }

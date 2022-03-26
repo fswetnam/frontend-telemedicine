@@ -1,0 +1,88 @@
+<html>
+<head>
+  <style>
+    .new-user{
+      margin-left: 44.3%;
+      font-family: "Montserrat", sans-serif;
+    }
+    .forgot-pw {
+      margin-left: 41.4%;
+      font-family: "Montserrat", sans-serif;
+    }
+    .btn-primary{
+      margin-left: 42.2%;
+      padding: 10px 30px 10px 30px;
+      background-color: rgba(0, 136, 169, 1);
+      border: none;
+      font-size: 16px;
+      font-family: "Montserrat", sans-serif;
+    }
+    .btn-primary:hover{
+      transition: 0.3s;
+      background-color: rgba(0, 136, 169, 0.8);
+    }
+    .container {
+      padding-top: 40px;
+    }
+    .card{
+      padding-bottom: 20px;
+    }
+    .form-group{
+      font-size: 20px;
+      font-weight: bold;
+      font-family: "Montserrat", sans-serif;
+    }
+    .form{
+      
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="form" (submit)="submit()">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Email address</label>
+                          <input 
+                          #emailInput
+                          formControlName="email"
+                          id="email" 
+                          type="email" 
+                          class="form-control"
+                          placeholder="Enter email"
+                          >
+                      <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
+                          <div *ngIf="f['email'].errors && f['email'].errors['required']">Email is required.</div>
+                      </div>
+                          <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                        </div>
+                        <br>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Password</label>
+                          <input 
+                                #passwordInput
+                                formControlName="password"
+                                id="password" 
+                                type="password" 
+                                class="form-control"
+                                placeholder="Password"
+                                >
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </form>
+                      <br>
+                      <a class = "new-user" href = "new">New User</a>
+                      <br>
+                      <a class = "forgot-pw" href = "forgot">Forgot Password</a>
+                </div>
+              </div>
+        </div>
+    </div>
+  </div>
+</body>
+</html>

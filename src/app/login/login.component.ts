@@ -47,7 +47,9 @@ export class LoginComponent implements OnInit  {
             let user = UserSession.getUserSession();
             if(user.userType === "PATIENT"){
                 window.location.href="patientp";
-            } else if(user.userType === "DOCTOR" || user.userType === "ADMIN"){
+            } else if(user.userType === "DOCTOR"){
+                window.location.href="doctorp";
+            } else if(user.userType == "ADMIN"){
                 window.location.href="adminp";
             }
         }, (error) => {

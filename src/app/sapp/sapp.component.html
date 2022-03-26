@@ -10,7 +10,7 @@
   <div id = "mysideBar" class = "sidebar">
     <a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav()">&times;</a>
     <div class = "overlay-content">
-      <a href = "sapp">Schedule an Appointment</a>
+      <a href = "sapp">Request an Appointment</a>
       <br>
       <a href = "message">Messages</a>
       <br>
@@ -26,7 +26,7 @@
   <div class = "main">
     <button class = "openbtn" (click) = "openNav()">&#9776;</button>
   </div>
-<h2>Schedule</h2>
+<h2>Request Appointment</h2>
 <hr>
     <div name="schApp" id="schApp">
     <form name="myApp" action="/action_page.php" #myApp="ngForm" (ngSubmit)="myAppoint(myApp)">
@@ -41,7 +41,7 @@
       <input ngModel type="time" id="timeScheduled" name="timeScheduled" value="timeScheduled" required/>
     </form>
   </div>
-    <input type="submit" name="sapp" id= "sappbtn" value="Schedule" (click)="myAppoint(myApp)" [disabled]="myApp.invalid" class="sapp">
+    <input type="submit" name="sapp" id= "sappbtn" value="Request" (click)="myAppoint(myApp)" [disabled]="myApp.invalid" class="sapp">
     <br>
     <br>
     <div class ="container">

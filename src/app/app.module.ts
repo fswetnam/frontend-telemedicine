@@ -10,10 +10,9 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from 'src/home/home.component';
 import { NewComponent } from './new/new.component';
 import { PatientpComponent } from './patientp/patientp.component';
-import { AdminlComponent } from './adminl/adminl.component';
 import { AboutComponent } from './about/about.component';
 import { PrivacyComponent } from './privacy/privacy.component';
-import { AdminpComponent } from './adminp/adminp.component';
+import { DoctorpComponent } from './doctorp/doctorp.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import { TermComponent } from './term/term.component';
 import { PatientComponent } from './patient/patient.component';
@@ -36,14 +35,13 @@ import { VchatComponent } from './vchat/vchat.component';
 import { UploadrepComponent } from './uploadrep/uploadrep.component';
 import { DocchatsComponent } from './docchats/docchats.component';
 import { DocinboxComponent } from './docinbox/docinbox.component';
-
+import { AdminpComponent } from './adminp/adminp.component';
 import { SettingsPComponent } from './settingsP/settingsP.component';
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
   {path: 'patientp', component:PatientpComponent},
-  {path: 'adminl', component:AdminlComponent},
-  {path: 'adminp', component:AdminpComponent},
+  {path: 'doctorp', component:DoctorpComponent},
   {path: 'about', component:AboutComponent},
   {path: 'privacy', component:PrivacyComponent},
   {path: 'forgot', component:ForgotComponent},
@@ -69,6 +67,7 @@ const Routs: Routes = [
   {path: 'docchats', component:DocchatsComponent},
   {path: 'docinbox', component:DocinboxComponent},
   {path: 'settingsP', component:SettingsPComponent},
+  {path: 'adminp', component:AdminpComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -77,8 +76,7 @@ const Routs: Routes = [
     HomeComponent,
     NewComponent,
     PatientpComponent,
-    AdminlComponent,
-    AdminpComponent,
+    DoctorpComponent,
     AboutComponent,
     PrivacyComponent,
     ForgotComponent,
@@ -102,7 +100,8 @@ const Routs: Routes = [
     VchatComponent,
     UploadrepComponent,
     DocchatsComponent,
-    DocinboxComponent
+    DocinboxComponent,
+    AdminpComponent,
   ],
   imports: [
     BrowserModule,

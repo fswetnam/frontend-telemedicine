@@ -27,27 +27,6 @@
   <div class = "main">
     <button class = "openbtn" (click) = "openNav()">&#9776;</button>
   </div>
-    
-  <h1 class = "title">Schedule New Appointment</h1>
-  <hr>
-    <div name="schApp" id="schApp">
-    <form name="myApp" action="/action_page.php" #myApp="ngForm" (ngSubmit)="myAppoint(myApp)">
-      <label for="patientEmail">Select your patient: </label>
-       <select ngModel name="patientEmail" id="patients" required>
-       <option *ngFor="let patient of patients" [value]="patient.email">{{patient.fname + " " + patient.lname}}</option>
-      </select>
-      <br>
-      <label for="dateScheduled">Select date: </label>
-      <input ngModel type="date" id="dateScheduled" name="dateScheduled" value="dateScheduled" required><br>
-      <label for="timeScheduled">Select time: </label>
-      <input ngModel type="time" id="timeScheduled" name="timeScheduled" value="timeScheduled" required/>
-    </form>
-  </div>
-    <input type="submit" name="sapp" id= "sappbtn" value="Schedule" (click)="myAppoint(myApp)" [disabled]="myApp.invalid" class="sapp">
-    <br>
-    <br>
-
-
   <h1 class = "title">Scheduled Appointments</h1>
 
   <div class ="container">

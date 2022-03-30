@@ -1,3 +1,4 @@
+import { Doctor } from "../doctor/Doctor";
 import { Patient } from "../patient/Patient";
 
 export interface Prescription{
@@ -5,5 +6,6 @@ export interface Prescription{
     name: string,
     dosages: string,
     description: string,
-    patient: Patient
+    patient: Patient,
+    doctorPrescribed: Doctor
 }

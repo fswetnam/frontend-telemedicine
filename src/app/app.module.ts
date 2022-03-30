@@ -37,6 +37,7 @@ import { DocchatsComponent } from './docchats/docchats.component';
 import { DocinboxComponent } from './docinbox/docinbox.component';
 import { AdminpComponent } from './adminp/adminp.component';
 import { SettingsPComponent } from './settingsP/settingsP.component';
+import { RequestComponent } from './requests/request.component';
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
@@ -68,6 +69,7 @@ const Routs: Routes = [
   {path: 'docinbox', component:DocinboxComponent},
   {path: 'settingsP', component:SettingsPComponent},
   {path: 'adminp', component:AdminpComponent},
+  {path: 'requests', component:RequestComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -102,6 +104,7 @@ const Routs: Routes = [
     DocchatsComponent,
     DocinboxComponent,
     AdminpComponent,
+    RequestComponent,
   ],
   imports: [
     BrowserModule,

@@ -35,6 +35,7 @@
                     <th> Name </th>
                     <th> Dosages </th>
                     <th> Description </th>
+                    <th> Doctor Prescribed </th>
                     <th> Actions </th>
                 </thead>
                 <tbody>
@@ -42,80 +43,60 @@
                         <td> {{ ps.name }}</td>
                         <td> {{ ps.dosages }}</td>
                         <td> {{ ps.description }}</td>
+                        <td> {{ ps.doctorPrescribed.lname + " " + ps.doctorPrescribed.fname }}</td>
                         <td>
-                            <span><button name="delete" style="margin: 5px 10px;" (click)="delete(ps)">Delete</button></span>
-                            <span><button name="update" style="margin: 5px 10px;" data-toggle="modal" data-target="#updatePrescription" (click)="setPrescription(ps)">Update</button></span>
+                            <span><button name="request" style="margin: 5px 10px;" data-toggle="modal" data-target="#requestPrescription" (click)="refillPrescriptions(ps)">Request Refill</button></span>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <span><button name="newPrescription" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newPrescription">New Prescription</button></span>
+            <span><button name="viewRequests" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewRequests">View Current Refill Requests</button></span>
         </div>
     </div>
 </div>
 
-<div id="newPrescription" class="modal fade" role="dialog">
+
+<div id="viewRequests" class="modal fade" role="dialog">
     <div class="modal-dialog">
   
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Save Prescription</h4>
+          <h4 class="modal-title">Current Refill Requests</h4>
         </div>
-        <div class="modal-body">
-          <form #newPrescriptionForm="ngForm" >
-            <p>Please fill in this form to create a new Prescription.</p>
-            <hr>
-            <label for="name"><b>Name</b></label>
-            <input type="text" ngModel placeholder="Enter Name" name="name" id="name" required>
-        
-            <label for="dosages"><b>Dosage</b></label>
-            <input type="text" ngModel placeholder="Enter Dosage" name="dosages" id="dosages" required>
-        
-            <label for="description"><b>Description</b></label>
-            <input type="text" ngModel placeholder="Enter Description" name="description" id="description">
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" data-dismiss="modal" [disabled]="newPrescriptionForm.invalid" (click)="save(newPrescriptionForm)">Save</button>
+        <div class="modal-body"><div class ="container">
+            <div class = "card">
+                <h3 class="text-center" style="display:inline;"> Requested Refills</h3>
+                <div class = "card-body" style="display: block; margin: 0 auto;">
+                    <table class="table table-striped">
+                        <thead>
+                            <th> Id </th>
+                            <th> Prescription </th>
+                            <th> Request Status </th>
+                            <th> Doctor </th>
+                            <th> Actions </th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor = "let r of userRequests">
+                                <td> {{ r.id }}</td>
+                                <td> {{r.prescriptionRequest.name + ", " + r.prescriptionRequest.dosages}}</td>
+                                <td> {{r.requestStatus }}</td>
+                                <td> {{ "Dr. " + r.doctor.fname + " " + r.doctor.lname }}</td>
+                                <td>
+                                    <span><button name="delete" style="margin: 5px 10px;" (click)="cancelRequest(r)">Cancel Request</button></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+          </div>
         </div>
       </div>
   
     </div>
 </div>
 
-<div id="updatePrescription" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Update Prescription</h4>
-      </div>
-      <div class="modal-body">
-        <form #updatePrescriptionForm="ngForm" (ngSubmit)="update(updatePrescriptionForm)">
-          <p>Please fill in this form to update values.</p>
-          <hr>
-      
-          <label for="name"><b>Name</b></label>
-          <input type="text" ngModel placeholder="Enter Name" name="name" id="name">
-      
-          <label for="dosages"><b>Dosage</b></label>
-          <input type="text" ngModel placeholder="Enter Dosage" name="dosages" id="dosages">
-      
-          <label for="description"><b>Description</b></label>
-          <input type="text" ngModel placeholder="Enter Description" name="description" id="description">
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" data-dismiss="modal" (click)="update(updatePrescriptionForm)">Update</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-  
 </body>
 </html>

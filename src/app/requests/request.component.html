@@ -1,0 +1,137 @@
+<html>
+<body>
+<div class ="container">
+    <div class = "card">
+        <h3 class="text-center" style="display:inline;"> Request List</h3>
+        <div class = "card-body" style="display: block; margin: 0 auto;">
+            <table class="table table-striped">
+                <thead>
+                    <th> Id </th>
+                    <th> Prescription </th>
+                    <th> Request Type </th>
+                    <th> Request Status </th>
+                    <th> Patient </th>
+                    <th> Doctor </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let r of requests">
+                        <td> {{ r.id }}</td>
+                        <td> {{r.prescriptionRequest.name + ", " + r.prescriptionRequest.dosages}}</td>
+                        <td> {{ r.requestType }}</td>
+                        <td> {{ r.requestStatus }}</td>
+                        <td> {{ r.requestingPatient.fname + " " + r.requestingPatient.lname}}</td>
+                        <td> {{ "Dr. " + r.doctor.fname + " " + r.doctor.lname }}</td>
+                        <td>
+                            <span><button name="delete" style="margin: 5px 10px;" (click)="delete(r)">Delete</button></span>
+                            <span><button name="update" style="margin: 5px 10px;" data-toggle="modal" data-target="#updateAddress" (click)="setRequest(r)">Update</button></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <span><button name="newAddress" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newAddress">New Request</button></span>
+        </div>
+    </div>
+</div>
+
+<div id="newAddress" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Save Request</h4>
+        </div>
+        <div class="modal-body">
+          <form #newRequestForm="ngForm" >
+            <p>Please fill in this form to create a new Request.</p>
+            <hr>
+            <label for="requestType"><b>RequestType</b></label>
+            <select name="requestType" ngModel id="requestType" placeHolder="Select a Request Type..." required>
+              <option value = "PRESCRIPTION_REQUEST">Prescription</option>
+              <option value="APPOINTMENT_REQUEST">Appointment</option>
+            </select>
+
+            <label for="prescriptionRequest">Select the prescription: </label>
+            <select ngModel name="prescriptionRequest" id="prescriptions" required>
+            <option *ngFor="let p of prescriptions" [value]="p.id">{{p.name + ", " + p.dosages}}</option>
+           </select>
+        
+            <label for="requestStatus"><b>RequestStatus</b></label>
+            <select name="requestStatus" ngModel id="requestStatus" placeHolder="Select a Request Status..." required>
+              <option value = "WAITING">Waiting</option>
+              <option value= "CONFIRMED">Confirmed</option>
+              <option value= "DENIED">Denied</option>
+            </select>
+        
+            <label for="doctorEmail">Select the doctor: </label>
+            <select ngModel name="doctorEmail" id="doctors" required>
+            <option *ngFor="let doctor of doctors" [value]="doctor.email">Dr.{{doctor.lname}}</option>
+           </select>
+        
+           <label for="patientEmail">Select your patient: </label>
+           <select ngModel name="patientEmail" id="patients" required>
+           <option *ngFor="let patient of patients" [value]="patient.email">{{patient.fname + " " + patient.lname}}</option>
+          </select>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" data-dismiss="modal" [disabled]="newRequestForm.invalid" (click)="save(newRequestForm)">Save</button>
+        </div>
+      </div>
+  
+    </div>
+</div>
+
+<div id="updateAddress" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Update Request</h4>
+      </div>
+      <div class="modal-body">
+        <form #updateRequestForm="ngForm" (ngSubmit)="update(updateRequestForm)">
+          <p>Please fill in this form to update values.</p>
+          <hr>
+          <label for="requestType"><b>RequestType</b></label>
+          <select name="requestType" ngModel id="requestType" placeHolder="Select a Request Type...">
+            <option value = "PRESCRIPTION_REQUEST">Prescription</option>
+            <option value="APPOINTMENT_REQUEST">Appointment</option>
+          </select>
+      
+          <label for="requestStatus"><b>RequestStatus</b></label>
+          <select name="requestStatus" ngModel id="requestStatus" placeHolder="Select a Request Status...">
+            <option value = "WAITING">Waiting</option>
+            <option value= "CONFIRMED">Confirmed</option>
+            <option value= "DENIED">Denied</option>
+          </select>
+
+          <label for="prescriptionRequest">Select the prescription: </label>
+            <select ngModel name="prescriptionRequest" id="prescriptions" required>
+            <option *ngFor="let p of prescriptions" [value]="p.id">{{p.name + ", " + p.dosages}}</option>
+           </select>
+      
+          <label for="doctorEmail">Select the doctor: </label>
+          <select ngModel name="doctorEmail" id="doctors">
+          <option *ngFor="let doctor of doctors" [value]="doctor.email">Dr.{{doctor.lname}}</option>
+         </select>
+      
+         <label for="patientEmail">Select your patient: </label>
+         <select ngModel name="patientEmail" id="patients">
+         <option *ngFor="let patient of patients" [value]="patient.email">{{patient.fname + " " + patient.lname}}</option>
+        </select>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" data-dismiss="modal" (click)="update(updateRequestForm)">Update</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+        
+</body>
+</html>

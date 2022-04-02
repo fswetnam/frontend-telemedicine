@@ -7,8 +7,8 @@
 		[eventSettings]="eventSettings"
 		currentView="Week" 
 		(popupOpen)="onPopupOpen($event)"
-		(actionComplete)="onActionComplete($event)"
-	  >
+		(actionComplete)="onActionComplete($event)">
+		
 		<ng-template #eventSettingsTemplate let-data>
 		  <div>
 			<div class="subject">{{data.Subject}}</div>

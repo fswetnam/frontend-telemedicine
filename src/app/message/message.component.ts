@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { MessageService } from "./message.service"
 import { UserSession } from '../user/UserSession';
+import { Doctor } from '../doctor/Doctor';
+import { DoctorService } from '../doctor/doctor.service';
 
 @Component({
   selector: 'app-message',
@@ -15,20 +17,39 @@ export class MessageComponent implements OnInit  {
         message: new FormControl('', [Validators.required, Validators.minLength(1)]),
     });
 
-    messageThreads = []
+    activeMessageThread = []
     messages = []
-    user = null;
+    user = null
+    doctors!: Doctor[]
+    doctor: Doctor
 
     @ViewChild('messageInput') input; 
 
-    constructor(private messageService: MessageService) {
+    constructor(private messageService: MessageService, private doctorService: DoctorService) {
         this.user = UserSession.getUserSession();
         this.getMessages();
-        this.messageThreads = this.getMessageThreads();
+        this.getDoctors();
     }
 
     ngOnInit(): void {
     }
+
+    selectDoctor(event, doctor) {
+        this.doctor = doctor;
+        this.activeMessageThread = this.messages.filter(message => message.receiver_id == doctor.id)
+        for(let i=0; i < document.getElementsByClassName("doctor-select").length; i++) {
+            let item = document.getElementsByClassName("doctor-select").item(i);
+            item.className="list-group-item list-group-item-action doctor-select"
+        }
+        document.getElementById("doctor-"+doctor.id).className="active list-group-item list-group-item-action doctor-select"
+    }
+
+    getDoctors(){
+        this.doctorService.getDoctors().subscribe((data: Doctor[]) => {
+          console.log(data);
+          this.doctors = data;
+        });
+      }
 
     get f(){
         return this.form.controls;
@@ -39,28 +60,7 @@ export class MessageComponent implements OnInit  {
     }
 
     getRecieverId() {
-        return "88"
-    }
-
-    getMessageThreads() {
-        return [
-            {
-                name: "Will",
-                receiver_id: 26
-            },
-            {
-                name: "Aubrey",
-                receiver_id: 88
-            },
-            {
-                name: "Scout",
-                receiver_id: 12
-            },
-            {
-                name: "Gooby",
-                receiver_id: 3
-            },
-        ]
+        return "" + this.doctor.id
     }
 
     /**
@@ -84,6 +84,7 @@ export class MessageComponent implements OnInit  {
         }
         this.messageService.saveMessage(message).forEach(m => m)
         this.messages.push(message)
+        this.activeMessageThread.push(message)
         this.input.nativeElement.value = ''
     }
 

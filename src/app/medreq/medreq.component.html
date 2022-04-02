@@ -28,4 +28,151 @@
     <button class = "openbtn" (click) = "openNav()">&#9776;</button>
   </div>
   <h1 class = "title">Medication Requests</h1>
+  <div class ="container">
+    <div class = "card">
+        <h3 class="text-center" style="display:inline;"> Requested Refills</h3>
+        <div class = "card-body" style="display: block; margin: 0 auto;">
+            <table class="table table-striped">
+                <thead>
+                    <th> Id </th>
+                    <th> Prescription </th>
+                    <th> Request Status </th>
+                    <th> Patient </th>
+                    <th> Actions </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let r of userRequests">
+                        <td> {{ r.id }}</td>
+                        <td> {{r.prescriptionRequest.name + ", " + r.prescriptionRequest.dosages}}</td>
+                        <td> {{r.requestStatus }}</td>
+                        <td> {{ r.requestingPatient.fname + " " + r.requestingPatient.lname }}</td>
+                        <td>
+                            <span><button name="deny" style="margin: 5px 10px;" (click)="denyRequest(r)">Deny</button></span>
+                            <span><button name="fulfill" style="margin: 5px 10px;" (click)="fulfillRequest(r)">Fulfill</button></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <span><button name="viewPrescriptions" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewPrescriptions">View Prescribed Prescriptions</button></span>
+        </div>
+    </div>
+  </div>
+
+  <div id="viewPrescriptions" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Prescribed Prescriptions</h4>
+        </div>
+        <div class="modal-body">
+          <div class ="container">
+            <div class = "card">
+                <h3 class="text-center" style="display:inline;"> Medication List</h3>
+                <div class = "card-body" style="display: block; margin: 0 auto;">
+                    <table class="table table-striped">
+                        <thead>
+                            <th> Name </th>
+                            <th> Dosages </th>
+                            <th> Description </th>
+                            <th> Doctor Prescribed </th>
+                            <th> Actions </th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor = "let ps of prescriptions">
+                                <td> {{ ps.name }}</td>
+                                <td> {{ ps.dosages }}</td>
+                                <td> {{ ps.description }}</td>
+                                <td> {{ ps.patient.fname + " " + ps.patient.lname }}</td>
+                                <td>
+                                    <span><button name="update"  style="margin: 5px 10px;" (click)="setPrescription(ps)" data-toggle="modal" data-target="#updatePrescription">Update Prescription</button></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <span><button name="newPrescription" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newPrescription">New Prescription</button></span>
+        </div>
+      </div>
+  
+    </div>
+   </div>
+
+
+
+  <div id="newPrescription" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Prescribe Prescription</h4>
+        </div>
+        <div class="modal-body">
+          <form #newPrescriptionForm="ngForm" >
+            <p>Please fill in this form to prescribe a new prescription.</p>
+            <hr>
+
+            <label for="patientEmail">Select your patient: </label>
+            <select ngModel name="patientEmail" id="patients" required>
+            <option *ngFor="let patient of patients" [value]="patient.email">{{patient.fname + " " + patient.lname}}</option>
+            </select>
+
+            <label for="name"><b>Name</b></label>
+            <input type="text" ngModel placeholder="Enter name of prescription..." name="name" id="name" required>
+        
+            <label for="dosages"><b>Dosage</b></label>
+            <input type="text" ngModel placeholder="Enter dosage..." name="dosages" id="dosages" required>
+        
+            <label for="description"><b>Description</b></label>
+            <input type="text" ngModel placeholder="Enter description..." name="description" id="description">
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" data-dismiss="modal" [disabled]="newPrescriptionForm.invalid" (click)="prescribe(newPrescriptionForm)">Prescribe</button>
+        </div>
+      </div>
+  
+    </div>
+</div>
+
+<div id="updatePrescription" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Update Prescription</h4>
+      </div>
+      <div class="modal-body">
+        <form #updatePrescriptionForm="ngForm" (ngSubmit)="update(updatePrescriptionForm)">
+          <p>Please fill in this form to update values.</p>
+          <hr>
+          <label for="name"><b>Name</b></label>
+          <input type="text" ngModel placeholder="Enter name of prescription..." name="name" id="name" required>
+      
+          <label for="dosages"><b>Dosage</b></label>
+          <input type="text" ngModel placeholder="Enter dosage..." name="dosages" id="dosages" required>
+      
+          <label for="description"><b>Description</b></label>
+          <input type="text" ngModel placeholder="Enter description..." name="description" id="description">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" data-dismiss="modal" (click)="update(updatePrescriptionForm)">Update</button>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  </div>
 </body>

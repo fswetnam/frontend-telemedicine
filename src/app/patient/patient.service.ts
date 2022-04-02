@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable} from "rxjs";
 import { Appointment } from "../appointment/Appointment";
 import { Prescription } from "../prescription/Prescription";
+import { Requests } from "../requests/Requests";
 import { Patient } from "./Patient";
 
 @Injectable({providedIn: 'root'})
@@ -26,6 +27,10 @@ export class PatientService{
 
     getPrescriptions(id: number): Observable<Prescription[]>{
         return this.http.get<Prescription[]>(`${this.url}/id=${id}/prescriptions`)
+    }
+
+    getRequestedPrescriptions(id: number): Observable<Requests[]>{
+        return this.http.get<Requests[]>(`${this.url}/id=${id}/requested-prescriptions`);
     }
 
     updatePrescription(id: number, p: Prescription){

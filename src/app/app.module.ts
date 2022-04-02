@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import {Routes, RouterModule } from '@angular/router'
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ScheduleModule, RecurrenceEditorAllModule, DayService, WeekService, MonthService, AgendaService } from '@syncfusion/ej2-angular-schedule';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from 'src/home/home.component';
@@ -36,6 +37,7 @@ import { UploadrepComponent } from './uploadrep/uploadrep.component';
 import { DocchatsComponent } from './docchats/docchats.component';
 import { DocinboxComponent } from './docinbox/docinbox.component';
 import { AdminpComponent } from './adminp/adminp.component';
+import { AdminappComponent } from './adminapp/adminapp.component';
 import { SettingsPComponent } from './settingsP/settingsP.component';
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
@@ -68,6 +70,7 @@ const Routs: Routes = [
   {path: 'docinbox', component:DocinboxComponent},
   {path: 'settingsP', component:SettingsPComponent},
   {path: 'adminp', component:AdminpComponent},
+  {path: 'adminapp', component:AdminappComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -102,9 +105,12 @@ const Routs: Routes = [
     DocchatsComponent,
     DocinboxComponent,
     AdminpComponent,
+    AdminappComponent
   ],
   imports: [
     BrowserModule,
+    ScheduleModule,
+    RecurrenceEditorAllModule,
     CommonModule,
     AppRoutingModule,
     FormsModule,
@@ -112,7 +118,7 @@ const Routs: Routes = [
     HttpClientModule,
     RouterModule.forRoot(Routs)
   ],
-  providers: [],
+  providers: [DayService, WeekService, MonthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -107,7 +107,8 @@ const Routs: Routes = [
     DocchatsComponent,
     DocinboxComponent,
     AdminpComponent,
-    AdminappComponent
+    AdminappComponent,
+    RequestComponent
   ],
   imports: [
     BrowserModule,

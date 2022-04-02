@@ -3,6 +3,8 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Appointment } from "../appointment/Appointment";
 import { Patient } from "../patient/Patient";
+import { Prescription } from "../prescription/Prescription";
+import { Requests } from "../requests/Requests";
 import { Doctor } from "./Doctor";
 
 @Injectable({providedIn: 'root'})
@@ -15,6 +17,19 @@ export class DoctorService{
     getDoctors(): Observable<Doctor[]>{
         return this.http.get<Doctor[]>(`${this.url}` + 's');
      }
+
+    getDoctor(id: number): Observable<Doctor>{
+        return this.http.get<Doctor>(`${this.url}/id=${id}`);
+    }
+
+    getPrescriptions(id: number): Observable<Prescription[]>{
+        return this.http.get<Prescription[]>(`${this.url}/id=${id}/prescribed-prescriptions`);
+    }
+
+    getRequestedPrescriptions(id: number): Observable<Requests[]>{
+        return this.http.get<Requests[]>(`${this.url}/id=${id}/requested-prescriptions`);
+    }
+
 
     public saveDoctor(doctor: Doctor) {
          return this.http.post(`${this.url}`, doctor, {responseType: 'text' as 'json'});

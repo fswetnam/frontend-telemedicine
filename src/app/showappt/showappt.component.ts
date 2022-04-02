@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Appointment } from '../appointment/Appointment';
 import { AppointmentService } from '../appointment/appointment.service';
+import { Doctor } from '../doctor/Doctor';
 import { DoctorService } from '../doctor/doctor.service';
 import { Patient } from '../patient/Patient';
 import { PatientService } from '../patient/patient.service';
@@ -17,7 +18,7 @@ export class ShowapptComponent implements OnInit {
   patients!: Patient[];
   appointments!: Appointment[];
   message: any;
-  doctor: Patient;
+  doctor: Doctor;
 
   constructor(private doctorService: DoctorService, private appointmentService: AppointmentService, private patientService: PatientService) { }
 

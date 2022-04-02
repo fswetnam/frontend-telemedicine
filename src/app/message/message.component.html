@@ -26,9 +26,10 @@
         <div class="col-3">
             <div class="row mt-5">
                 <div class="col-12">
-                      <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action" *ngFor="let thread of messageThreads">
-                            {{thread.name}}
+                    <h2>Doctors</h2>
+                      <div class="list-group" >
+                        <a *ngFor="let doctor of doctors" (click)="selectDoctor($event, doctor)" class="list-group-item list-group-item-action doctor-select" id="{{ 'doctor-' + doctor.id }}" >
+                            {{doctor.fname}}
                         </a>
                       </div>
                 </div>
@@ -39,10 +40,10 @@
                 <div class="col-12">
                     <div id="messages">
                         <ul class="list-group list-group-flush">
-                            <li *ngFor="let item of messages; let i = index" [attr.data-index]="i" class="list-group-item">
-                                {{item.content}}
+                            <li *ngFor="let message of activeMessageThread; let i = index" [attr.data-index]="i" class="list-group-item">
+                                {{message.content}}
                                 <div class="float-right">
-                                    {{item.date}}
+                                    {{message.date}}
                                 </div>
                             </li>
                         </ul>

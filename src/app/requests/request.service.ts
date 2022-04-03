@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { Appointment } from "../appointment/Appointment";
 import { Doctor } from "../doctor/Doctor";
 import { Patient } from "../patient/Patient";
 import { Requests } from "./Requests";
@@ -30,6 +31,10 @@ export class RequestService{
 
      public getRequestsByPatient(patient: Patient): Observable<Requests[]> {
          return this.http.put<Requests[]>(`${this.url}/patient`, patient, {responseType: 'text' as 'json'});
+     }
+
+     public getRequestByAppointment(appointment: Appointment): Observable<Requests> {
+        return this.http.put<Requests>(`${this.url}/appointment`, appointment);
      }
 
     public deleteRequest(id: number){

@@ -2,6 +2,11 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
   }
+
+  .control-section{
+    align-content: center;
+    margin: auto;
+  }
   
   .sidebar {
     height: 100%;

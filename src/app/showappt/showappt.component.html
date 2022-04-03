@@ -3,6 +3,7 @@
 <head>
   <title>Admin Portal</title>
   <meta charset="UTF-8">
+    <link href="//cdn.syncfusion.com/ej2/material.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -27,7 +28,34 @@
   <div class = "main">
     <button class = "openbtn" (click) = "openNav()">&#9776;</button>
   </div>
+
   <h1 class = "title">Scheduled Appointments</h1>
+  <div class="control-section">
+    <div class="col-lg-9 content-wrapper">
+    <ejs-schedule
+      #schedule
+      height="525px"
+      [(selectedDate)]="selectedDate"
+      [eventSettings]="eventSettings"
+      currentView="Week" 
+      (popupOpen)="onPopupOpen($event)"
+      (actionComplete)="onActionComplete($event)"
+    >
+      <ng-template #eventSettingsTemplate let-data>
+      <div>
+        <div class="subject">{{data.Subject}}</div>
+        <div class="time">
+        Time: {{data.StartTime.toISOString()}} -
+        {{data.EndTime.toISOString()}}
+        </div>
+      </div>
+      </ng-template>
+    </ejs-schedule>
+    </div>
+  </div>
+  
+  
+<!--
 
   <div class ="container">
     <div class = "card">
@@ -45,7 +73,7 @@
                           {{app.patient.fname + " " + app.patient.lname}}
                         </td>
                         <td>
-                            <span><button name="delete" style="margin: 5px 10px;" (click)="delete(app)">Delete</button></span>
+                            <span><button name="delete" style="margin: 5px 10px;" (click)="delete(app)">Cancel</button></span>
                         </td>
                     </tr>
                 </tbody>
@@ -53,5 +81,6 @@
         </div>
     </div>
   </div>
-
+  
+-->
 </body>

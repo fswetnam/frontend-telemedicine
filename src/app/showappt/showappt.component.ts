@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActionEventArgs, EventSettingsModel, ScheduleComponent } from '@syncfusion/ej2-angular-schedule';
 import { Appointment } from '../appointment/Appointment';
 import { AppointmentService } from '../appointment/appointment.service';
 import { Doctor } from '../doctor/Doctor';
 import { DoctorService } from '../doctor/doctor.service';
+import { RequestStatus } from '../enumeration/RequestStatus';
+import { RequestType } from '../enumeration/RequestType';
 import { Patient } from '../patient/Patient';
 import { PatientService } from '../patient/patient.service';
+import { RequestService } from '../requests/request.service';
+import { Requests } from '../requests/Requests';
 import { UserSession } from '../user/UserSession';
 
 @Component({
@@ -16,43 +21,86 @@ import { UserSession } from '../user/UserSession';
 export class ShowapptComponent implements OnInit {
 
   patients!: Patient[];
-  appointments!: Appointment[];
+  appointments: Appointment[] = [];
+  requests: Requests[];
   message: any;
   doctor: Doctor;
 
-  constructor(private doctorService: DoctorService, private appointmentService: AppointmentService, private patientService: PatientService) { }
+  constructor(private doctorService: DoctorService, private appointmentService: AppointmentService, 
+    private patientService: PatientService, private requestService: RequestService) { }
 
   
   ngOnInit() {
     this.doctor = UserSession.getUserSession();
     this.getPatients();
-    this.getAppointments();
+    this.getAppointmentRequests();
   }
+
+  public data: object [] = [{
+   
+  }];
+  public selectedDate: Date = new Date();
+  public eventSettings: EventSettingsModel = {
+dataSource: this.data,
+fields: {
+  id: 'id',
+  subject: { name: 'Subject', title: 'Event Name' },
+  description: { name: 'Description', title: 'Event Description' },
+  startTime: { name: 'StartTime', title: 'Start Duration' },
+  endTime: { name: 'EndTime', title: 'End Duration'  }
+}
+  };
+
+  public scheduleObj: ScheduleComponent;
+
+  onPopupOpen(args) {
+    console.log("popUp args", args.data);
+    console.log("getEvent result", this.scheduleObj.getEvents(args.data));
+  }
+
+  onActionComplete(args: ActionEventArgs): void {
+    console.log("actionComplete", args.requestType, args);
+
+    switch (args.requestType) {
+      case "viewNavigate":
+      case "dateNavigate":
+        this.scheduleObj.refresh();
+        break;
+      case "toolBarItemRendered":
+        break;
+      default:
+    }
+}
 
   public getPatients(){
     this.patientService.getPatients().subscribe((data: Patient[]) => {
-        console.log(data);
         this.patients = data;
     });
 }
 
-  public getAppointments(){
-    this.doctorService.getAppointments(this.doctor.id).subscribe((data: Appointment[]) => {
-        this.appointments = data;
-        this.appointments.forEach(element => {
-            this.appointmentService.getAppointmentPatient(element.id).subscribe((data) => {
-                element.patient = <Patient>data;
-            });
-        });
-    });
-}
+public getAppointmentRequests(){
+    this.doctorService.getRequests(this.doctor.id).subscribe((data: Requests[]) =>{
+      console.log(data);
+      this.requests = data;
+      console.log(this.requests);
+      data.forEach(d=>{
+        if(d.requestStatus === RequestStatus.CONFIRMED && d.requestType === RequestType.APPOINTMENT_REQUEST){
+           this.requestService.getPatient(d.id).subscribe((data: Patient) =>{
+             d.appointmentRequest.patient = data;
+           })
+           this.appointments.push(d.appointmentRequest);
+          }
+      });
+      console.log(this.appointments);
+    })
+} 
 
 public delete(appointment: Appointment){
-  console.log(appointment.id);
-  this.appointmentService.deleteAppointment(appointment.id).subscribe((data) => {
-      this.message = data
-      this.getAppointments();
-      window.location.reload;
+  this.requestService.getRequestByAppointment(appointment).subscribe((data: Requests)=>{
+    this.requestService.deleteRequest(data.id).subscribe((data)=>{});
+    this.message = data;
+    this.appointments = [];
+    window.location.reload;
   });
 }
 
@@ -79,7 +127,7 @@ public delete(appointment: Appointment){
       this.doctorService.addPatient(this.doctor.id, myP).subscribe((data) => {});
       this.message = data
         form.reset();
-        this.getAppointments();
+        this.getAppointmentRequests();
         alert("Appointment has been set!")
         window.location.reload;
     });

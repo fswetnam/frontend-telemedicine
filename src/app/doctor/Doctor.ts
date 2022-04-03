@@ -17,6 +17,6 @@ export interface Doctor{
     officeAddress?: Address,
     appointments?: Appointment,
     patients?: Patient,
-    requestedPrescriptions?: Requests[],
+    requests?: Requests[],
     prescribedPrescriptions?: Prescription[]
 }

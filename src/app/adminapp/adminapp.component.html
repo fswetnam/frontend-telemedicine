@@ -1,4 +1,33 @@
+<html>
+	<body>
 
+		<div id = "mysideBar" class = "sidebar">
+			<a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav()">&times;</a>
+			<div class = "overlay-content">
+			  <a href = "adminapp">Appointments</a>
+			  <br>
+			  <a href = "uploadrep">Upload Reports</a>
+			  <br>
+			  <a href = "#">Chats</a>
+			  <br>
+			  <a href = "#">Inbox</a>
+<div class="control-section">
+	<div class="col-lg-9 content-wrapper">
+	  <ejs-schedule
+		#schedule
+		height="525px"
+		[(selectedDate)]="selectedDate"
+		[eventSettings]="eventSettings"
+		currentView="Week" 
+		(popupOpen)="onPopupOpen($event)"
+		(actionComplete)="onActionComplete($event)">
+		
+		<ng-template #eventSettingsTemplate let-data>
+		  <div>
+			<div class="subject">{{data.Subject}}</div>
+			<div class="time">
+			  Time: {{data.StartTime.toISOString()}} -
+			  {{data.EndTime.toISOString()}}
 			</div>
 		  </div>
 		  <div class = "main">

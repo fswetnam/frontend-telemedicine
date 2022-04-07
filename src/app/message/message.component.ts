@@ -36,7 +36,7 @@ export class MessageComponent implements OnInit  {
 
     selectDoctor(event, doctor) {
         this.doctor = doctor;
-        this.activeMessageThread = this.messages.filter(message => message.receiver_id == doctor.id)
+        this.activeMessageThread = this.messages.filter(message => (message.receiver_id == doctor.id) || (message.sender_id === doctor.id))
         for(let i=0; i < document.getElementsByClassName("doctor-select").length; i++) {
             let item = document.getElementsByClassName("doctor-select").item(i);
             item.className="list-group-item list-group-item-action doctor-select"
@@ -61,6 +61,14 @@ export class MessageComponent implements OnInit  {
 
     getRecieverId() {
         return "" + this.doctor.id
+    }
+
+    isUserMessage(message) {
+        return message.sender_id == this.user.id
+    }
+
+    isDoctorMessage(message) {
+        return message.receiver_id == this.user.id
     }
 
     /**

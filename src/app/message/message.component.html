@@ -41,9 +41,11 @@
                     <div id="messages">
                         <ul class="list-group list-group-flush">
                             <li *ngFor="let message of activeMessageThread; let i = index" [attr.data-index]="i" class="list-group-item">
-                                {{message.content}}
-                                <div class="float-right">
-                                    {{message.date}}
+                                <div *ngIf="isUserMessage(message)" class="float-left">
+                                    <span class="badge rounded-pill bg-primary p-3">{{message.content}}</span>
+                                </div>
+                                <div *ngIf="isDoctorMessage(message)" class="float-right">
+                                    <span class="badge rounded-pill bg-success p-3">{{message.content}}</span>
                                 </div>
                             </li>
                         </ul>

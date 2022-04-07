@@ -1,5 +1,6 @@
 import { Time } from "@angular/common";
 import { Doctor } from "../doctor/Doctor";
+import { AppointmentType } from "../enumeration/AppointmentType";
 import { Patient } from "../patient/Patient";
 
 export interface Appointment{
@@ -8,5 +9,6 @@ export interface Appointment{
     schedule: Date,
     purpose: string,
     patient: Patient,
-    doctor: Doctor
+    doctor: Doctor,
+    appointmentType: AppointmentType
 }

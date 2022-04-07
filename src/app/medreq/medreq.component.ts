@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Doctor } from '../doctor/Doctor';
 import { DoctorService } from '../doctor/doctor.service';
 import { RequestStatus } from '../enumeration/RequestStatus';
+import { RequestType } from '../enumeration/RequestType';
 import { Patient } from '../patient/Patient';
 import { PatientService } from '../patient/patient.service';
 import { Prescription } from '../prescription/Prescription';
@@ -20,7 +21,7 @@ export class MedreqComponent implements OnInit {
   doctor: Doctor;
   patients: Patient[];
   prescriptions: Prescription[];
-  userRequests: Requests[];
+  userRequests: Requests[] = [];
   message: any;
   prescription: Prescription;
 
@@ -33,6 +34,7 @@ export class MedreqComponent implements OnInit {
     this.doctor = UserSession.getUserSession();
     this.getPatients();
     this.getRequests();
+    console.log(this.userRequests);
     this.getPrescriptions();
   }
 
@@ -54,22 +56,27 @@ public fulfillRequest(request: Requests){
 
 
 public getRequests() {
-    this.doctorService.getRequestedPrescriptions(this.doctor.id).subscribe((data: Requests[]) => {
-        this.userRequests = <Requests[]> data;
+    this.doctorService.getRequests(this.doctor.id).subscribe((data: Requests[]) => {
+      data.forEach(req => {
+        if(req.requestType === RequestType.PRESCRIPTION_REQUEST && !this.userRequests.includes(req)){
+          this.userRequests.push(<Requests> req);
+        }
+        this.requestService.getPatient(req.id).subscribe((data: Patient)=>{
+          req.requestingPatient = <Patient> data;
+        });
+    });
         window.location.reload;
     });
 }
 
 public getPatients(){
   this.patientService.getPatients().subscribe((data: Patient[]) => {
-      console.log(data);
       this.patients = data;
   });
 }
 
 public getPrescriptions(){
   this.doctorService.getPrescriptions(this.doctor.id).subscribe((data: Prescription[]) => {
-      console.log(data);
       this.prescriptions = data;
       this.prescriptions.forEach(pre => {
           this.prescriptionService.getPatient(pre.id).subscribe((data)=>{
@@ -96,7 +103,7 @@ public prescribe(form: NgForm){
       this.message = data
       window.location.reload;
       form.reset();
-      this.ngOnInit();
+      this.getPrescriptions();
   });
   return response;
 }
@@ -105,14 +112,21 @@ public update(form: NgForm){
   const response = this.prescriptionService.updatePrescription(form.value as Prescription, this.prescription.id).subscribe((data) => {
       this.message = data;
       form.reset();
-      window.location.reload;
-      this.ngOnInit();
+      this.prescriptions = [];
+      this.getPrescriptions();
   });
   return response;
 }
 
+public deletePrescription(prescription: Prescription){
+  this.prescriptionService.deletePrescription(prescription.id).subscribe((data) => {
+      this.message = data;
+      this.getPrescriptions();
+      window.location.reload;
+  });
+}
+
 public setPrescription(prescription: Prescription){
-  console.log(prescription);
   this.prescription = prescription;
 }
 

@@ -1,27 +1,92 @@
-<div class="control-section">
-	<div class="col-lg-9 content-wrapper">
-	  <ejs-schedule
-		#schedule
-		height="525px"
-		[(selectedDate)]="selectedDate"
-		[eventSettings]="eventSettings"
-		currentView="Week" 
-		(popupOpen)="onPopupOpen($event)"
-		(actionComplete)="onActionComplete($event)">
-		
-		<ng-template #eventSettingsTemplate let-data>
-		  <div>
-			<div class="subject">{{data.Subject}}</div>
-			<div class="time">
-			  Time: {{data.StartTime.toISOString()}} -
-			  {{data.EndTime.toISOString()}}
+
 			</div>
 		  </div>
-		</ng-template>
-	  </ejs-schedule>
-	</div>
-  </div>
-  
-<head>
-  <link href="//cdn.syncfusion.com/ej2/material.css" rel="stylesheet" />
-</head>
+		  <div class = "main">
+			<button class = "openbtn" (click) = "openNav()">&#9776;</button>
+		  </div>
+		  <div class ="container">
+			<div class = "card">
+				<h3 class="text-center" style="display:inline;"> Requested Appointments</h3>
+				<div class = "card-body" style="display: block; margin: 0 auto;">
+					<table class="table table-striped">
+						<thead>
+							<th> Date/Time Scheduled</th>
+							<th> Doctor </th>
+							<th> Patient </th>
+							<th> Request Status </th>
+							<th> Actions </th>
+						</thead>
+						<tbody>
+							<tr *ngFor = "let r of requests">
+								<td> {{ r.appointmentRequest.schedule | date:"short" }}</td>
+								<td> {{ "Dr. " + r.doctor.fname + " " + r.doctor.lname }}</td>
+								<td> {{ r.requestingPatient.fname + " " + r.requestingPatient.lname }}</td>
+								<td> {{ r.requestStatus }}</td>
+								<td>
+									<span><button name="deny" style="margin: 5px 10px;" (click)="denyRequest(r)">Deny</button></span>
+									<span><button name="fulfill" style="margin: 5px 10px;" (click)="fulfillRequest(r)">Fulfill</button></span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<span><button name="newAppointment" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newAppointment">New Appointment</button></span>
+				</div>
+			</div>
+		  </div>
+
+		  <div id="newAppointment" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+		  
+			  <!-- Modal content-->
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal">&times;</button>
+				  <h4 class="modal-title">Save Appointment</h4>
+				</div>
+				<div class="modal-body">
+				  <form #newAppointmentForm="ngForm">
+					<p>Please fill in this form to create an appointment.</p>
+					<hr>
+				
+					<label for="dateScheduled"><b>Date</b></label>
+					<br>
+					<input type="date" ngModel placeholder="Select Date" name="dateScheduled" id="dateScheduled" required>
+					<br>
+					<label for="timeScheduled"><b>Time</b></label>
+					<br>
+					<input type="time" ngModel placeholder="Select Time" name="timeScheduled" id="timeScheduled" required>
+					<br>
+
+					<label for="appointmentType"><b>RequestType</b></label>
+					<select name="appointmentType" ngModel id="appointmentType" placeHolder="Select an Appointment Type..." required>
+					<option value = "ONLINE">Online</option>
+					<option value="IN_PERSON">In-Person</option>
+					</select>
+					<br>
+					<label for="purpose"><b>Purpose</b></label>
+					<input type="text" ngModel placeholder="Enter Purpose" name="purpose" id="purpose" required>
+					<br>
+					<label for="doctorEmail">Select the doctor: </label>
+					<select ngModel name="doctorEmail" id="doctors" required>
+					<option *ngFor="let doctor of doctors" [value]="doctor.email">Dr.{{doctor.lname}}</option>
+				   </select>
+				   <br>
+				   <label for="patientEmail">Select the patient: </label>
+				   <select ngModel name="patientEmail" id="patients" required>
+				   <option *ngFor="let patient of patients" [value]="patient.email">{{patient.fname}} {{patient.lname}}</option>
+				  </select>
+					<br>
+				  </form>
+				</div>
+				<div class="modal-footer">
+				  <button type="submit" data-dismiss="modal" [disabled]="newAppointmentForm.invalid" (click)="save(newAppointmentForm)">Save</button>
+				</div>
+			  </div>
+		  
+			</div>
+		</div>
+			  
+		
+		
+</body>
+</html>

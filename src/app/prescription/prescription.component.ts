@@ -43,7 +43,17 @@ export class PrescriptionComponent implements OnInit{
 
     public getRequests() {
         this.patientService.getRequestedPrescriptions(this.patient.id).subscribe((data: Requests[]) => {
-            this.userRequests = <Requests[]> data;
+            data.forEach(req => {
+                this.requestService.getDoctor(req.id).subscribe((data: Doctor)=>{
+                    req.doctor = <Doctor> data;
+                    console.log(data);
+                    console.log(req.doctor);
+                });
+                if(req.requestType === RequestType.PRESCRIPTION_REQUEST){
+                    this.userRequests.push(<Requests> req);
+                }
+            });
+            
             window.location.reload;
         });
     }
@@ -55,11 +65,6 @@ export class PrescriptionComponent implements OnInit{
             this.prescriptions.forEach(pre => {
                 this.prescriptionService.getDoctor(pre.id).subscribe((data)=>{
                     pre.doctorPrescribed = <Doctor> data;
-                    this.userRequests.forEach(req =>{
-                        if(req.prescriptionRequest.id === pre.id){
-                            req.doctor = <Doctor> data;
-                        }
-                    });
                 });
             });
         });

@@ -26,8 +26,8 @@ export class DoctorService{
         return this.http.get<Prescription[]>(`${this.url}/id=${id}/prescribed-prescriptions`);
     }
 
-    getRequestedPrescriptions(id: number): Observable<Requests[]>{
-        return this.http.get<Requests[]>(`${this.url}/id=${id}/requested-prescriptions`);
+    getRequests(id: number): Observable<Requests[]>{
+        return this.http.get<Requests[]>(`${this.url}/id=${id}/requests`);
     }
 
 

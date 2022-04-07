@@ -2,7 +2,16 @@
 <html lang = "en">
 <head>
   <title>Admin Portal</title>
-  <meta charset="UTF-8">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/interact.js/1.2.4/interact.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+    <script src="//mattlewis92.github.io/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.min.js"></script>
+    <script src="example.js"></script>
+    <script src="helpers.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//mattlewis92.github.io/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -27,31 +36,83 @@
   <div class = "main">
     <button class = "openbtn" (click) = "openNav()">&#9776;</button>
   </div>
-  <h1 class = "title">Scheduled Appointments</h1>
+  <h1 class = "title" >Scheduled Appointments</h1>
 
-  <div class ="container">
-    <div class = "card">
-        <div class = "card-body" style="display: block; margin: 0 auto;">
-            <table class="table table-striped">
-                <thead>
-                    <th> Date Scheduled </th>
-                    <th> Patient </th>
-                    <th> Actions </th>
-                </thead>
-                <tbody>
-                    <tr *ngFor = "let app of appointments">
-                        <td> {{ app.schedule | date:"short"}}</td>
-                        <td> 
-                          {{app.patient.fname + " " + app.patient.lname}}
-                        </td>
-                        <td>
-                            <span><button name="delete" style="margin: 5px 10px;" (click)="delete(app)">Delete</button></span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+  <div class="row text-center">
+
+    <div class="col-md-4">
+        <div class="btn-group">
+            <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+                Previous
+            </div>
+            <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+                Today
+            </div>
+            <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+                Next
+            </div>
         </div>
     </div>
+  
+    <div class="col-md-4">
+        <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    </div>
+  
+    <div class="col-md-4">
+        <div class="btn-group">
+            <div class="btn btn-primary" (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
+                Month
+            </div>
+            <div class="btn btn-primary" (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
+                Week
+            </div>
+            <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
+                Day
+            </div>
+        </div>
+    </div>
+  
+  
   </div>
+  <div [ngSwitch]="view">
+  
+    <mwl-calendar-month-view (dayClicked)="dayClicked($event.day)" *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="eventList">
+    </mwl-calendar-month-view>
+  
+    <mwl-calendar-week-view (eventClicked)="eventClicked($event)" *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="eventList" [dayStartHour]="9" [dayEndHour]="21" [weekStartsOn]="1" [excludeDays]="[0,6]">
+    </mwl-calendar-week-view>
+  
+    <mwl-calendar-day-view (eventClicked)="eventClicked($event)" *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="eventList" [dayStartHour]="9" [dayEndHour]="21">
+    </mwl-calendar-day-view>
+  
+  </div>
+
+  <!--
+<div id="eventModal" class="modal fade" role="dialog"  style="display: hidden;">
+    <div class="modal-dialog">
+  
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Update Patient</h4>
+        </div>
+        <div class="modal-body">
+          <h4> Date Scheduled </h4>
+              <p id="dateScheduled"></p>
+          <h4> Appointment Type </h4>
+              <p id="appointmentType"></p>
+          <h4> Patient Information </h4>
+
+              <p id="patientFname"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+
+  -->
 
 </body>

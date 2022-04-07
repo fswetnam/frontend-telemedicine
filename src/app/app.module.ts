@@ -40,6 +40,8 @@ import { AdminpComponent } from './adminp/adminp.component';
 import { AdminappComponent } from './adminapp/adminapp.component';
 import { SettingsPComponent } from './settingsP/settingsP.component';
 import { RequestComponent } from './requests/request.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
@@ -112,14 +114,16 @@ const Routs: Routes = [
   ],
   imports: [
     BrowserModule,
-    ScheduleModule,
-    RecurrenceEditorAllModule,
     CommonModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(Routs)
+    RouterModule.forRoot(Routs),
+    CalendarModule.forRoot({
+     provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
   ],
   providers: [DayService, WeekService, MonthService],
   bootstrap: [AppComponent]

@@ -27,5 +27,61 @@
   <div class = "main">
     <button class = "openbtn" (click) = "openNav()">&#9776;</button>
   </div>
-  <h1 class = "title">Chats With Patients</h1>
+  <div class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h2>Patients</h2>
+                      <div class="list-group" >
+                        <a *ngFor="let patient of patients" (click)="selectPatient($event, patient)" class="list-group-item list-group-item-action patient-select" id="{{ 'patient-' + patient.id }}" >
+                            {{patient.fname}}
+                        </a>
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div id="messages">
+                        <ul class="list-group list-group-flush">
+                            <li *ngFor="let message of activeMessageThread; let i = index" [attr.data-index]="i" class="list-group-item">
+                                <div *ngIf="isUserMessage(message)" class="float-left">
+                                    <span class="badge rounded-pill bg-primary p-3">{{message.content}}</span>
+                                </div>
+                                <div *ngIf="isPatientMessage(message)" class="float-right">
+                                    <span class="badge rounded-pill bg-success p-3">{{message.content}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12">
+                    <!-- Message chat box -->
+                    <form [formGroup]="form" (submit)="submit()">
+                        <div class="form-group">
+                            <input 
+                                #messageInput
+                                formControlName="message"
+                                id="message" 
+                                type="text" 
+                                class="form-control">
+                            <div *ngIf="f['message'].touched && f['message'].invalid" class="alert alert-danger">
+                                <div *ngIf="f['message'].errors && f['message'].errors['required']">Message is required.</div>
+                                <div *ngIf="f['message'].errors && f['message'].errors['minlength']">Message should be 1 character.</div>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </div>
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
 </body>
+</html>

@@ -1,6 +1,6 @@
 <html>
 <body>
-<form name="myForm" method="post" #myForm="ngForm" (ngSubmit)="myFunction(myForm)">
+<form name="myForm" method="post" >
   <div class="container">
     <h1>Adminstration Login</h1>
     <hr>
@@ -12,7 +12,7 @@
     <input type="password" ngModel placeholder="Enter Password" name="psw" id="psw" required>
 
 
-    <input type="submit" name="log" id= "loginbtn" value="Login" (click)="myFunction(myForm)" class="returnbtn">
+    <input type="submit" name="log" id= "loginbtn" value="Login" class="returnbtn">
   </div>
   
   <div class="container return">

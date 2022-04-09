@@ -18,7 +18,7 @@
       <br>
       <a href = "precords">Records</a>
       <br>
-      <a href = "settingsP">Account Settings</a>
+      <a href = "settingsP">Account Details</a>
       <br>
       <a href = "vchat">Video Chat</a>
     </div>
@@ -26,23 +26,168 @@
   <div class = "main">
     <button class = "openbtn" (click) = "openNav()">&#9776;</button>
   </div>
-<h2>Request Appointment</h2>
-<hr>
-    <div name="schApp" id="schApp">
-    <form name="myApp" action="/action_page.php" #myApp="ngForm" (ngSubmit)="myAppoint(myApp)">
-      <label for="doctorEmail">Select your doctor: </label>
-       <select ngModel name="doctorEmail" id="doctors" required>
-       <option *ngFor="let doctor of doctors" [value]="doctor.email">Dr.{{doctor.lname}}</option>
-      </select>
-      <br>
-      <label for="dateScheduled">Select date: </label>
-      <input ngModel type="date" id="dateScheduled" name="dateScheduled" value="dateScheduled" required><br>
-      <label for="timeScheduled">Select time: </label>
-      <input ngModel type="time" id="timeScheduled" name="timeScheduled" value="timeScheduled" required/>
-    </form>
-  </div>
-    <input type="submit" name="sapp" id= "sappbtn" value="Request" (click)="myAppoint(myApp)" [disabled]="myApp.invalid" class="sapp">
-    <br>
+
+  <div>
+  <span><button class="sapp" name="viewRequest" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewRequests">View Requests</button></span> <br>
+  <span><button class="sapp" name="newRequests" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#requestAppointment">New Appointment Request</button></span>
+          <br>
+
+        </div>
+
+
+
+
+    <div class="row text-center">
+  
+      <div class="col-md-4">
+          <div class="btn-group">
+              <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+                  Previous
+              </div>
+              <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+                  Today
+              </div>
+              <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+                  Next
+              </div>
+          </div>
+      </div>
+    
+      <div class="col-md-4">
+          <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+      </div>
+    
+      <div class="col-md-4">
+          <div class="btn-group">
+              <div id="start" class="btn btn-primary" (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
+                  Month
+              </div>
+              <div is="week" class="btn btn-primary" (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
+                  Week
+              </div>
+              <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
+                  Day
+              </div>
+          </div>
+      </div>
+    
+    
+    </div>
+    <div [ngSwitch]="view">
+    
+      <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="eventList">
+      </mwl-calendar-month-view>
+    
+      <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="eventList" [dayStartHour]="9" [dayEndHour]="21" [weekStartsOn]="1" [excludeDays]="[0,6]">
+      </mwl-calendar-week-view>
+    
+      <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="eventList" [dayStartHour]="9" [dayEndHour]="21">
+      </mwl-calendar-day-view>
+    
+    </div>
+
+    <div id="requestAppointment" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">New Appointment Request</h4>
+          </div>
+          <div class="modal-body">
+            <form #newAppointmentRequest="ngForm">
+              <p>Please fill in this form to request an appointment.</p>
+              <hr>
+          
+              <label for="doctorEmail">Select your doctor: </label>
+              <select ngModel name="doctorEmail" id="doctors" required>
+              <option *ngFor="let doctor of doctors" [value]="doctor.email">Dr.{{doctor.lname}}</option>
+             </select>
+             <br>
+             <label for="dateScheduled">Select date: </label> <br>
+             <input ngModel type="date" id="dateScheduled" name="dateScheduled" value="dateScheduled" required><br>
+             <label for="timeScheduled">Select time: </label> <br>
+             <input ngModel type="time" id="timeScheduled" name="timeScheduled" value="timeScheduled" required/>
+             <label for="appointmentType">Select appointment type...</label>
+             <select name="appointmentType" ngModel id="appointmentType" placeHolder="Select one..." required>
+              <option value = "ONLINE">Online</option>
+              <option value="IN_PERSON">In-Person</option>
+          </select>
+             <label for="purpose">Reason</label>
+             <input ngModel type="text" id="purpose" name="purpose" required>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" data-dismiss="modal" (click)="newRequest(newAppointmentRequest)">Request</button>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+    
+    <div id="viewRequests" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">View Requests</h4>
+          </div>
+          <div class="modal-body">
+    
+            <br>
+        <div class ="container">
+          <div class = "card">
+              <h3 class="text-center" style="display:inline;"> Active Requests</h3>
+              <div class = "card-body" style="display: block; margin: 0 auto;">
+                  <table class="table table-striped">
+                      <thead>
+                          <th> Date Scheduled </th>
+                          <th> Doctor </th>
+                          <th> Purpose </th>
+                          <th> Appointment Type </th>
+                          <th> Request Status </th>
+                          <th> Actions </th>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor='let app of requests'>
+                              <td> {{ app.appointmentRequest.schedule | date:"short"}}</td>
+                              <td> 
+                                {{app.doctor.fname + " " + app.doctor.lname + ": " + app.doctor.specialty}}
+                              </td>
+                              <td> {{app.appointmentRequest.purpose}}</td>
+                              <td> {{app.appointmentRequest.appointmentType}}</td>
+                              <td> {{app.requestStatus}} </td>
+                              <td>
+                                  <span><button name="delete" style="margin: 5px 10px;" (click)="cancelRequest(app)">Cancel</button></span>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+            
+          <div class="modal-footer">
+          </div>
+        </div>
+    
+      </div>
+    </div>
+    </div>
+
+
+</body>
+
+
+
+</html>
+
+
+<!--
+    
     <br>
     <div class ="container">
       <div class = "card">
@@ -52,14 +197,18 @@
                   <thead>
                       <th> Date Scheduled </th>
                       <th> Doctor </th>
+                      <th> Purpose </th>
+                      <th> Appointment Type </th>
                       <th> Actions </th>
                   </thead>
                   <tbody>
-                      <tr *ngFor = "let app of appointments">
-                          <td> {{ app.schedule | date:"short"}}</td>
+                      <tr *ngFor='let app of requests'>
+                          <td> {{ app.appointmentRequest.schedule | date:"short"}}</td>
                           <td> 
                             {{app.doctor.fname + " " + app.doctor.lname + ": " + app.doctor.specialty}}
                           </td>
+                          <td> {{app.appointmentRequest.purpose}}</td>
+                          <td> {{app.appointmentRequest.appointmentType}}</td>
                           <td>
                               <span><button name="delete" style="margin: 5px 10px;" (click)="delete(app)">Delete</button></span>
                           </td>
@@ -70,7 +219,4 @@
       </div>
   </div>
 
-
-
-</body>
-</html>
+-->

@@ -42,6 +42,8 @@ import { SettingsPComponent } from './settingsP/settingsP.component';
 import { RequestComponent } from './requests/request.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { AdminAddUserComponent } from 'src/adminadduser/adminadduser.component';
+
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
@@ -75,6 +77,7 @@ const Routs: Routes = [
   {path: 'adminp', component:AdminpComponent},
   {path: 'requests', component:RequestComponent},
   {path: 'adminapp', component:AdminappComponent},
+  {path: 'adminadduser', component:AdminAddUserComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -110,7 +113,9 @@ const Routs: Routes = [
     DocinboxComponent,
     AdminpComponent,
     AdminappComponent,
-    RequestComponent
+    RequestComponent,
+    AdminAddUserComponent,
+    SettingsPComponent
   ],
   imports: [
     BrowserModule,

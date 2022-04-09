@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { Address } from "../address/Address";
 import { Appointment } from "../appointment/Appointment";
 import { Patient } from "../patient/Patient";
 import { Prescription } from "../prescription/Prescription";
@@ -30,6 +31,13 @@ export class DoctorService{
         return this.http.get<Requests[]>(`${this.url}/id=${id}/requests`);
     }
 
+    getOfficeAddress(id: number): Observable<Address>{
+        return this.http.get<Address>(`${this.url}/id=${id}/address`);
+    }
+
+    addOfficeAddress(id: number, address: Address){
+            return this.http.put(`${this.url}/id=${id}/add-address`, address, {responseType: 'text' as 'json'})
+        }
 
     public saveDoctor(doctor: Doctor) {
          return this.http.post(`${this.url}`, doctor, {responseType: 'text' as 'json'});

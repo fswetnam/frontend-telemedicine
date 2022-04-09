@@ -1,0 +1,146 @@
+*{
+    box-sizing: border-box;
+  }
+  
+  /* Add padding to containers */
+  .container {
+    padding: 16px;
+    background-color: white;
+  }
+
+  .myForm {
+    margin-left: 100px;
+  }
+  
+  input[type='text'],
+  input[type='email'],
+  input[type='password'] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    margin-left: 50px;
+  }
+  
+  label {
+    margin-left: 50px;
+  }
+  
+  h1 {
+    margin-left: 50px;
+  }
+  
+  input[type='submit'] {
+    background-color: #1e6de2;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    margin-left: 50px;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+  }
+  
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #778899;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.4s;
+  }
+  
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 23px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: black;
+    transition: 0.5s;
+  }
+  
+  .sidebar a:hover .offcanvas a:focus{
+    color: #f1f1f1;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  .openbtn {
+    font-size: 30px;
+    cursor: pointer;
+    background-color: white;
+    color: #111;
+    padding: 18px 20px;
+    border: none;
+    transition: 0.4s;
+  }
+  
+  .openbtn:hover {
+    background-color: #696969;
+    color: white;
+    transition: 0.4s;
+  }
+
+    input[type=text], input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #f1f1f1;
+    }
+  
+    
+    /* Overwrite default styles of hr */
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 25px;
+    }
+  .returnbtn{
+    background-color: #1e6de2;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 500px;
+    opacity: 0.9;
+  }
+
+  
+  .modal-content{
+    text-align: center;
+    position: absolute;
+    width: 750px;
+    margin: auto;
+  }
+
+  .modal-fade{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }

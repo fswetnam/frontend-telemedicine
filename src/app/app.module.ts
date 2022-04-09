@@ -43,6 +43,9 @@ import { RequestComponent } from './requests/request.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AdminAddUserComponent } from 'src/adminadduser/adminadduser.component';
+import { UploadRepAdmin } from './uploadRepAdmin/uploadRepAdmin.component';
+import { SettingsAComponent } from './settingsA/settingsA.component';
+import { SettingsDComponent } from './settingsD/settingsD.component';
 
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
@@ -78,6 +81,9 @@ const Routs: Routes = [
   {path: 'requests', component:RequestComponent},
   {path: 'adminapp', component:AdminappComponent},
   {path: 'adminadduser', component:AdminAddUserComponent},
+  {path: 'uploadRepAdmin', component:UploadRepAdmin},
+  {path: 'settingsA', component:SettingsAComponent},
+  {path: 'settingsD', component:SettingsDComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -115,7 +121,10 @@ const Routs: Routes = [
     AdminappComponent,
     RequestComponent,
     AdminAddUserComponent,
-    SettingsPComponent
+    SettingsPComponent,
+    UploadRepAdmin,
+    SettingsAComponent,
+    SettingsDComponent,
   ],
   imports: [
     BrowserModule,

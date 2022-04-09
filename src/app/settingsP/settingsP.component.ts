@@ -54,6 +54,7 @@ export class SettingsPComponent implements OnInit {
         console.log(this.addresses)
         alert("New address has been added!");
         this.ngOnInit();
+        window.location.reload();
       })
   }
 
@@ -62,6 +63,7 @@ export class SettingsPComponent implements OnInit {
         this.currAddress = data;
         alert("Address has been updated!");
         this.ngOnInit();
+        window.location.reload();
       })
   }
 
@@ -69,6 +71,7 @@ export class SettingsPComponent implements OnInit {
     this.addressService.deleteAddress(address.id).subscribe((data) => {
         alert("Address deleted!");
         this.ngOnInit();
+        window.location.reload();
     });
 }
 
@@ -84,6 +87,7 @@ export class SettingsPComponent implements OnInit {
     this.patientService.addInsurance(this.patient.id, insurance).subscribe((data) => { 
       alert("Insurance added!");
       this.ngOnInit();
+      window.location.reload();
   });
   }
 
@@ -91,6 +95,7 @@ export class SettingsPComponent implements OnInit {
     const response = this.insuranceService.updateInsurance(form.value as Insurance, this.insurance.id).subscribe((data) => {
       alert("Insurance updated!")
       this.ngOnInit();
+      window.location.reload();
   });
   return response;
   }
@@ -103,6 +108,7 @@ export class SettingsPComponent implements OnInit {
     this.insuranceService.deleteInsurance(insurance.id).subscribe((data) => {
         alert("Insurance deleted!");
         this.ngOnInit();
+        window.location.reload();
     });  
   }
 
@@ -111,6 +117,7 @@ export class SettingsPComponent implements OnInit {
       alert("Patient details updated!");
       UserSession.setUserSession(data);
       this.ngOnInit();
+      window.location.reload();
   });
   return response;
   }
@@ -126,6 +133,7 @@ export class SettingsPComponent implements OnInit {
     this.patientService.addMedicalHistory(this.patient.id, medicalHistory).subscribe((data) => {    
       alert("Medical condition added!");
       this.ngOnInit();
+      window.location.reload();
   });
   }
 
@@ -140,6 +148,7 @@ export class SettingsPComponent implements OnInit {
     this.medicalHistoryService.deleteMedicalHistory(medicalHistory.id).subscribe((data) => {
       alert("Medical condition deleted!");
       this.ngOnInit();
+      window.location.reload();
     });
   }
 
@@ -154,6 +163,7 @@ export class SettingsPComponent implements OnInit {
     const response = this.medicalHistoryService.updateMedicalHistory(medicalHistory, this.medicalHistory.id).subscribe((data) => {
       alert("Insurance updated!");
       this.ngOnInit();
+      window.location.reload();
     });
 
     return response;

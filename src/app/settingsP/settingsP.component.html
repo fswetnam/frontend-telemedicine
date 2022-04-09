@@ -213,6 +213,8 @@
                                   <th> All Care Coverage </th>
                                   <th> Consulting Fees Covered </th>
                                   <th> Percent Insured </th>
+                                  <th> Member/Group Id </th>
+                                  <th> Actions </th>
                               </thead>
                               <tbody>
                                   <tr *ngFor='let insurance of insurances'>
@@ -220,6 +222,7 @@
                                       <td> {{ insurance.allCareCoverage }}</td>
                                       <td> {{ insurance.consultingFeesCovered }}</td>
                                       <td> {{ insurance.percentInsured }}</td>
+                                      <td> {{ insurance.memberId }}</td>
                                       <td>
                                           <span><button name="delete" style="margin: 5px 10px;" (click)="deleteInsurance(insurance)">Delete</button></span>
                                           <span><button name="update" style="margin: 5px 10px;" data-toggle="modal" data-target="#updateInsurance" (click)="setInsurance(insurance)">Update</button></span>
@@ -272,6 +275,9 @@
               
                   <label for="percentInsured"><b>Percent Insured</b></label>
                   <input type="text" ngModel placeholder="Enter percent insured..." name="percentInsured" id="percentInsured">
+
+                  <label for="memberId"><b>Member/Group Id</b></label>
+                  <input type="text" ngModel placeholder="Enter Member/Group Id..." name="memberId" id="memberId">
                 </form>
               </div>
               <div class="modal-footer">
@@ -313,6 +319,9 @@
               
                   <label for="percentInsured"><b>Percent Insured</b></label>
                   <input type="text" ngModel placeholder="Enter Percent Insured" name="percentInsured" id="percentInsured" required>
+
+                  <label for="memberId"><b>Member/Group Id</b></label>
+                  <input type="text" ngModel placeholder="Enter Member/Group Id..." name="memberId" id="memberId" required>
                 </form>
               </div>
               <div class="modal-footer">

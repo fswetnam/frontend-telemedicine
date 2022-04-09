@@ -21,5 +21,28 @@
 		  <div class = "main">
 			<button class = "openbtn" (click) = "openNav()">&#9776;</button>
 		  </div>
+
+          <h1 style="text-align: center;">Admin Details</h1>
+
+          <form #updateAdminForm="ngForm" (ngSubmit)="updateAdmin(updateAdminForm)">
+            <p>Please fill in this form to update values.</p>
+            <hr>
+        
+            <label for="fname"><b>First Name</b></label>
+            <input type="text" ngModel placeholder={{this.admin.fname}} name="fname" id="fname">
+        
+            <label for="lname"><b>Last Name</b></label>
+            <input type="text" ngModel placeholder={{this.admin.lname}} name="lname" id="lname">
+        
+            <label for="email"><b>Email</b></label>
+            <input type="text" ngModel placeholder={{this.admin.email}} name="email" id="email">
+        
+            <label for="cellphone"><b>Phone Number</b></label>
+            <input type="text" ngModel placeholder={{this.admin.cellphone}} name="cellphone" id="cellphone">
+        
+            <label for="userpassword"><b>Password</b></label>
+            <input type="password" ngModel placeholder="Enter Password" name="userpassword" id="userpassword">
+          </form>
+          <button class="returnbtn" type="submit" data-dismiss="modal" (click)="updateAdmin(updateAdminForm)">Update</button>
     </body>
 </html>

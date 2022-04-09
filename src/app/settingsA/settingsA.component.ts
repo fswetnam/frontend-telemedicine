@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { Address } from "../address/Address";
-import { AddressService } from "../address/address.service";
-import { Doctor } from "../doctor/Doctor";
-import { DoctorService } from "../doctor/doctor.service";
+import { NgForm } from "@angular/forms";
+import { Admin } from "../admin/Admin";
+import { AdminService } from "../admin/admin.service";
 import { UserSession } from "../user/UserSession";
 
 @Component({
@@ -12,15 +11,23 @@ import { UserSession } from "../user/UserSession";
   })
   export class SettingsAComponent implements OnInit {
   
-    doctor!: Doctor;
-    currAddress: Address;
-    addresses: Address[] = [];
+    admin!: Admin;
   
-    constructor(private doctorService: DoctorService, private addressService: AddressService) { }
+    constructor(private adminService: AdminService) { }
   
     ngOnInit() {
-      this.doctor = UserSession.getUserSession();
+      this.admin = UserSession.getUserSession();
     }
+
+    updateAdmin(form: NgForm) {
+        const response = this.adminService.updateAdmin(form.value as Admin, this.admin.id).subscribe((data: Admin) => {
+          alert("Admin details updated!");
+          UserSession.setUserSession(data);
+          this.ngOnInit();
+          window.location.reload();
+      });
+      return response;
+      }
 
     
   openNav(){

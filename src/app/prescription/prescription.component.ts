@@ -42,19 +42,15 @@ export class PrescriptionComponent implements OnInit{
     }
 
     public getRequests() {
-        this.patientService.getRequestedPrescriptions(this.patient.id).subscribe((data: Requests[]) => {
+        this.patientService.getRequests(this.patient.id).subscribe((data: Requests[]) => {
             data.forEach(req => {
                 this.requestService.getDoctor(req.id).subscribe((data: Doctor)=>{
                     req.doctor = <Doctor> data;
-                    console.log(data);
-                    console.log(req.doctor);
                 });
                 if(req.requestType === RequestType.PRESCRIPTION_REQUEST){
                     this.userRequests.push(<Requests> req);
                 }
             });
-            
-            window.location.reload;
         });
     }
 
@@ -74,8 +70,7 @@ export class PrescriptionComponent implements OnInit{
         let pS = form.value as Prescription;
         pS.patient = this.patient;
         const response =  this.prescriptionService.savePrescription(form.value as Prescription).subscribe((data) => {
-            this.message = data
-            console.log(data)
+            this.message = data;
             form.reset();
             window.location.reload;
         });
@@ -84,8 +79,7 @@ export class PrescriptionComponent implements OnInit{
 
     public cancelRequest(request: Requests){
         this.requestService.deleteRequest(request.id).subscribe((data) => {
-            this.message = data
-            this.ngOnInit();
+            this.message = data;
             window.location.reload;
         });
     }

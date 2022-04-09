@@ -1,7 +1,10 @@
 import { HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable} from "rxjs";
+import { Address } from "../address/Address";
 import { Appointment } from "../appointment/Appointment";
+import { Insurance } from "../insurance/Insurance";
+import { MedicalHistory } from "../medicalHistory/MedicalHistory";
 import { Prescription } from "../prescription/Prescription";
 import { Requests } from "../requests/Requests";
 import { Patient } from "./Patient";
@@ -29,8 +32,31 @@ export class PatientService{
         return this.http.get<Prescription[]>(`${this.url}/id=${id}/prescriptions`)
     }
 
-    getRequestedPrescriptions(id: number): Observable<Requests[]>{
-        return this.http.get<Requests[]>(`${this.url}/id=${id}/requested-prescriptions`);
+    getAddress(id: number): Observable<Address>{
+        return this.http.get<Address>(`${this.url}/id=${id}/address`);
+    }
+
+    addAddress(id: number, address: Address){
+            return this.http.put(`${this.url}/id=${id}/add-address`, address, {responseType: 'text' as 'json'})
+        }
+    addInsurance(id: number, insurance: Insurance){
+        return this.http.put(`${this.url}/id=${id}/add-insurance`, insurance, {responseType: 'text' as 'json'})
+    }
+
+    getInsurance(id: number): Observable<Insurance[]>{
+        return this.http.get<Insurance[]>(`${this.url}/id=${id}/insurance`);
+    }
+
+    addMedicalHistory(id: number, mH: MedicalHistory){
+        return this.http.put(`${this.url}/id=${id}/add-medical-history`, mH, {responseType: 'text' as 'json'})
+    }
+
+    getMedicalHistory(id: number): Observable<MedicalHistory[]>{
+        return this.http.get<MedicalHistory[]>(`${this.url}/id=${id}/medical-history`);
+    }
+
+    getRequests(id: number): Observable<Requests[]>{
+        return this.http.get<Requests[]>(`${this.url}/id=${id}/requests`);
     }
 
     updatePrescription(id: number, p: Prescription){

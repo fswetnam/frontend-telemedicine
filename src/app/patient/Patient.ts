@@ -16,7 +16,7 @@ export interface Patient{
     dob?: string,
     isInsured: boolean,
     medicalHistory?: MedicalHistory[],
-    insurance?: Insurance[],
+    insurance?:Insurance[],
     address?: Address,
     appointments?: Appointment[],
     prescriptions?: Prescription[],

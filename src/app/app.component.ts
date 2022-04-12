@@ -8,6 +8,11 @@ import { UserSession } from "src/app/user/UserSession";
 })
 export class AppComponent {
   title = 'frontend';
+  dashboardRoute = 'patientp';
+
+  constructor() {
+    this.dashboardRoute = this.getDashboardPath()
+  }
 
   isLoggedIn() {
     let user = UserSession.getUserSession()
@@ -19,5 +24,14 @@ export class AppComponent {
   
   logout() {
     UserSession.setUserSession(null)
+  }
+
+  getDashboardPath() {
+    let user = UserSession.getUserSession()
+    if(user.userType == 'PATIENT') {
+      return 'patientp'
+    } else {
+      return 'doctorp'
+    }
   }
 }

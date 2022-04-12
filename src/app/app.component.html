@@ -13,12 +13,13 @@
         <ul class="nav__links">
             <span *ngIf="!isLoggedIn()">
               <li routerLinkActive = "active"><a routerLink = "login">Login</a></li>
+              <li routerLinkActive = "active"><a routerLink = "about">About</a></li>
+              <li><a href = "#">COVID-19</a></li>
             </span>
             <span *ngIf="isLoggedIn()">
-              <li routerLinkActive = "active"><a href="#" (click)="logout()">Logout</a></li>
+              <li routerLinkActive = "active"><a href="#" routerLink = {{dashboardRoute}}>Dashboard</a></li>
+              <li routerLinkActive = "active"><a href="#" routerLink = "home" (click)="logout()">Logout</a></li>
             </span>
-            <li routerLinkActive = "active"><a routerLink = "about">About</a></li>
-            <li><a href = "#">COVID-19</a></li>
         </ul>
     </nav>
     <a class = "cta" href= "#"><button>Contact Us</button></a>

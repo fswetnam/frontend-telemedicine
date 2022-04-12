@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserSession } from "src/app/user/UserSession";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
+
+  isLoggedIn() {
+    let user = UserSession.getUserSession()
+    if(user != null || user != undefined) {
+      return true
+    }
+    return false
+  }
+  
+  logout() {
+    UserSession.setUserSession(null)
+  }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserSession } from "src/app/user/UserSession";
+import { UserType } from './enumeration/UserType';
 
 @Component({
   selector: 'app-root',
@@ -28,10 +29,17 @@ export class AppComponent {
 
   getDashboardPath() {
     let user = UserSession.getUserSession()
-    if(user.userType == 'PATIENT') {
-      return 'patientp'
-    } else {
-      return 'doctorp'
+    if(user === null){
+      return 'home';
     }
+    if(user.userType === UserType.PATIENT) {
+      return 'patientp'
+    } else if (user.userType === UserType.DOCTOR){
+      return 'doctorp'
+    } else if (user.userType === UserType.ADMIN){
+      return 'adminp'
+    }
+
+    return null;
   }
 }

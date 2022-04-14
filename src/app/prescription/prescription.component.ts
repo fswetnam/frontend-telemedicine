@@ -42,6 +42,7 @@ export class PrescriptionComponent implements OnInit{
     }
 
     public getRequests() {
+        this.userRequests=[];
         this.patientService.getRequests(this.patient.id).subscribe((data: Requests[]) => {
             data.forEach(req => {
                 this.requestService.getDoctor(req.id).subscribe((data: Doctor)=>{
@@ -80,14 +81,14 @@ export class PrescriptionComponent implements OnInit{
     public cancelRequest(request: Requests){
         this.requestService.deleteRequest(request.id).subscribe((data) => {
             this.message = data;
-            window.location.reload;
+            window.location.reload();
         });
     }
 
     public delete(prescription: Prescription){
         this.prescriptionService.deletePrescription(prescription.id).subscribe((data) => {
             this.message = data;
-            window.location.reload;
+            window.location.reload();
         });
     }
 

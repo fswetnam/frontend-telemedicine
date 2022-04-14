@@ -29,30 +29,78 @@
   <div class = "main">
     <button class = "openbtn" (click) = "openNav()">&#9776;</button>
   </div>
-  <h1 class = "title">List of Patients for Today</h1>
+  <h1 class = "title">Patient Details</h1>
 
-  <div class ="container">
-    <div class = "card">
-        <h3 class="text-center" style="display:inline;"> Patient List</h3>
-        <div class = "card-body" style="display: block; margin: 0 auto;">
-            <table class="table table-striped">
-                <thead>
-                    <th> First Name </th>
-                    <th> Last Name </th>
-                    <th> Email </th>
-                    <th> Phone </th>
-                </thead>
-                <tbody>
-                    <tr *ngFor = "let patient of patients">
-                        <td> {{ patient.fname }}</td>
-                        <td> {{ patient.lname }}</td>
-                        <td> {{ patient.email }}</td>
-                        <td> {{ patient.cellphone }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <form name="myForm" method="post" #searchPatientForm="ngForm">
+    <div class="container">
+      <h1>Search Patient</h1>
+      <p>Enter patient name and dob to view patient details</p>
+      <hr>
+      <br>
+      <label for="fname"><b>First Name</b></label>
+      <input type="text" ngModel placeholder="Enter First Name" name="fname" id="fname" required>
+      <br>
+      <label for="lname"><b>Last Name</b></label>
+      <input type="text" ngModel placeholder="Enter Last Name" name="lname" id="lname" required>
+      <br>
+      <label for="dob"><b>Date of Birth</b></label>
+      <br>
+      <input type="date" ngModel placeholder="Select Date of Birth" name="dob" id="dob" required>
+      <br>
+      <br>
+  
+      <input class="returnbtn" type="submit" name="log" id= "registerbtn" value="Search" [disabled]="searchPatientForm.invalid" (click)="search(searchPatientForm)" data-toggle="modal" data-target="#viewPatient">
     </div>
-</div>
+  </form>
+
+  <div id="viewPatient" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Patient Information</h4>
+        </div>
+        <div class="modal-body">
+          <hr>
+          <br>
+          <h4>Details</h4> <br>
+            <h5>Name: {{this.patient.fname}} {{this.patient.lname}}</h5> <br>
+            <h5>Date of Birth: {{this.patient.dob}}</h5> <br>
+          <br>
+          <hr>
+          <h4>Contact Information</h4> <br>
+            <h5>Email: {{this.patient.email}}</h5> <br>
+            <h5>Phone: {{this.patient.cellphone}}</h5> <br>
+            <!-- button with href to chat -->
+          <br>
+          <hr>
+          <h4>Prescriptions</h4> <br>
+            <hr>
+            <ul *ngFor="let pre of this.patient.prescriptions" class="list-group" >
+              <li>Name: {{pre.name}} </li>
+              <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
+                <li>Dosage: {{pre.dosages}}</li> 
+                <li>Description: {{pre.description}}</li>
+              </ol>
+              <br>
+            </ul>
+          <br>
+          <hr>
+          <h4>Medical Conditions</h4> <br>
+            <ul *ngFor="let hist of this.patient.medicalHistory" class="list-group" >
+              <li>Name: {{hist.name}} </li>
+              <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
+                <li>Doctor Diagnosed: {{hist.doctorDiagnosed}}</li>
+                <li>Date Diagnosed: {{hist.dateDiagnosed}}</li>
+                <li>Description: {{hist.description}}</li>
+              </ol>
+              <br>
+            </ul>
+      </div>
+      </div>
+    </div>
+  </div>
 
 </body>

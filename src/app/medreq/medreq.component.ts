@@ -56,6 +56,7 @@ public fulfillRequest(request: Requests){
 
 
 public getRequests() {
+  this.userRequests = [];
     this.doctorService.getRequests(this.doctor.id).subscribe((data: Requests[]) => {
       data.forEach(req => {
         if(req.requestType === RequestType.PRESCRIPTION_REQUEST && !this.userRequests.includes(req)){
@@ -103,7 +104,8 @@ public prescribe(form: NgForm){
       this.message = data
       window.location.reload;
       form.reset();
-      this.getPrescriptions();
+      this.ngOnInit();
+      window.location.reload();
   });
   return response;
 }
@@ -113,17 +115,32 @@ public update(form: NgForm){
       this.message = data;
       form.reset();
       this.prescriptions = [];
-      this.getPrescriptions();
+      this.ngOnInit();
+      window.location.reload();
   });
   return response;
 }
 
 public deletePrescription(prescription: Prescription){
-  this.prescriptionService.deletePrescription(prescription.id).subscribe((data) => {
+  let found = false;
+  this.userRequests.forEach(req => {
+    if(req.prescriptionRequest.id === prescription.id){
+      this.requestService.deleteRequest(req.id).subscribe((data) => {
+          this.prescriptionService.deletePrescription(prescription.id).subscribe((data) => {});
+          this.message = data;
+          this.ngOnInit();
+          window.location.reload();
+      })
+      found = true;
+    }
+  })
+  if(found == false){
+    this.prescriptionService.deletePrescription(prescription.id).subscribe((data) => {
       this.message = data;
-      this.getPrescriptions();
-      window.location.reload;
-  });
+      this.ngOnInit();
+      window.location.reload();
+    });
+  }
 }
 
 public setPrescription(prescription: Prescription){

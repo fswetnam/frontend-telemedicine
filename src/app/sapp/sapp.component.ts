@@ -81,6 +81,7 @@ export class SappComponent implements OnInit {
   }
 
   public getAppointments(){
+    this.appointments = [];
     this.requests.forEach(r => {
       if(r.requestStatus === RequestStatus.CONFIRMED){
         let app = r.appointmentRequest;

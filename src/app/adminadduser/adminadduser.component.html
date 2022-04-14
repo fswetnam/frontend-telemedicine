@@ -10,7 +10,7 @@
 			  <br>
 			  <a href = "uploadrep">Upload Reports</a>
               <br>
-			  <a href = "adminadduser">Add User</a>
+			  <a href = "adminadduser">User Services</a>
 			  <br>
 			  <a href = "#">Chats</a>
 			  <br>
@@ -28,6 +28,7 @@
           <span><button class="returnbtn" name="newDoctor" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newDoctor">New Doctor</button></span>
           <br>
           <span><button class="returnbtn" name="newAdmin" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newAdmin">New Admin</button></span>
+          <br>
 </body>
 
           <div id="newDoctor" class="modal fade" role="dialog">
@@ -64,6 +65,9 @@
                 
                     <label for="userpassword"><b>Password</b></label>
                     <input type="password" ngModel placeholder="Enter Password" name="userpassword" id="userpassword" required>
+
+                    <label for="pswRepeat"><b>Repeat Password</b></label>
+                    <input type="password" ngModel placeholder="Repeat Password" name="pswRepeat" id="pswRepeat" required>
                   </form>
                 </div>
                 <div class="modal-footer">
@@ -99,9 +103,18 @@
                 
                     <label for="cellphone"><b>Phone Number</b></label>
                     <input type="text" ngModel placeholder="Enter Phone Number" name="cellphone" id="cellphone" required>
+
+                    <label for="dob"><b>Date of Birth</b></label>
+                    <br>
+                    <input type="date" ngModel placeholder="Select Date of Birth" name="dob" id="dob" required>
+                    <br>
+                    <br>
                 
                     <label for="userpassword"><b>Password</b></label>
                     <input type="password" ngModel placeholder="Enter Password" name="userpassword" id="userpassword" required>
+
+                    <label for="pswRepeat"><b>Repeat Password</b></label>
+                    <input type="password" ngModel placeholder="Repeat Password" name="pswRepeat" id="pswRepeat" required>
                   </form>
                 </div>
                 <div class="modal-footer">
@@ -119,7 +132,7 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Save Patient</h4>
+                  <h4 class="modal-title">Save Admin</h4>
                 </div>
                 <div class="modal-body">
                   <form #newAdminForm="ngForm">
@@ -140,6 +153,9 @@
                 
                     <label for="userpassword"><b>Password</b></label>
                     <input type="password" ngModel placeholder="Enter Password" name="userpassword" id="userpassword" required>
+
+                    <label for="pswRepeat"><b>Repeat Password</b></label>
+                    <input type="password" ngModel placeholder="Repeat Password" name="pswRepeat" id="pswRepeat" required>
                   </form>
                 </div>
                 <div class="modal-footer">

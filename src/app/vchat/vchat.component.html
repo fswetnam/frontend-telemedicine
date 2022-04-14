@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang = "en">
 <head>
-  <title>Patient Portal</title>
-  <meta charset="UTF-8">
+  <title>Video Chat</title>
 </head>
 
 <body>
+
   <div id = "mysideBar" class = "sidebar">
     <a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav()">&times;</a>
     <div class = "overlay-content">
@@ -27,5 +27,13 @@
   <div class = "main">
     <button class = "openbtn" (click) = "openNav()">&#9776;</button>
   </div>
-  <h1 class = "title">Video Chat With Your Doctor</h1>
+
+  <iframe
+  src="https://tokbox.com/embed/embed/ot-embed.js?embedId=07db8b78-4cca-48fc-bc4e-f36633bc7cb1&room=DEFAULT_ROOM&iframe=true"
+  width="800px"
+  height="640px"
+  scrolling="auto"
+  allow="microphone; camera"
+></iframe>
+
 </body>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-vchat',
   templateUrl: './vchat.component.html',
@@ -7,8 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VchatComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(){}
 
   openNav(){
     document.getElementById("mysideBar").style.width = "400px";
@@ -20,7 +20,9 @@ export class VchatComponent implements OnInit {
     document.getElementById("main").style.marginLeft = "0";
   }
   
-
+  
   ngOnInit() {
   }
+
+
 }

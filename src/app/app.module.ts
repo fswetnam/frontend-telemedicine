@@ -42,7 +42,7 @@ import { SettingsPComponent } from './settingsP/settingsP.component';
 import { RequestComponent } from './requests/request.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { AdminAddUserComponent } from 'src/adminadduser/adminadduser.component';
+import { AdminAddUserComponent } from 'src/app/adminadduser/adminadduser.component';
 import { UploadRepAdmin } from './uploadRepAdmin/uploadRepAdmin.component';
 import { SettingsAComponent } from './settingsA/settingsA.component';
 import { SettingsDComponent } from './settingsD/settingsD.component';

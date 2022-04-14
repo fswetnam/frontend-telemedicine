@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Address } from '../address/Address';
 import { AddressService } from '../address/address.service';
@@ -20,10 +20,10 @@ export class SettingsPComponent implements OnInit {
   patient!: Patient;
   currAddress: Address;
   addresses: Address[] = [];
-  insurances: Insurance[];
-  insurance!: Insurance;
-  medicalHistories: MedicalHistory[];
-  medicalHistory!: MedicalHistory;
+  @Input() insurances: Insurance[];
+  @Input() insurance!: Insurance;
+  @Input() medicalHistories: MedicalHistory[];
+  @Input() medicalHistory!: MedicalHistory;
 
   constructor(private patientService: PatientService, private addressService: AddressService, 
     private insuranceService: InsuranceService, private medicalHistoryService: MedicalHistoryService) { }
@@ -92,12 +92,11 @@ export class SettingsPComponent implements OnInit {
   }
 
   updateInsurance(form: NgForm) {
-    const response = this.insuranceService.updateInsurance(form.value as Insurance, this.insurance.id).subscribe((data) => {
+    this.insuranceService.updateInsurance(form.value as Insurance, this.insurance.id).subscribe((data) => {
       alert("Insurance updated!")
       this.ngOnInit();
       window.location.reload();
-  });
-  return response;
+    });
   }
 
   public setInsurance(insurance: Insurance){
@@ -113,24 +112,23 @@ export class SettingsPComponent implements OnInit {
   }
 
   updatePatient(form: NgForm) {
-    const response = this.patientService.updatePatient(form.value as Patient, this.patient.id).subscribe((data: Patient) => {
+    this.patientService.updatePatient(form.value as Patient, this.patient.id).subscribe((data: Patient) => {
       alert("Patient details updated!");
       UserSession.setUserSession(data);
       this.ngOnInit();
       window.location.reload();
   });
-  return response;
   }
 
   addMedicalHistory(form: NgForm){
-    let medicalHistory = <MedicalHistory> {
+    this.medicalHistory = <MedicalHistory> {
       name: form.value.name,
       doctorDiagnosed: form.value.doctorDiagnosed,
       dateDiagnosed: <Date> form.value.dateDiagnosed,
       description: form.value.description,
       patient: this.patient
     }
-    this.patientService.addMedicalHistory(this.patient.id, medicalHistory).subscribe((data) => {    
+    this.patientService.addMedicalHistory(this.patient.id, this.medicalHistory).subscribe((data: MedicalHistory) => {    
       alert("Medical condition added!");
       this.ngOnInit();
       window.location.reload();
@@ -160,13 +158,11 @@ export class SettingsPComponent implements OnInit {
       description: form.value.description,
       patient: this.patient
     }
-    const response = this.medicalHistoryService.updateMedicalHistory(medicalHistory, this.medicalHistory.id).subscribe((data) => {
-      alert("Insurance updated!");
+    this.medicalHistoryService.updateMedicalHistory(medicalHistory, this.medicalHistory.id).subscribe((data) => {
+      alert("Medical Condition updated!");
       this.ngOnInit();
       window.location.reload();
     });
-
-    return response;
 }
 
 public setMedicalHistory(medicalHistory: MedicalHistory) {

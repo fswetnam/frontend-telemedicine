@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <title>Admin Portal</title>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <div id = "mysideBar" class = "sidebar">
+    <a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav()">&times;</a>
+    <div class = "overlay-content">
+      <a href = "adminp">Home</a>
+      <br>
+      <a href = "showappt">Appointments</a>
+      <br>
+      <a href = "patientlist">Patients</a>
+      <br>
+      <a href = "medreq">Medication Requests</a>
+      <br>
+      <a href = "uploadrep">Upload Reports</a>
+      <br>
+      <a href = "docchats">Chats</a>
+      <br>
+      <a href = "docinbox">Inbox</a>
+      <br>
+      <a href = "settingsD">Account Details</a>
+    </div>
+  </div>
+  <div class = "main">
+    <button class = "openbtn" (click) = "openNav()">&#9776;</button>
+  </div>
+
+  <span><button class="returnbtn" name="Patient Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#updateDoctor">Doctor Details</button></span>
+  <br>
+  <span><button class="returnbtn" *ngIf="currAddress !== null" name="Address Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewAddress">Office Address Details</button></span>
+  <span><button class="returnbtn" *ngIf="currAddress === null" name="Address Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#addAddress">Add Office Address</button></span>
+  <br>
+
+  </body>
+
+
+  <div id="updateDoctor" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Update Doctor Details</h4>
+        </div>
+        <div class="modal-body">
+          <form #updateDoctorForm="ngForm" (ngSubmit)="updateDoctor(updateDoctorForm)">
+            <p>Please fill in this form to update values.</p>
+            <hr>
+        
+            <label for="fname"><b>First Name</b></label>
+            <input type="text" ngModel placeholder={{this.doctor.fname}} name="fname" id="fname">
+        
+            <label for="lname"><b>Last Name</b></label>
+            <input type="text" ngModel placeholder={{this.doctor.lname}} name="lname" id="lname">
+
+            <label for="specialty"><b>Specialty</b></label>
+            <input type="text" ngModel placeholder={{this.doctor.specialty}} name="specialty" id="specialty">
+        
+            <label for="email"><b>Email</b></label>
+            <input type="text" ngModel placeholder={{this.doctor.email}} name="email" id="email">
+        
+            <label for="cellphone"><b>Phone Number</b></label>
+            <input type="text" ngModel placeholder={{this.doctor.cellphone}} name="cellphone" id="cellphone">
+        
+            <label for="userpassword"><b>Password</b></label>
+            <input type="password" ngModel placeholder="Enter Password" name="userpassword" id="userpassword">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" data-dismiss="modal" (click)="updateDoctor(updateDoctorForm)">Update</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <div id="viewAddress" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Update Address</h4>
+        </div>
+        <div class="modal-body">
+          <div class ="container">
+            <div class = "card">
+                <h3 class="text-center" style="display:inline;"> Address</h3>
+                <div class = "card-body" style="display: block; margin: 0 auto;">
+                    <table class="table table-striped">
+                        <thead>
+                            <th> Street Address </th>
+                            <th> City </th>
+                            <th> State </th>
+                            <th> Zipcode </th>
+                            <th> Actions </th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let add of addresses'>
+                                <td> {{ add.streetAddress }}</td>
+                                <td> {{ add.city }}</td>
+                                <td> {{ add.usState }}</td>
+                                <td> {{ add.zipcode }}</td>
+                                <td>
+                                    <button type="submit" data-toggle="modal" data-target="#updateAddress">Update</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+<div id="updateAddress" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Update Address</h4>
+      </div>
+      <div class="modal-body">
+        <form #updateAddressForm="ngForm" (ngSubmit)="updateAddress(updateAddressForm)">
+          <p>Please fill in this form to update values.</p>
+          <hr>
+      
+          <label for="streetAddress"><b>Street Address</b></label>
+          <input type="text" ngModel placeholder="Enter street Address..." name="streetAddress" id="streetAddress">
+      
+          <label for="city"><b>City</b></label>
+          <input type="text" ngModel placeholder="Enter city..." name="city" id="city">
+      
+          <label for="usState"><b>State</b></label>
+          <input type="text" ngModel placeholder="Enter state..." name="usState" id="usState">
+      
+          <label for="zipcode"><b>Zipcode</b></label>
+          <input type="text" ngModel placeholder="Enter zipcode..." name="zipcode" id="zipcode">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" data-dismiss="modal" (click)="updateAddress(updateAddressForm)">Update</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="addAddress" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Save Address</h4>
+      </div>
+      <div class="modal-body">
+        <form #newAddressForm="ngForm" >
+          <p>Please fill in this form to create a new Address.</p>
+          <hr>
+          <label for="streetAddress"><b>Street Address</b></label>
+          <input type="text" ngModel placeholder="Enter Street Address" name="streetAddress" id="streetAddress" required>
+      
+          <label for="city"><b>City</b></label>
+          <input type="text" ngModel placeholder="Enter City Name" name="city" id="" required>
+      
+          <label for="usState"><b>State</b></label>
+          <input type="text" ngModel placeholder="Enter State Name" name="usState" id="usState" required>
+      
+          <label for="zipcode"><b>Zipcode</b></label>
+          <input type="text" ngModel placeholder="Enter Zipcode" name="zipcode" id="zipcode" required>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" data-dismiss="modal" [disabled]="newAddressForm.invalid" (click)="addAddress(newAddressForm)">Save</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+</html>

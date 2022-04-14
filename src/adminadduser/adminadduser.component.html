@@ -1,0 +1,151 @@
+<html>
+	<body>
+
+		<div id = "mysideBar" class = "sidebar">
+			<a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav()">&times;</a>
+			<div class = "overlay-content">
+        <a href = "adminp">Home</a>
+        <br>
+			  <a href = "adminapp">Appointments</a>
+			  <br>
+			  <a href = "uploadrep">Upload Reports</a>
+              <br>
+			  <a href = "adminadduser">Add User</a>
+			  <br>
+			  <a href = "#">Chats</a>
+			  <br>
+			  <a href = "#">Inbox</a>
+        <br>
+        <a href = "#">Account Details</a>
+			</div>
+		  </div>
+		  <div class = "main">
+			<button class = "openbtn" (click) = "openNav()">&#9776;</button>
+		  </div>
+
+          <span><button class="returnbtn" name="newPatient" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newPatient">New Patient</button></span>
+          <br>
+          <span><button class="returnbtn" name="newDoctor" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newDoctor">New Doctor</button></span>
+          <br>
+          <span><button class="returnbtn" name="newAdmin" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newAdmin">New Admin</button></span>
+</body>
+
+          <div id="newDoctor" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+          
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Save Doctor</h4>
+                </div>
+                <div class="modal-body">
+                  <form #newDoctorForm="ngForm">
+                    <p>Please fill in this form to create an account.</p>
+                    <hr>
+                
+                    <label for="fname"><b>First Name</b></label>
+                    <input type="text" ngModel placeholder="Enter First Name" name="fname" id="fname" required>
+                
+                    <label for="lname"><b>Last Name</b></label>
+                    <input type="text" ngModel placeholder="Enter Last Name" name="lname" id="lname" required>
+                
+                    <label for="email"><b>Email</b></label>
+                    <input type="text" ngModel placeholder="Enter Email" name="email" id="email" required>
+                
+                    <label for="cellphone"><b>Phone Number</b></label>
+                    <input type="text" ngModel placeholder="Enter Phone Number" name="cellphone" id="cellphone" required>
+        
+                    <label for="officeName"><b>Office Name</b></label>
+                    <input type="text" ngModel placeholder="Enter Office Name" name="officeName" id="officeName" required>
+                
+                    <label for="specialty"><b>Specialty</b></label>
+                    <input type="text" ngModel placeholder="Enter Specialty" name="specialty" id="specialty" required>
+                
+                    <label for="userpassword"><b>Password</b></label>
+                    <input type="password" ngModel placeholder="Enter Password" name="userpassword" id="userpassword" required>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" data-dismiss="modal" [disabled]="newDoctorForm.invalid" (click)="saveDoctor(newDoctorForm)">Save</button>
+                </div>
+              </div>
+          
+            </div>
+        </div>
+        
+        <div id="newPatient" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+          
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Save Patient</h4>
+                </div>
+                <div class="modal-body">
+                  <form #newPatientForm="ngForm">
+                    <p>Please fill in this form to create an account.</p>
+                    <hr>
+                
+                    <label for="fname"><b>First Name</b></label>
+                    <input type="text" ngModel placeholder="Enter First Name" name="fname" id="fname" required>
+                
+                    <label for="lname"><b>Last Name</b></label>
+                    <input type="text" ngModel placeholder="Enter Last Name" name="lname" id="lname" required>
+                
+                    <label for="email"><b>Email</b></label>
+                    <input type="text" ngModel placeholder="Enter Email" name="email" id="email" required>
+                
+                    <label for="cellphone"><b>Phone Number</b></label>
+                    <input type="text" ngModel placeholder="Enter Phone Number" name="cellphone" id="cellphone" required>
+                
+                    <label for="userpassword"><b>Password</b></label>
+                    <input type="password" ngModel placeholder="Enter Password" name="userpassword" id="userpassword" required>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" data-dismiss="modal" [disabled]="newPatientForm.invalid" (click)="savePatient(newPatientForm)">Save</button>
+                </div>
+              </div>
+          
+            </div>
+        </div>
+
+        <div id="newAdmin" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+          
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Save Patient</h4>
+                </div>
+                <div class="modal-body">
+                  <form #newAdminForm="ngForm">
+                    <p>Please fill in this form to create an account.</p>
+                    <hr>
+                
+                    <label for="fname"><b>First Name</b></label>
+                    <input type="text" ngModel placeholder="Enter First Name" name="fname" id="fname" required>
+                
+                    <label for="lname"><b>Last Name</b></label>
+                    <input type="text" ngModel placeholder="Enter Last Name" name="lname" id="lname" required>
+                
+                    <label for="email"><b>Email</b></label>
+                    <input type="text" ngModel placeholder="Enter Email" name="email" id="email" required>
+                
+                    <label for="cellphone"><b>Phone Number</b></label>
+                    <input type="text" ngModel placeholder="Enter Phone Number" name="cellphone" id="cellphone" required>
+                
+                    <label for="userpassword"><b>Password</b></label>
+                    <input type="password" ngModel placeholder="Enter Password" name="userpassword" id="userpassword" required>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" data-dismiss="modal" [disabled]="newAdminForm.invalid" (click)="saveAdmin(newAdminForm)">Save</button>
+                </div>
+              </div>
+          
+            </div>
+        </div>

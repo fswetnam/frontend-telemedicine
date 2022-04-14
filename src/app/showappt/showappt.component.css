@@ -3,6 +3,11 @@ body {
     margin: 0;
   }
 
+  div.flex-box {
+    display: flex;
+    justify-content: space-between;
+}
+
   .control-section{
     align-content: center;
     margin: auto;

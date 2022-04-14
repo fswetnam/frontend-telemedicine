@@ -40,6 +40,13 @@ import { AdminpComponent } from './adminp/adminp.component';
 import { AdminappComponent } from './adminapp/adminapp.component';
 import { SettingsPComponent } from './settingsP/settingsP.component';
 import { RequestComponent } from './requests/request.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { AdminAddUserComponent } from 'src/adminadduser/adminadduser.component';
+import { UploadRepAdmin } from './uploadRepAdmin/uploadRepAdmin.component';
+import { SettingsAComponent } from './settingsA/settingsA.component';
+import { SettingsDComponent } from './settingsD/settingsD.component';
+
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'new', component:NewComponent},
@@ -73,6 +80,10 @@ const Routs: Routes = [
   {path: 'adminp', component:AdminpComponent},
   {path: 'requests', component:RequestComponent},
   {path: 'adminapp', component:AdminappComponent},
+  {path: 'adminadduser', component:AdminAddUserComponent},
+  {path: 'uploadRepAdmin', component:UploadRepAdmin},
+  {path: 'settingsA', component:SettingsAComponent},
+  {path: 'settingsD', component:SettingsDComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -108,18 +119,25 @@ const Routs: Routes = [
     DocinboxComponent,
     AdminpComponent,
     AdminappComponent,
-    RequestComponent
+    RequestComponent,
+    AdminAddUserComponent,
+    SettingsPComponent,
+    UploadRepAdmin,
+    SettingsAComponent,
+    SettingsDComponent,
   ],
   imports: [
     BrowserModule,
-    ScheduleModule,
-    RecurrenceEditorAllModule,
     CommonModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(Routs)
+    RouterModule.forRoot(Routs),
+    CalendarModule.forRoot({
+     provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
   ],
   providers: [DayService, WeekService, MonthService],
   bootstrap: [AppComponent]

@@ -29,6 +29,10 @@ export class RequestService{
         return this.http.get<Patient>(`${this.url}/id=${id}/patient`);
      }
 
+     public getAppointmentRequest(id: number): Observable<Appointment> {
+        return this.http.get<Appointment>(`${this.url}/id=${id}/appointment`);
+     }
+
      public getRequestsByPatient(patient: Patient): Observable<Requests[]> {
          return this.http.put<Requests[]>(`${this.url}/patient`, patient, {responseType: 'text' as 'json'});
      }

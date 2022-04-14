@@ -33,11 +33,11 @@
       <h1 style="text-align: center;">Patient Details</h1>
           <span><button class="returnbtn" name="Patient Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#updatePatient">Patient Details</button></span>
           <br>
-          <span><button class="returnbtn" *ngIf="medicalHistories.length > 0" name="Medical History Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewMedicalHistory">Medical History Details</button></span>
-          <span><button class="returnbtn" *ngIf="medicalHistories.length === 0" name="Medical History Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#addMedicalHistory">Add Medical History</button></span>
-          <br>
           <span><button class="returnbtn" *ngIf="currAddress !== null" name="Address Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewAddress">Address Details</button></span>
           <span><button class="returnbtn" *ngIf="currAddress === null" name="Address Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#addAddress">Add Address</button></span>
+          <br>
+          <span><button class="returnbtn" *ngIf="medicalHistories.length > 0" name="Medical History Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewMedicalHistory">Medical History Details</button></span>
+          <span><button class="returnbtn" *ngIf="medicalHistories.length === 0" name="Medical History Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#addMedicalHistory">Add Medical History</button></span>
           <br>
           <span><button class="returnbtn" *ngIf="insurances.length > 0" name="Insurance Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewInsurance">Insurance Details</button></span>
           <span><button class="returnbtn" *ngIf="insurances.length === 0" name="Insurance Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#addInsurance">Add Insurance</button></span>
@@ -179,6 +179,14 @@
               
                   <label for="cellphone"><b>Phone Number</b></label>
                   <input type="text" ngModel placeholder={{this.patient.cellphone}} name="cellphone" id="cellphone">
+
+                  <label for="dob"><b>Date of Birth</b></label>
+                  <br>
+                  <b>{{"Current: " + this.patient.dob }} </b>
+                  <br>
+                  <input type="date" ngModel name="dob" id="dob" required>
+                  <br>
+                  <br>
               
                   <label for="userpassword"><b>Password</b></label>
                   <input type="password" ngModel placeholder="Enter Password" name="userpassword" id="userpassword">
@@ -218,13 +226,13 @@
                               </thead>
                               <tbody>
                                   <tr *ngFor='let insurance of insurances'>
-                                      <td> {{ insurance.name }}</td>
-                                      <td> {{ insurance.allCareCoverage }}</td>
-                                      <td> {{ insurance.consultingFeesCovered }}</td>
-                                      <td> {{ insurance.percentInsured }}</td>
-                                      <td> {{ insurance.memberId }}</td>
+                                      <td> {{ insurance?.name }}</td>
+                                      <td> {{ insurance?.allCareCoverage }}</td>
+                                      <td> {{ insurance?.consultingFeesCovered }}</td>
+                                      <td> {{ insurance?.percentInsured }}</td>
+                                      <td> {{ insurance?.memberId }}</td>
                                       <td>
-                                          <span><button name="delete" style="margin: 5px 10px;" (click)="deleteInsurance(insurance)">Delete</button></span>
+                                          <span><button name="delete" style="margin: 5px 10px;" data-toggle="modal" (click)="deleteInsurance(insurance)">Delete</button></span>
                                           <span><button name="update" style="margin: 5px 10px;" data-toggle="modal" data-target="#updateInsurance" (click)="setInsurance(insurance)">Update</button></span>
               
                                           
@@ -356,12 +364,12 @@
                               </thead>
                               <tbody>
                                   <tr *ngFor='let medHist of medicalHistories'>
-                                      <td> {{ medHist.name }}</td>
-                                      <td> {{ medHist.doctorDiagnosed }}</td>
-                                      <td> {{ medHist.dateDiagnosed }}</td>
-                                      <td> {{ medHist.description }}</td>
+                                      <td> {{ medHist?.name }}</td>
+                                      <td> {{ medHist?.doctorDiagnosed }}</td>
+                                      <td> {{ medHist?.dateDiagnosed }}</td>
+                                      <td> {{ medHist?.description }}</td>
                                       <td>
-                                          <span><button name="delete" style="margin: 5px 10px;" (click)="deleteMedicalHistory(medHist)">Delete</button></span>
+                                          <span><button name="delete" style="margin: 5px 10px;" data-toggle="modal" (click)="deleteMedicalHistory(medHist)">Delete</button></span>
                                           <span><button name="update" style="margin: 5px 10px;" data-toggle="modal" data-target="#updateMedicalHistory" (click)="setMedicalHistory(medHist)">Update</button></span>
                                       </td>
                                   </tr>

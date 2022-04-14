@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Doctor } from '../doctor/Doctor';
 import { DoctorService } from '../doctor/doctor.service';
 import { Patient } from '../patient/Patient';
@@ -13,16 +14,29 @@ import { UserSession } from '../user/UserSession';
 export class PatientlistComponent implements OnInit {
 
   patients!: Patient[];
+  patient!: Patient;
   message: any;
   doctor: Doctor;
 
-  constructor(private doctorService: DoctorService) { }
+  constructor(private patientService: PatientService) { }
 
   public getPatients(){
-    this.doctorService.getPatients(this.doctor.id).subscribe((data: Patient[]) => {
+    this.patientService.getPatients().subscribe((data: Patient[]) => {
         console.log(data);
         this.patients = data;
     });
+  }
+
+  search(form: NgForm){
+    let first = form.value.fname;
+    let last = form.value.lname;
+    let dob = form.value.dob;
+    this.patient = this.patients.find(p => (p.fname = first) && (p.lname === last) && (p.dob === dob))
+    if(this.patient == null || this.patient == undefined){
+      alert("Patient not found!");
+      form.reset();
+    }
+    console.log(this.patient)
   }
 
   openNav(){

@@ -46,6 +46,9 @@ import { AdminAddUserComponent } from 'src/app/adminadduser/adminadduser.compone
 import { UploadRepAdmin } from './uploadRepAdmin/uploadRepAdmin.component';
 import { SettingsAComponent } from './settingsA/settingsA.component';
 import { SettingsDComponent } from './settingsD/settingsD.component';
+import { aBoxComponent } from './adminbox/adminbox.component';
+import { dBoxComponent } from './doctorbox/doctorbox.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
@@ -84,6 +87,8 @@ const Routs: Routes = [
   {path: 'uploadRepAdmin', component:UploadRepAdmin},
   {path: 'settingsA', component:SettingsAComponent},
   {path: 'settingsD', component:SettingsDComponent},
+  {path: 'abox', component:aBoxComponent},
+  {path: 'dbox', component:dBoxComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -125,6 +130,8 @@ const Routs: Routes = [
     UploadRepAdmin,
     SettingsAComponent,
     SettingsDComponent,
+    aBoxComponent,
+    dBoxComponent,
   ],
   imports: [
     BrowserModule,
@@ -138,6 +145,7 @@ const Routs: Routes = [
      provide: DateAdapter,
       useFactory: adapterFactory
     }),
+    NoopAnimationsModule,
   ],
   providers: [DayService, WeekService, MonthService],
   bootstrap: [AppComponent]

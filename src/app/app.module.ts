@@ -49,6 +49,7 @@ import { SettingsDComponent } from './settingsD/settingsD.component';
 import { aBoxComponent } from './adminbox/adminbox.component';
 import { dBoxComponent } from './doctorbox/doctorbox.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ResourceComponent } from './resources/resources.component';
 
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
@@ -89,6 +90,7 @@ const Routs: Routes = [
   {path: 'settingsD', component:SettingsDComponent},
   {path: 'abox', component:aBoxComponent},
   {path: 'dbox', component:dBoxComponent},
+  {path: 'resources', component:ResourceComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 @NgModule({
@@ -132,6 +134,7 @@ const Routs: Routes = [
     SettingsDComponent,
     aBoxComponent,
     dBoxComponent,
+    ResourceComponent,
   ],
   imports: [
     BrowserModule,

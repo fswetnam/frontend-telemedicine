@@ -26,7 +26,7 @@ export class NewComponent implements OnInit {
         this.message = data;
         UserSession.setUserSession(data);
         alert("Account Successfully Created!");
-        window.location.href="patientp";
+        window.location.href="home";
         this.message = data;
       });
       return response;
@@ -72,12 +72,12 @@ export class NewComponent implements OnInit {
         alert("Password not valid. Password must be 12 characters long and contain: Upper and Lower case letters, at least one number(0-9), and at least one valid symbol: ! # $ % & ( ) * + , - . : ; < = > ? [ ] ^ _ { } | ~ ");
         return false;
       }
-      
+
       return true;
     } else {
       alert("Passwords do not match!")
       return false;
     }
   }
-  
+
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserSession } from "src/app/user/UserSession";
 import { UserType } from './enumeration/UserType';
+import { HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent {
   title = 'frontend';
   dashboardRoute = 'patientp';
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.dashboardRoute = this.getDashboardPath()
   }
 
@@ -22,9 +23,12 @@ export class AppComponent {
     }
     return false
   }
-  
+
   logout() {
     UserSession.setUserSession(null)
+    localStorage.removeItem('JWT-TOKEN')
+
+
   }
 
   getDashboardPath() {

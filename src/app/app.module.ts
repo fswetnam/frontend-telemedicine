@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import {Routes, RouterModule } from '@angular/router'
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { ScheduleModule, RecurrenceEditorAllModule, DayService, WeekService, MonthService, AgendaService } from '@syncfusion/ej2-angular-schedule';
 
 import { AppComponent } from './app.component';
@@ -49,6 +49,7 @@ import { SettingsDComponent } from './settingsD/settingsD.component';
 import { aBoxComponent } from './adminbox/adminbox.component';
 import { dBoxComponent } from './doctorbox/doctorbox.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {AuthInterceptor} from "./auth.interceptor";
 
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
@@ -91,6 +92,11 @@ const Routs: Routes = [
   {path: 'dbox', component:dBoxComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
+
+export const interceptorProviders=
+  [
+    {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true}
+  ];
 @NgModule({
   declarations: [
     AppComponent,
@@ -147,7 +153,7 @@ const Routs: Routes = [
     }),
     NoopAnimationsModule,
   ],
-  providers: [DayService, WeekService, MonthService],
+  providers: [DayService, WeekService, MonthService , interceptorProviders ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

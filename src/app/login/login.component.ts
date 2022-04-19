@@ -22,8 +22,8 @@ export class LoginComponent implements OnInit  {
     messageThreads = []
     messages = []
 
-    @ViewChild('emailInput') emailInput; 
-    @ViewChild('passwordInput') passwordInput; 
+    @ViewChild('emailInput') emailInput;
+    @ViewChild('passwordInput') passwordInput;
 
     constructor(private http: HttpClient){}
 
@@ -33,9 +33,10 @@ export class LoginComponent implements OnInit  {
     get f(){
         return this.form.controls;
     }
-    
+
     submit() {
- 
+        console.log(this.form.value.email)
+        console.log(this.form.value.password)
         let authDetails = {
             email: this.form.value.email,
             password: this.form.value.password
@@ -56,6 +57,6 @@ export class LoginComponent implements OnInit  {
             alert(errorMsg.message)
         });
 
-       
+
     }
 }

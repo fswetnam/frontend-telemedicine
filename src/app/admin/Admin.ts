@@ -1,3 +1,4 @@
+import { Report } from "../report/Report";
 import { Requests } from "../requests/Requests";
 
 export interface Admin{

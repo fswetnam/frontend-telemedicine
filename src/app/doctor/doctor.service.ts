@@ -5,6 +5,7 @@ import { Address } from "../address/Address";
 import { Appointment } from "../appointment/Appointment";
 import { Patient } from "../patient/Patient";
 import { Prescription } from "../prescription/Prescription";
+import { Report } from "../report/Report";
 import { Requests } from "../requests/Requests";
 import { Doctor } from "./Doctor";
 
@@ -33,6 +34,10 @@ export class DoctorService{
 
     getOfficeAddress(id: number): Observable<Address>{
         return this.http.get<Address>(`${this.url}/id=${id}/address`);
+    }
+
+    getReportIds(id: number): Observable<number[]>{
+        return this.http.get<number[]>(`${this.url}/id=${id}/reports`);
     }
 
     addOfficeAddress(id: number, address: Address){

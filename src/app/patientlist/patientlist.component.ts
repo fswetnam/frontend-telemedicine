@@ -30,8 +30,8 @@ export class PatientlistComponent implements OnInit {
   search(form: NgForm){
     let first = form.value.fname;
     let last = form.value.lname;
-    let dob = form.value.dob;
-    this.patient = this.patients.find(p => (p.fname = first) && (p.lname === last) && (p.dob === dob))
+    let email = form.value.email;
+    this.patient = this.patients.find(p => (p.fname = first) && (p.lname === last) && (p.email === email))
     if(this.patient == null || this.patient == undefined){
       alert("Patient not found!");
       form.reset();

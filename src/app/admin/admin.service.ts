@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { Report } from "../report/Report";
 import { Requests } from "../requests/Requests";
 import { Admin } from "./Admin";
 
@@ -25,6 +26,10 @@ export class AdminService{
 
      getAppointments(id: number): Observable<Requests[]>{
         return this.http.get<Requests[]>(`${this.url}/id=${id}/requests`)
+    }
+
+    getReportIds(id: number): Observable<number[]>{
+        return this.http.get<number[]>(`${this.url}/id=${id}/reports`);
     }
 
     public deleteAdmin(id: number){

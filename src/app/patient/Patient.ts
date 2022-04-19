@@ -4,6 +4,7 @@ import { Doctor } from "../doctor/Doctor";
 import { Insurance } from "../insurance/Insurance";
 import { MedicalHistory } from "../medicalHistory/MedicalHistory";
 import { Prescription } from "../prescription/Prescription";
+import { Report } from "../report/Report";
 import { Requests } from "../requests/Requests";
 
 export interface Patient{
@@ -20,6 +21,5 @@ export interface Patient{
     address?: Address,
     appointments?: Appointment[],
     prescriptions?: Prescription[],
-    doctors?: Doctor[],
     requests?: Requests[]
 }

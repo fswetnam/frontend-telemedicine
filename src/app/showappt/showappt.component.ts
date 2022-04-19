@@ -76,7 +76,7 @@ public getAppointmentRequests(){
             this.requestService.getPatient(d.id).subscribe((p: Patient) => {
               this.eventList.push(<CalendarEvent>  {
                 start: parseISO(data.dateScheduled),
-                title: data.appointmentType + " " + data.purpose + " " + p.fname + " " + p.lname,
+                title: data.appointmentType + " " + data.purpose + " " + p.fname + " " + p.lname + ", " + p.email,
                 allDay: false
               })
                 })

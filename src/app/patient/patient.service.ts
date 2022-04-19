@@ -6,6 +6,7 @@ import { Appointment } from "../appointment/Appointment";
 import { Insurance } from "../insurance/Insurance";
 import { MedicalHistory } from "../medicalHistory/MedicalHistory";
 import { Prescription } from "../prescription/Prescription";
+import { Report } from "../report/Report";
 import { Requests } from "../requests/Requests";
 import { Patient } from "./Patient";
 
@@ -61,6 +62,10 @@ export class PatientService{
 
     updatePrescription(id: number, p: Prescription){
         return this.http.put(`${this.url}/id=${id}/prescriptions-update`, p)
+    }
+
+    getReportIds(id: number): Observable<number[]>{
+        return this.http.get<number[]>(`${this.url}/id=${id}/reports`);
     }
 
     public savePatient(patient: Patient) {

@@ -35,8 +35,7 @@ export class LoginComponent implements OnInit  {
     }
     
     submit() {
-        console.log(this.form.value.email)
-        console.log(this.form.value.password)
+ 
         let authDetails = {
             email: this.form.value.email,
             password: this.form.value.password

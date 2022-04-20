@@ -23,7 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
       //console.log(localStorage.getItem("JWT-TOKEN"));
       let tokenReq = request.clone({
         setHeaders: {
-          Authorization: 'Bearer ' + JSON.parse(localStorage.getItem("JWT-TOKEN"))
+          Authorization: 'Bearer ' + JSON.parse(localStorage.getItem("Token"))
         }
       })
       return next.handle(tokenReq);

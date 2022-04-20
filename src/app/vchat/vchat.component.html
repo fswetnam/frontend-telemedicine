@@ -5,7 +5,6 @@
 </head>
 
 <body>
-
   <div id = "mysideBar" class = "sidebar">
     <a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav()">&times;</a>
     <div class = "overlay-content">
@@ -28,12 +27,67 @@
     <button class = "openbtn" (click) = "openNav()">&#9776;</button>
   </div>
 
-  <iframe
-  src="https://tokbox.com/embed/embed/ot-embed.js?embedId=07db8b78-4cca-48fc-bc4e-f36633bc7cb1&room=DEFAULT_ROOM&iframe=true"
-  width="800px"
-  height="640px"
-  scrolling="auto"
-  allow="microphone; camera"
-></iframe>
+  <div class="container" *ngIf="!isPatient">
+    <div class="row">
+        <div class="col-3">
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h2>Patients</h2>
+                      <div class="list-group" >
+                        <a *ngFor="let patient of patients" (click)="selectPatient($event, patient)" class="list-group-item list-group-item-action patient-select" id="{{ 'patient-' + patient.id }}" >
+                            {{patient.fname}}
+                        </a>
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div id="video-chat">
+                        <iframe id="embeddedPage" 
+                        src="https://tokbox.com/embed/embed/ot-embed.js?embedId=07db8b78-4cca-48fc-bc4e-f36633bc7cb1&room=DEFAULT&iframe=true"
+                        allow="microphone; camera"
+                        width="800px"
+                        height="640px"
+                        >
+                      </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
 
+  <div class="container" *ngIf="isPatient">
+    <div class="row">
+        <div class="col-3">
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h2>Doctors</h2>
+                      <div class="list-group" >
+                        <a *ngFor="let doctor of doctors" (click)="selectDoctor($event, doctor)" class="list-group-item list-group-item-action doctor-select" id="{{ 'doctor-' + doctor.id }}" >
+                            {{doctor.fname}}
+                        </a>
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div id="video-chat">
+                        <iframe id="embeddedPage" 
+                        src="https://tokbox.com/embed/embed/ot-embed.js?embedId=07db8b78-4cca-48fc-bc4e-f36633bc7cb1&room=DEFAULT&iframe=true"
+                        allow="microphone; camera"
+                        width="800px"
+                        height="640px"
+                        >
+                      </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
 </body>

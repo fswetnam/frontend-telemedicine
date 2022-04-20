@@ -46,10 +46,10 @@
                 </thead>
                 <tbody>
                     <tr *ngFor = "let r of userRequests">
-                        <td> {{ r.id }}</td>
-                        <td> {{r.prescriptionRequest.name + ", " + r.prescriptionRequest.dosages}}</td>
-                        <td> {{r.requestStatus }}</td>
-                        <td> {{ r.requestingPatient.fname + " " + r.requestingPatient.lname }}</td>
+                        <td> {{ r?.id }}</td>
+                        <td> {{r?.prescriptionRequest?.name + ", " + r.prescriptionRequest?.dosages}}</td>
+                        <td> {{r?.requestStatus }}</td>
+                        <td> {{ r?.requestingPatient?.fname + " " + r.requestingPatient?.lname }}</td>
                         <td>
                             <span><button name="deny" style="margin: 5px 10px;" (click)="denyRequest(r)">Deny</button></span>
                             <span><button name="fulfill" style="margin: 5px 10px;" (click)="fulfillRequest(r)">Fulfill</button></span>
@@ -86,10 +86,10 @@
                         </thead>
                         <tbody>
                             <tr *ngFor = "let ps of prescriptions">
-                                <td> {{ ps.name }}</td>
-                                <td> {{ ps.dosages }}</td>
-                                <td> {{ ps.description }}</td>
-                                <td> {{ ps.patient.fname + " " + ps.patient.lname }}</td>
+                                <td> {{ ps?.name }}</td>
+                                <td> {{ ps?.dosages }}</td>
+                                <td> {{ ps?.description }}</td>
+                                <td> {{ ps?.patient?.fname + " " + ps.patient?.lname }}</td>
                                 <td>
                                     <span><button name="update"  style="margin: 5px 10px;" (click)="setPrescription(ps)" data-toggle="modal" data-target="#updatePrescription">Update Prescription</button></span>
                                     <span><button name="delete" style="margin: 5px 10px;" (click)="deletePrescription(ps)">Delete</button></span>
@@ -126,7 +126,7 @@
 
             <label for="patientEmail">Select your patient: </label>
             <select ngModel name="patientEmail" id="patients" required>
-            <option *ngFor="let patient of patients" [value]="patient.email">{{patient.fname + " " + patient.lname}}</option>
+            <option *ngFor="let patient of patients" [value]="patient.email">{{patient?.fname + " " + patient?.lname}}</option>
             </select>
 
             <label for="name"><b>Name</b></label>

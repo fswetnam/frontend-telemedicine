@@ -1,0 +1,114 @@
+<html>
+  <body>
+
+    <div id = "mysideBar" class = "sidebar">
+        <a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav()">&times;</a>
+        <div class = "overlay-content">
+          <a href = "sapp">Request an Appointment</a>
+          <br>
+          <a href = "message">Messages</a>
+          <br>
+          <a href = "prescription">My Medications</a>
+          <br>
+          <a href = "precords">Files</a>
+          <br>
+          <a href = "pBox">Inbox</a>
+        <br>
+          <a href = "settingsP">Account Details</a>
+          <br>
+          <a href = "vchat">Video Chat</a>
+        </div>
+      </div>
+      <div class = "main">
+        <button class = "openbtn" (click) = "openNav()">&#9776;</button>
+      </div>
+
+<h1>Inbox</h1>
+<hr>
+
+<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Compose</button>
+<div id="id01" class="modal">
+
+  <form class="modal-content animate" action="/action_page.php" method="post">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+    </div>
+
+    <div class="container">
+      <label for="uemail"><b>From:</b></label>
+      <input type="uemail" placeholder="Enter Your Email" name="uemail" required> 
+
+      <label for="remail"><b>To:</b></label>
+      <input type="remail" placeholder="Enter the Recipient's Email" name="remail" required>
+
+      <label for="subject"><b>Subject:</b></label>
+      <input type="subject" placeholder="Enter Subject" name="subject" required>
+
+      <label for="content"><b></b></label>
+      <textarea name="content" rows="10" cols="130" wrap="soft" maxlength="5000" ></textarea>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="sendbtn">Send</button>
+      </div>
+  </form>
+</div>
+
+    <div class="message">
+      <input type="checkbox" />
+      <span class="uemail">Scott</span>
+      <span class="date">4/16/2022</span>
+      <span class="subject">Hello World</span>
+      <span class="content">I just wanted to say hello world!Be sure to take care of yourself</span>
+    </div>
+    
+    <div class="message">
+      <input type="checkbox" />
+      <span class="uemail"></span>
+      <span class="date"></span>
+      <span class="subject"></span>
+      <span class="content"></span>
+    </div>
+    
+    <div class="message">
+      <input type="checkbox" />
+      <span class="uemail"></span>
+      <span class="date"></span>
+      <span class="subject"></span>
+      <span class="content"></span>
+    </div>
+    
+    <div class="message">
+      <input type="checkbox" />
+      <span class="uemail"></span>
+      <span class="date"></span>
+      <span class="subject"></span>
+      <span class="content"></span>
+    </div>
+    
+    <div class="message">
+      <input type="checkbox" />
+      <span class="uemail"></span>
+      <span class="date"></span>
+      <span class="subject"></span>
+      <span class="content"></span>
+    </div>
+    
+    <div class="message">
+      <input type="checkbox" />
+      <span class="uemail"></span>
+      <span class="date"></span>
+      <span class="subject"></span>
+      <span class="content"></span>
+    </div>
+    
+    <div class="message">
+      <input type="checkbox" />
+      <span class="uemail"></span>
+      <span class="date"></span>
+      <span class="subject"></span>
+      <span class="content"></span>
+    </div>
+  </body>
+  </html>

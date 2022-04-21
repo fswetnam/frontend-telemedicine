@@ -51,6 +51,7 @@ import { dBoxComponent } from './doctorbox/doctorbox.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ResourceComponent } from './resources/resources.component';
 import {AuthInterceptor} from "./auth.interceptor";
+import { pBoxComponent } from './patientinbox/pbox.component';
 
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
@@ -80,7 +81,7 @@ const Routs: Routes = [
   {path: 'vchat', component:VchatComponent},
   {path: 'uploadrep', component:UploadrepComponent},
   {path: 'docchats', component:DocchatsComponent},
-  //{path: 'docinbox', component:DocinboxComponent},
+  {path: 'docinbox', component:DocinboxComponent},
   {path: 'settingsP', component:SettingsPComponent},
   {path: 'adminp', component:AdminpComponent},
   {path: 'requests', component:RequestComponent},
@@ -92,6 +93,7 @@ const Routs: Routes = [
   {path: 'aBox', component:aBoxComponent},
   {path: 'dBox', component:dBoxComponent},
   {path: 'resources', component:ResourceComponent},
+  {path: 'pBox', component:pBoxComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 
@@ -129,7 +131,7 @@ export const interceptorProviders=
     VchatComponent,
     UploadrepComponent,
     DocchatsComponent,
-    //DocinboxComponent,
+    DocinboxComponent,
     AdminpComponent,
     AdminappComponent,
     RequestComponent,
@@ -141,6 +143,7 @@ export const interceptorProviders=
     aBoxComponent,
     dBoxComponent,
     ResourceComponent,
+    pBoxComponent,
   ],
   imports: [
     BrowserModule,

@@ -28,9 +28,9 @@ export class ReportService{
         return this.http.post(`${this.url}/userId=${id}`, formData, {responseType: 'blob'});
      }
 
-     public sendReport(id: number, report: Report) {
-         return this.http.put(`${this.url}/userId=${id}`, report);
-     }
+    public sendReport(id: number, report: Report) {
+        return this.http.put(`${this.url}/userId=${id}`, report);
+    }
 
     public downloadReport(id: number){
         return this.http.get(`${this.url}/download/id=${id}`);

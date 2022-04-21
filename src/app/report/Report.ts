@@ -8,5 +8,6 @@ export interface Report{
     name: string,
     type: string,
     url: string,
-    size: number
+    size: number,
+    data: Blob
 }

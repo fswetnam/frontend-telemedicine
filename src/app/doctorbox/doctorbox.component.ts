@@ -46,24 +46,27 @@ export class dBoxComponent implements OnInit {
       this.recieverName = [];
       this.sentName = [];
       this.messageService.getMessages(this.user.id).subscribe((message: Message[]) =>{
-          message.forEach(m =>{
+          message.forEach((m, index) =>{
               if(m.messageType == MessageType.EMAIL){
                 if(m.sender_id == this.user.id.toString()){
-                  this.sent_messages.push(m);
+                  this.sent_messages[index] = (m);
                   this.userService.getUser(m.receiver_id).subscribe((data:User)=> {
-                      this.recieverName.push(data.fname + " " + data.lname);
+                      this.recieverName[index] = data.fname + " " + data.lname;
                   })
                   this.sent=true;
                 } else {
-                  this.received_messages.push(m);
+                  this.received_messages[index] = (m);
                   this.userService.getUser(m.sender_id).subscribe((data:User)=> {
-                    this.sentName.push(data.fname + " " + data.lname);
+                    this.sentName[index] = data.fname + " " + data.lname;
                   })
                   this.received=true;
                 }
                   
               }
           });
+          this.sent_messages.forEach(s =>{
+            
+          })
       });
   }
   

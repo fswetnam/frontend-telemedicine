@@ -56,45 +56,50 @@
       <div class="pageContent">
       <div class="buttonBox">
           <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Compose</button>
-          <button onclick="document.getElementById('id03').style.display='block'; document.getElementById('id02').style.display='none'; this.getMesssages()"  style="width:auto;">Sent Mail</button>
-          <button onclick="document.getElementById('id02').style.display='block'; document.getElementById('id03').style.display='none'; this.getMesssages()"  style="width:auto;">Received Mail</button>
+          <button onclick="document.getElementById('id03').style.display='block'; document.getElementById('id02').style.display='none';"  style="width:auto;">Sent Mail</button>
+          <button onclick="document.getElementById('id02').style.display='block'; document.getElementById('id03').style.display='none';"  style="width:auto;">Received Mail</button>
       </div>
       <br>
       <br>
       <br>
-      
-      <div style="display:block" id="id02" class="container" name="mailReceived">
-          <h3 *ngIf="!received" class="message">No emails recieved</h3>
-          <ul *ngIf="received" class="message"  style="list-style-type:none;">
-            <li class="uemail">Sender</li>
-            <li class="date">Date</li>
-            <li class="subject">Subject</li>
-            <li class="content">Content</li>
+
+      <div style="display:none" id="id02" class="container" name="mailReceived">
+        <h3 *ngIf="!received" class="message">No emails recieved</h3>
+        <ul *ngIf="received" class="message"  style="list-style-type:none;">
+          <li class="uemail">Sender</li>
+          <li class="date">Date</li>
+          <li class="subject">Subject</li>
+          <li class="content">Content</li>
+          <hr>
+        </ul>
+        <ul *ngFor="let message of this.received_messages; let i = index" style="list-style-type:none;">
+          <ul class="message" *ngIf="sentName[i] != '' && sentName[i] != null && sentName[i] != undefined ">
+            <li class="uemail" >{{sentName[i]}}</li>
+            <li class="date">{{message?.date}}</li>
+            <li class="subject">{{message?.subject}}</li>
+            <li class="content">{{message?.content}}</li>
           </ul>
-          <ul class="message" *ngFor="let message of this.received_messages; let i = index" style="list-style-type:none;">
-                      <li class="uemail">{{sentName[i]}}</li>
-                      <li class="date">{{message?.date}}</li>
-                      <li class="subject">{{message?.subject}}</li>
-                      <li class="content">{{message?.content}}</li>
+        </ul>
+    </div>
+    
+    <div style="display:none" id="id03" class="container" name="mailSent">
+        <h3 *ngIf="!sent" class="message">No emails sent</h3>
+        <ul *ngIf="sent" class="message"  style="list-style-type:none;">
+          <li class="uemail">Receiver</li>
+          <li class="date">Date</li>
+          <li class="subject">Subject</li>
+          <li class="content">Content</li>
+        </ul>
+        <ul *ngFor="let message of this.sent_messages; let i = index" style="list-style-type:none;">
+          <ul class="message" *ngIf="recieverName[i] != '' && recieverName[i] != null && recieverName[i] != undefined ">
+            <li class="uemail">{{recieverName[i]}}</li>
+            <li class="date">{{message?.date}}</li>
+            <li class="subject">{{message?.subject}}</li>
+            <li class="content">{{message?.content}}</li>
           </ul>
-      </div>
-      
-      <div style="display:none" id="id03" class="container" name="mailSent">
-          <h3 *ngIf="!sent" class="message">No emails sent</h3>
-          <ul *ngIf="sent" class="message"  style="list-style-type:none;">
-            <li class="uemail">Receiver</li>
-            <li class="date">Date</li>
-            <li class="subject">Subject</li>
-            <li class="content">Content</li>
-          </ul>
-          <ul class="message" *ngFor="let message of this.sent_messages; let i = index" style="list-style-type:none;">
-              <li class="uemail">{{recieverName[i]}}</li>
-              <li class="date">{{message?.date}}</li>
-              <li class="subject">{{message?.subject}}</li>
-              <li class="content">{{message?.content}}</li>
-          </ul>
-      </div>
-      </div>
+        </ul>
+    </div>
+    </div>
       <!--
           <div class="message">
             <input type="checkbox" />

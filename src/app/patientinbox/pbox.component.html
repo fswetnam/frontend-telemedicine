@@ -19,42 +19,85 @@
           <a href = "vchat">Video Chat</a>
         </div>
       </div>
-      <div class = "main">
+      <div class = "main" style="width:100px">
         <button class = "openbtn" (click) = "openNav()">&#9776;</button>
       </div>
-
+<br>
+<br>
 <h1>Inbox</h1>
 <hr>
 
-<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Compose</button>
+
 <div id="id01" class="modal">
 
-  <form class="modal-content animate" action="/action_page.php" method="post">
+  <form #sendEmailForm="ngForm" class="modal-content animate" action="/action_page.php" method="post">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
     </div>
 
     <div class="container">
       <label for="uemail"><b>From:</b></label>
-      <input type="uemail" placeholder="Enter Your Email" name="uemail" required> 
+      <input ngModel type="uemail" placeholder="Enter Your Email" name="uemail" required> 
 
       <label for="remail"><b>To:</b></label>
-      <input type="remail" placeholder="Enter the Recipient's Email" name="remail" required>
+      <input ngModel type="remail" placeholder="Enter the Recipient's Email" name="remail" required>
 
       <label for="subject"><b>Subject:</b></label>
-      <input type="subject" placeholder="Enter Subject" name="subject" required>
+      <input ngModel type="subject" placeholder="Enter Subject" name="subject" required>
 
       <label for="content"><b></b></label>
-      <textarea name="content" rows="10" cols="130" wrap="soft" maxlength="5000" ></textarea>
+      <textarea ngModel name="content" rows="10" cols="130" wrap="soft" maxlength="5000" ></textarea>
     </div>
 
     <div class="container" style="background-color:#f1f1f1">
         <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="sendbtn">Send</button>
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="sendbtn" (click)="submit(sendEmailForm)">Send</button>
       </div>
   </form>
 </div>
+<div class="pageContent">
+<div class="buttonBox">
+    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Compose</button>
+    <button onclick="document.getElementById('id03').style.display='block'; document.getElementById('id02').style.display='none'; this.getMesssages()"  style="width:auto;">Sent Mail</button>
+    <button onclick="document.getElementById('id02').style.display='block'; document.getElementById('id03').style.display='none'; this.getMesssages()"  style="width:auto;">Received Mail</button>
+</div>
+<br>
+<br>
+<br>
 
+<div style="display:block" id="id02" class="container" name="mailReceived">
+    <h3 *ngIf="!received" class="message">No emails recieved</h3>
+    <ul *ngIf="received" class="message"  style="list-style-type:none;">
+      <li class="uemail">Sender</li>
+      <li class="date">Date</li>
+      <li class="subject">Subject</li>
+      <li class="content">Content</li>
+    </ul>
+    <ul class="message" *ngFor="let message of this.received_messages; let i = index" style="list-style-type:none;">
+      <li class="uemail">{{sentName[i]}}</li>
+      <li class="date">{{message?.date}}</li>
+      <li class="subject">{{message?.subject}}</li>
+      <li class="content">{{message?.content}}</li>
+    </ul>
+</div>
+
+<div style="display:none" id="id03" class="container" name="mailSent">
+    <h3 *ngIf="!sent" class="message">No emails sent</h3>
+    <ul *ngIf="sent" class="message"  style="list-style-type:none;">
+      <li class="uemail">Receiver</li>
+      <li class="date">Date</li>
+      <li class="subject">Subject</li>
+      <li class="content">Content</li>
+    </ul>
+    <ul class="message" *ngFor="let message of this.sent_messages; let i = index" style="list-style-type:none;">
+        <li class="uemail">{{recieverName[i]}}</li>
+        <li class="date">{{message?.date}}</li>
+        <li class="subject">{{message?.subject}}</li>
+        <li class="content">{{message?.content}}</li>
+    </ul>
+</div>
+</div>
+<!--
     <div class="message">
       <input type="checkbox" />
       <span class="uemail">Scott</span>
@@ -110,5 +153,6 @@
       <span class="subject"></span>
       <span class="content"></span>
     </div>
+-->
   </body>
   </html>

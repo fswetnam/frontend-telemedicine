@@ -21,6 +21,7 @@ input[type=remail], input[type=subject], input[type=uemail] {
   
   /* Set a style for all buttons */
   button {
+    display: inline-block;
     background-color: red;
     color: white;
     padding: 14px 20px;
@@ -31,6 +32,16 @@ input[type=remail], input[type=subject], input[type=uemail] {
     left: 10px;
     bottom: -25px;
     position: relative;
+  }
+
+  pageContent {
+    display: block;
+  }
+
+  buttonBox {
+    display:block;
+    position: relative;
+    float: left
   }
   
   button:hover {

@@ -21,6 +21,7 @@ input[type=content] {
 
 /* Set a style for all buttons */
 button {
+  display: inline-block;
   background-color: red;
   color: white;
   padding: 14px 20px;
@@ -31,6 +32,16 @@ button {
   left: 10px;
   bottom: -25px;
   position: relative;
+}
+
+pageContent {
+  display: block;
+}
+
+buttonBox {
+  display:block;
+  position: relative;
+  float: left
 }
 
 button:hover {
@@ -115,12 +126,12 @@ h1 {
   padding-bottom: 25px;
 }
 
-/*
+
 * {
   margin: 0px; padding: 0px;
   border: none;
   box-sizing: border-box;
-} */
+}
 
 .message {
   clear: both;

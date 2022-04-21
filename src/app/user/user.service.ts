@@ -16,6 +16,14 @@ export class UserService{
         return this.http.get<User[]>(`${this.url}` + 's');
      }
 
+     getUserByEmail(email): Observable<User>{
+         return this.http.get<User>(`${this.url}/email=${email}`);
+     }
+
+     getUser(id): Observable<User>{
+        return this.http.get<User>(`${this.url}/id=${id}`);
+    }
+
     public saveUser(user: User) {
          return this.http.post(`${this.url}`, user, {responseType: 'text' as 'json'});
      }

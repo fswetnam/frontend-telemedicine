@@ -21,7 +21,9 @@
       <br>
       <a href = "docchats">Messages</a>
       <br>
-      <a href = "docinbox">Inbox</a>
+      <a href = "dBox">Inbox</a>
+      <br>
+      <a href = "vchat">Video Chat</a>
       <br>
       <a href = "settingsD">Account Details</a>
     </div>
@@ -42,8 +44,8 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let report of reports">
-                        <td> {{ report.name }}</td>
-                        <td> {{ report.type }}</td>
+                        <td> {{ report?.name }}</td>
+                        <td> {{ report?.type }}</td>
                         <td>
                             <span><button name="delete" style="margin: 5px 10px;" (click)="deleteReport(report)">Delete</button></span>
                             <span><button name="send" style="margin: 5px 10px;" data-toggle="modal" data-target="#sendReport" (click)="setReport(report)">Send</button></span>
@@ -77,7 +79,7 @@
           (change)="selectFile($event)" #fileUpload required>
           <br>
 
-
+<!--
           <br>
             <p>If you want to send the file to a patient or admin select them below.</p>
             <label for="patientId">Select the patient: </label>
@@ -90,6 +92,7 @@
             <option *ngFor="let admin of admins" [value]="admin.id">{{admin.fname}} {{admin.lname}}</option>
             </select>
             <br>
+          -->
         </form>
       </div>
       <div class="modal-footer">

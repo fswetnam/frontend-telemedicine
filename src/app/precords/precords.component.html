@@ -9,8 +9,6 @@
   <div id = "mysideBar" class = "sidebar">
     <a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav()">&times;</a>
     <div class = "overlay-content">
-      <a href = "patientp">Home</a>
-      <br>
       <a href = "sapp">Request an Appointment</a>
       <br>
       <a href = "message">Messages</a>
@@ -19,6 +17,8 @@
       <br>
       <a href = "precords">Files</a>
       <br>
+      <a href = "pBox">Inbox</a>
+    <br>
       <a href = "settingsP">Account Details</a>
       <br>
       <a href = "vchat">Video Chat</a>
@@ -41,8 +41,8 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let report of reports">
-                        <td> {{ report.name }}</td>
-                        <td> {{ report.type }}</td>
+                        <td> {{ report?.name }}</td>
+                        <td> {{ report?.type }}</td>
                         <td>
                             <span><button name="delete" style="margin: 5px 10px;" (click)="deleteReport(report)">Delete</button></span>
                             <span><button name="send" style="margin: 5px 10px;" data-toggle="modal" data-target="#sendReport" (click)="setReport(report)">Send</button></span>
@@ -75,7 +75,7 @@
           <input id="selectFile" class="selectFile" type="file" class="file-input"
           (change)="selectFile($event)" #fileUpload required>
           <br>
-
+<!--
 
           <br>
             <p>If you want to send the file to a doctor or admin select them below.</p>
@@ -89,6 +89,7 @@
             <option *ngFor="let admin of admins" [value]="admin.id">{{admin.fname}} {{admin.lname}}</option>
             </select>
             <br>
+          -->
         </form>
       </div>
       <div class="modal-footer">

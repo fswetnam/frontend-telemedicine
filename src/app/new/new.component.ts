@@ -31,8 +31,9 @@ export class NewComponent implements OnInit {
       });
       return response;
     } else {
-      alert(this.message);
-      form.reset();
+      //alert(this.message);
+      form.controls['userpassword'].reset();
+      form.controls['pswRepeat'].reset();
       return null;
     }
   }

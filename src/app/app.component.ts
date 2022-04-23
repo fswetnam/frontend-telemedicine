@@ -26,7 +26,7 @@ export class AppComponent {
 
   logout() {
     UserSession.setUserSession(null)
-    localStorage.removeItem('JWT-TOKEN')
+    localStorage.clear()
 
 
   }

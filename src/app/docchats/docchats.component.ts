@@ -6,6 +6,8 @@ import { Doctor } from '../doctor/Doctor';
 import { DoctorService } from '../doctor/doctor.service';
 import { Patient } from '../patient/Patient';
 import { PatientService } from '../patient/patient.service';
+import { MessageType } from '../enumeration/MessageType';
+import { Message } from '../message/message';
 
 @Component({
   selector: 'app-docchats',
@@ -72,7 +74,14 @@ export class DocchatsComponent implements OnInit {
    * Fetched messagesd that have already been sent
    */
   getMessages() {
-      this.messageService.getMessages(this.user.id).subscribe(message => this.messages = message);
+    this.messages = [];
+    this.messageService.getMessages(this.user.id).subscribe((message: Message[]) =>{
+        message.forEach(m =>{
+            if(m.messageType == MessageType.CHAT){
+                this.messages.push(m);
+            }
+        });
+    });
   }
 
   /**
@@ -85,7 +94,9 @@ export class DocchatsComponent implements OnInit {
           receiver_id: this.getRecieverId(),
           date: null,
           content: this.form.value.message,
-          time: null
+          time: null,
+          messageType: MessageType.CHAT,
+          subject: null
       }
       this.messageService.saveMessage(message).forEach(m => m)
       this.messages.push(message)

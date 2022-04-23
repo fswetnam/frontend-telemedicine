@@ -11,7 +11,7 @@
 			  <br>
 			  <a href = "adminadduser">User Services</a>
 			  <br>
-			  <a href = "#">Inbox</a>
+			  <a href = "aBox">Inbox</a>
 			  <br>
       		  <a href = "settingsA">Account Details</a>
 			</div>
@@ -32,8 +32,8 @@
 						</thead>
 						<tbody>
 							<tr *ngFor="let report of reports">
-								<td> {{ report.name }}</td>
-								<td> {{ report.type }}</td>
+								<td> {{ report?.name }}</td>
+								<td> {{ report?.type }}</td>
 								<td>
 									<span><button name="delete" style="margin: 5px 10px;" (click)="deleteReport(report)">Delete</button></span>
 									<span><button name="send" style="margin: 5px 10px;" data-toggle="modal" data-target="#sendReport" (click)="setReport(report)">Send</button></span>
@@ -66,7 +66,7 @@
 				  <input id="selectFile" class="selectFile" type="file" class="file-input"
 				  (change)="selectFile($event)" #fileUpload required>
 				  <br>
-		
+		<!--
 		
 				  <br>
 					<p>If you want to send the file to a patient or doctor select them below.</p>
@@ -79,7 +79,7 @@
 					<select ngModel name="doctorId" id="doctors">
 					<option *ngFor="let doctor of doctors" [value]="doctor.id">Dr. {{doctor.fname}} {{doctor.lname}}</option>
 					</select>
-					<br>
+					<br> -->
 				</form>
 			  </div>
 			  <div class="modal-footer">

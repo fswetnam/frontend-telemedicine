@@ -58,13 +58,21 @@ export class PrecordsComponent implements OnInit {
 
   getReports(){
     this.reports = [];
-    this.patientService.getReportIds(this.patient.id).subscribe((data: number[])=>{
-      data.forEach(repId =>{
-        this.reportService.getReport(repId).subscribe((report: Report)=>{
-          this.reports.push(report);
+    this.reportService.getReports().subscribe((data: Report[])=>{
+      console.log(data);
+      this.patientService.getReportIds(this.patient.id).subscribe((repIds) => {
+        console.log(repIds);
+        data.forEach(rep => {
+          repIds.forEach(id =>{
+            if(rep.id == id){
+              this.reports.push(rep);
+            }
+          })
         })
       })
+      console.log(this.reports);
     })
+    
   }
 
   downloadReport(id: number){
@@ -126,11 +134,13 @@ public getDoctors(){
           this.reportService.sendReport(form.value.doctorId, this.report).subscribe();
         }
         form.reset();
+        alert("Report sent!");
       });
     }
     if(form.value.doctorId !== null && form.value.doctorId !== undefined && form.value.doctorId != ''){
       this.reportService.sendReport(form.value.doctorId, this.report).subscribe();
       form.reset();
+      alert("Report sent!");
     }
   }
 
@@ -147,12 +157,11 @@ public getDoctors(){
 
   uploadReport(form: NgForm): void {
     if (this.selectedFiles) {
-      const file: File | null = this.selectedFiles.item(0);
+      const file: File = this.selectedFiles.item(0);
       if (file) {
         this.currentFile = file;
         this.reportService.saveReport(this.currentFile, this.patient.id).subscribe((data: any) => {
             this.report = data;
-            this.sendReport(form);
             form.reset();
             alert("File uploaded!");
             window.location.reload();

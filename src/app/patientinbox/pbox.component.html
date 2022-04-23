@@ -1,29 +1,27 @@
 <html>
   <body>
 
-<div id = "mysideBar" class = "sidebar">
-  <a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav()">&times;</a>
-  <div class = "overlay-content">
-    <a href = "showappt">Appointments</a>
-    <br>
-    <a href = "patientlist">Patients</a>
-    <br>
-    <a href = "medreq">Medication Requests</a>
-    <br>
-    <a href = "uploadrep">Files</a>
-    <br>
-    <a href = "docchats">Messages</a>
-    <br>
-    <a href = "dBox">Inbox</a>
-    <br>
-    <a href = "vchat">Video Chat</a>
-    <br>
-    <a href = "settingsD">Account Details</a>
-  </div>
-</div>
-<div class = "main" style="width:100px">
-  <button class = "openbtn" (click) = "openNav()">&#9776;</button>
-</div>
+    <div id = "mysideBar" class = "sidebar">
+        <a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav()">&times;</a>
+        <div class = "overlay-content">
+          <a href = "sapp">Request an Appointment</a>
+          <br>
+          <a href = "message">Messages</a>
+          <br>
+          <a href = "prescription">My Medications</a>
+          <br>
+          <a href = "precords">Files</a>
+          <br>
+          <a href = "pBox">Inbox</a>
+        <br>
+          <a href = "settingsP">Account Details</a>
+          <br>
+          <a href = "vchat">Video Chat</a>
+        </div>
+      </div>
+      <div class = "main" style="width:100px">
+        <button class = "openbtn" (click) = "openNav()">&#9776;</button>
+      </div>
 <br>
 <br>
 <h1>Inbox</h1>
@@ -68,41 +66,41 @@
 <br>
 
 <div style="display:none" id="id02" class="container" name="mailReceived">
-  <h3 *ngIf="!received" class="message">No emails recieved</h3>
-  <ul *ngIf="received" class="message"  style="list-style-type:none;">
-    <li class="uemail">Sender</li>
-    <li class="date">Date</li>
-    <li class="subject">Subject</li>
-    <li class="content">Content</li>
-    <hr>
-  </ul>
-  <ul *ngFor="let message of this.received_messages; let i = index" style="list-style-type:none;">
-    <ul class="message" *ngIf="sentName[i] != '' && sentName[i] != null && sentName[i] != undefined ">
-      <li class="uemail" >{{sentName[i]}}</li>
-      <li class="date">{{message?.date}}</li>
-      <li class="subject">{{message?.subject}}</li>
-      <li class="content">{{message?.content}}</li>
+    <h3 *ngIf="!received" class="message">No emails recieved</h3>
+    <ul *ngIf="received" class="message"  style="list-style-type:none;">
+      <li class="uemail">Sender</li>
+      <li class="date">Date</li>
+      <li class="subject">Subject</li>
+      <li class="content">Content</li>
+      <hr>
     </ul>
-  </ul>
+    <ul *ngFor="let message of this.received_messages; let i = index" style="list-style-type:none;">
+      <ul class="message" *ngIf="sentName[i] != '' && sentName[i] != null && sentName[i] != undefined ">
+        <li class="uemail" >{{sentName[i]}}</li>
+        <li class="date">{{message?.date}}</li>
+        <li class="subject">{{message?.subject}}</li>
+        <li class="content">{{message?.content}}</li>
+      </ul>
+    </ul>
 </div>
 
 <div style="display:none" id="id03" class="container" name="mailSent">
-  <h3 *ngIf="!sent" class="message">No emails sent</h3>
-  <ul *ngIf="sent" class="message"  style="list-style-type:none;">
-    <li class="uemail">Receiver</li>
-    <li class="date">Date</li>
-    <li class="subject">Subject</li>
-    <li class="content">Content</li>
-    <hr>
-  </ul>
-  <ul *ngFor="let message of this.sent_messages; let i = index" style="list-style-type:none;">
-    <ul class="message" *ngIf="recieverName[i] != '' && recieverName[i] != null && recieverName[i] != undefined ">
-      <li class="uemail">{{recieverName[i]}}</li>
-      <li class="date">{{message?.date}}</li>
-      <li class="subject">{{message?.subject}}</li>
-      <li class="content">{{message?.content}}</li>
+    <h3 *ngIf="!sent" class="message">No emails sent</h3>
+    <ul *ngIf="sent" class="message"  style="list-style-type:none;">
+      <li class="uemail">Receiver</li>
+      <li class="date">Date</li>
+      <li class="subject">Subject</li>
+      <li class="content">Content</li>
+      <hr>
     </ul>
-  </ul>
+    <ul *ngFor="let message of this.sent_messages; let i = index" style="list-style-type:none;">
+      <ul class="message" *ngIf="recieverName[i] != '' && recieverName[i] != null && recieverName[i] != undefined ">
+        <li class="uemail">{{recieverName[i]}}</li>
+        <li class="date">{{message?.date}}</li>
+        <li class="subject">{{message?.subject}}</li>
+        <li class="content">{{message?.content}}</li>
+      </ul>
+    </ul>
 </div>
 </div>
 <!--

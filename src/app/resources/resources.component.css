@@ -1,0 +1,35 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: white;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Add padding to containers */
+  h1 {
+    padding-left: 86px;
+    padding-top: 16px;
+    background-color: white;
+  }
+  
+  p {
+    padding-left: 85px;
+    background-color: white;
+  }
+  
+  /* Overwrite default styles of hr */
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+  }
+  
+  div {
+    color:black;
+    width: 1000px;
+    padding: 10px;
+    border: 5px solid #1e6de2;
+    margin-left: 150px;
+    text-align: center;
+  }

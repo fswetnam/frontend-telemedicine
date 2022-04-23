@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { User } from "./User";
 
+
 @Injectable({providedIn: 'root'})
 export class UserService{
     
@@ -14,6 +15,14 @@ export class UserService{
     getUsers(): Observable<User[]>{
         return this.http.get<User[]>(`${this.url}` + 's');
      }
+
+     getUserByEmail(email): Observable<User>{
+         return this.http.get<User>(`${this.url}/email=${email}`);
+     }
+
+     getUser(id): Observable<User>{
+        return this.http.get<User>(`${this.url}/id=${id}`);
+    }
 
     public saveUser(user: User) {
          return this.http.post(`${this.url}`, user, {responseType: 'text' as 'json'});
@@ -29,5 +38,9 @@ export class UserService{
 
     public createNewUser(user: User) {
         return this.http.post(`${this.registerUrl}`, user, {responseType: 'text' as 'json'});
+    }
+
+    public getVideoChatRoomIdByDoctor(doctor_id, patient_id) {
+        return this.http.get("http://localhost:8080/video-chat-room/" + doctor_id + "/" + patient_id);
     }
 }

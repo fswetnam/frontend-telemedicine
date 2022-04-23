@@ -1,23 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { throwIfEmpty } from 'rxjs';
 import { Admin } from '../admin/Admin';
+import { AdminService } from '../admin/admin.service';
+import { Doctor } from '../doctor/Doctor';
+import { DoctorService } from '../doctor/doctor.service';
 import { MessageType } from '../enumeration/MessageType';
 import { Message } from '../message/message';
 import { MessageService } from '../message/message.service';
+import { Patient } from '../patient/Patient';
 import { User } from '../user/User';
 import { UserService } from '../user/user.service';
 import { UserSession } from '../user/UserSession';
 
 @Component({
-  selector: 'app-abox',
-  templateUrl: './adminbox.component.html',
-  styleUrls: ['./adminbox.component.css']
+  selector: 'app-pbox',
+  templateUrl: './pbox.component.html',
+  styleUrls: ['./pbox.component.css']
 })
-export class aBoxComponent implements OnInit {
+export class pBoxComponent implements OnInit {
 
   received_messages = [];
   sent_messages = [];
-  user: Admin;
+  user: Patient;
   senderId = null;
   receiverId = null;
   received=false;
@@ -25,7 +30,7 @@ export class aBoxComponent implements OnInit {
   recieverName = [];
   sentName = [];
 
-  constructor(private messageService: MessageService, private userService: UserService) { }
+  constructor(private doctorService: DoctorService, private messageService: MessageService, private adminService: AdminService, private userService: UserService) { }
 
   ngOnInit() {
     this.user = UserSession.getUserSession();
@@ -54,7 +59,7 @@ export class aBoxComponent implements OnInit {
                   })
                   this.sent=true;
                 } else {
-                  this.received_messages[index] = (m);
+                  this.received_messages[index] =(m);
                   this.userService.getUser(m.sender_id).subscribe((data:User)=> {
                     this.sentName[index] = data.fname + " " + data.lname;
                   })
@@ -105,4 +110,3 @@ export class aBoxComponent implements OnInit {
   
 
 }
-

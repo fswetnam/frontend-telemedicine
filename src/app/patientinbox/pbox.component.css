@@ -1,0 +1,231 @@
+
+/* Full-width input fields */
+input[type=remail], input[type=subject], input[type=uemail] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  input[type=content] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      height: 200px;
+    }
+  
+  /* Set a style for all buttons */
+  button {
+    display: inline-block;
+    background-color: red;
+    color: white;
+    padding: 14px 20px;
+    margin: 10px 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    left: 10px;
+    bottom: -25px;
+    position: relative;
+  }
+
+  pageContent {
+    display: block;
+  }
+
+  buttonBox {
+    display:block;
+    position: relative;
+    float: left
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  /* Extra styles for the cancel button */
+  .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+  }
+  
+  .sendbtn {
+      width: auto;
+      padding: 10px 18px;
+      float: right;
+      background-color: rgb(12, 165, 248);
+    }
+  
+  .container {
+    padding: 16px;
+  }
+  
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button (x) */
+  .close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: red;
+    cursor: pointer;
+  }
+  
+  /* Add Zoom Animation */
+  .animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+  }
+  
+  @-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+  }
+    
+  @keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+  }
+  
+  h1 {
+    padding-left: 25px;
+    padding-bottom: 25px;
+  }
+  
+  
+  * {
+    margin: 0px; padding: 0px;
+    border: none;
+    box-sizing: border-box;
+  }
+  
+  .message {
+    clear: both;
+    margin-bottom: 5px;
+    position: relative;
+    padding: 5px;
+    background: #bbd0e4;
+    border-radius: 5px;
+    left: 150px;
+    width: 1000px;
+    top: -35px;
+  }
+  
+  .message .uemail {
+    display: block;
+    position: absolute;
+    left: 40px;
+    color: #000;
+    font-weight: bold;
+    width: 90px;
+  }
+  
+  .message .subject {
+    display: inline-block;
+    padding-left: 150px;
+    width: 100%;
+  }
+  
+  .message .date {
+    position: absolute;
+    right: 10px;
+  }
+  
+  .message .content{
+    display: inline-block;
+    padding-left: 150px;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+  }
+  
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #778899;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.4s;
+  }
+  
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 23px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: black;
+    transition: 0.5s;
+  }
+  
+  .sidebar a:hover .offcanvas a:focus{
+    color: #f1f1f1;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  .openbtn {
+    font-size: 30px;
+    cursor: pointer;
+    background-color: white;
+    color: #111;
+    padding: 18px 20px;
+    border: none;
+    transition: 0.4s;
+  }
+  
+  .openbtn:hover {
+    background-color: #696969;
+    color: white;
+    transition: 0.4s;
+  }

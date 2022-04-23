@@ -61,13 +61,31 @@ export class UploadrepComponent implements OnInit {
 
   getReports(){
     this.reports = [];
+    this.reportService.getReports().subscribe((data: Report[])=>{
+      console.log(data);
+      this.doctorService.getReportIds(this.doctor.id).subscribe((repIds) => {
+        console.log(repIds);
+        data.forEach(rep => {
+          repIds.forEach(id =>{
+            if(rep.id == id){
+              this.reports.push(rep);
+            }
+          })
+        })
+      })
+      console.log(this.reports);
+    })
+    /*
     this.doctorService.getReportIds(this.doctor.id).subscribe((data: number[])=>{
+      console.log(data);
       data.forEach(repId =>{
         this.reportService.getReport(repId).subscribe((report: Report)=>{
           this.reports.push(report);
         })
       })
+      console.log(this.reports);
     })
+    */
   }
 
   downloadReport(id: number){
@@ -129,11 +147,13 @@ export class UploadrepComponent implements OnInit {
           this.reportService.sendReport(form.value.patientId, this.report).subscribe();
         }
         form.reset();
+        alert("Report sent!");
       });
     }
     if(form.value.patientId !== null && form.value.patientId !== undefined && form.value.patientId != ''){
       this.reportService.sendReport(form.value.patientId, this.report).subscribe();
       form.reset();
+      alert("Report sent!");
     }
   }
 
@@ -150,12 +170,11 @@ export class UploadrepComponent implements OnInit {
 
   uploadReport(form: NgForm): void {
     if (this.selectedFiles) {
-      const file: File | null = this.selectedFiles.item(0);
+      const file: File = this.selectedFiles.item(0);
       if (file) {
         this.currentFile = file;
         this.reportService.saveReport(this.currentFile, this.doctor.id).subscribe((data: any) => {
             this.report = data;
-            this.sendReport(form);
             form.reset();
             alert("File uploaded!");
             window.location.reload();

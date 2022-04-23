@@ -11,8 +11,6 @@
     <div id = "mysideBar" class = "sidebar">
       <a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav()">&times;</a>
       <div class = "overlay-content">
-        <a href = "patientp">Home</a>
-        <br>
         <a href = "sapp">Request an Appointment</a>
         <br>
         <a href = "message">Messages</a>
@@ -21,6 +19,8 @@
         <br>
         <a href = "precords">Files</a>
         <br>
+        <a href = "pBox">Inbox</a>
+      <br>
         <a href = "settingsP">Account Details</a>
         <br>
         <a href = "vchat">Video Chat</a>
@@ -36,11 +36,11 @@
           <span><button class="returnbtn" *ngIf="currAddress !== null" name="Address Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewAddress">Address Details</button></span>
           <span><button class="returnbtn" *ngIf="currAddress === null" name="Address Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#addAddress">Add Address</button></span>
           <br>
-          <span><button class="returnbtn" *ngIf="medicalHistories.length > 0" name="Medical History Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewMedicalHistory">Medical History Details</button></span>
-          <span><button class="returnbtn" *ngIf="medicalHistories.length === 0" name="Medical History Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#addMedicalHistory">Add Medical History</button></span>
+          <span><button class="returnbtn" *ngIf="medicalHistories?.length > 0" name="Medical History Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewMedicalHistory">Medical History Details</button></span>
+          <span><button class="returnbtn" *ngIf="medicalHistories?.length === 0" name="Medical History Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#addMedicalHistory">Add Medical History</button></span>
           <br>
-          <span><button class="returnbtn" *ngIf="insurances.length > 0" name="Insurance Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewInsurance">Insurance Details</button></span>
-          <span><button class="returnbtn" *ngIf="insurances.length === 0" name="Insurance Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#addInsurance">Add Insurance</button></span>
+          <span><button class="returnbtn" *ngIf="insurances?.length > 0" name="Insurance Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewInsurance">Insurance Details</button></span>
+          <span><button class="returnbtn" *ngIf="insurances?.length === 0" name="Insurance Details" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#addInsurance">Add Insurance</button></span>
 
           <div id="viewAddress" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -66,10 +66,10 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor='let add of addresses'>
-                                        <td> {{ add.streetAddress }}</td>
-                                        <td> {{ add.city }}</td>
-                                        <td> {{ add.usState }}</td>
-                                        <td> {{ add.zipcode }}</td>
+                                        <td> {{ add?.streetAddress }}</td>
+                                        <td> {{ add?.city }}</td>
+                                        <td> {{ add?.usState }}</td>
+                                        <td> {{ add?.zipcode }}</td>
                                         <td>
                                             <button type="submit" data-toggle="modal" data-target="#updateAddress">Update</button>
                                         </td>
@@ -234,8 +234,6 @@
                                       <td>
                                           <span><button name="delete" style="margin: 5px 10px;" data-toggle="modal" (click)="deleteInsurance(insurance)">Delete</button></span>
                                           <span><button name="update" style="margin: 5px 10px;" data-toggle="modal" data-target="#updateInsurance" (click)="setInsurance(insurance)">Update</button></span>
-              
-                                          
                                       </td>
                                   </tr>
                               </tbody>

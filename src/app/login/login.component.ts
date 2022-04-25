@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit  {
     }
     public getAccessToken(authRequest){
       let resp = this.generateToken(authRequest);
-      resp.subscribe(data=>localStorage.setItem("Token" , JSON.stringify(data)));
+      resp.subscribe(data=>sessionStorage.setItem("Token" , JSON.stringify(data)));
     }
     submit() {
         console.log(this.form.value.email)

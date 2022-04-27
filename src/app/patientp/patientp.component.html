@@ -29,6 +29,8 @@
     <button class = "openbtn" (click) = "openNav()">&#9776;</button>
   </div>
   <h1 class = "title">Patient Portal Homepage</h1>
+  <br>
+  <h2 class="title" *ngIf="unReadFound">You have {{this.messages}} unread emails in your inbox!</h2>
 </body>
 
 <!--

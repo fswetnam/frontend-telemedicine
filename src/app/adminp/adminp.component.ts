@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Admin } from '../admin/Admin';
+import { MessageType } from '../enumeration/MessageType';
+import { Message } from '../message/message';
+import { MessageService } from '../message/message.service';
+import { UserSession } from '../user/UserSession';
 
 @Component({
   selector: 'app-adminp',
@@ -7,8 +12,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminpComponent implements OnInit {
 
-  constructor() { }
+  user: Admin;
+  messages: number;
+  unReadFound = false;
 
+  constructor(private messageService: MessageService) { }
+
+  getMessages() {
+    this.messages = 0;
+    this.messageService.getMessages(this.user.id).subscribe((message: Message[]) =>{
+        message.forEach((m, index) =>{
+          if(m.receiver_id == this.user.id.toString()){
+            if(m.messageType == MessageType.EMAIL){
+              if(!m.viewed){
+                this.messages++;
+                this.unReadFound = true;
+              }
+            }
+          }
+        });
+    });
+}
 
   openNav(){
     document.getElementById("mysideBar").style.width = "400px";
@@ -22,6 +46,8 @@ export class AdminpComponent implements OnInit {
   
 
   ngOnInit() {
+    this.user = UserSession.getUserSession();
+    this.getMessages();
   }
 
 }

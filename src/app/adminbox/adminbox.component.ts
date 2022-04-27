@@ -24,16 +24,16 @@ export class aBoxComponent implements OnInit {
   sent=false;
   recieverName = [];
   sentName = [];
+  viewEmail: string;
+  viewSubject: string;
+  viewContent: string;
+  content: string;
 
   constructor(private messageService: MessageService, private userService: UserService) { }
 
   ngOnInit() {
     this.user = UserSession.getUserSession();
     this.getMessages();
-    console.log(this.recieverName);
-    console.log(this.sentName);
-    console.log(this.sent_messages);
-    console.log(this.received_messages);
   }
 
    /**
@@ -70,28 +70,60 @@ export class aBoxComponent implements OnInit {
    * Adds new message to chat
    */
   submit(form: NgForm){
-      this.userService.getUserByEmail(form.value.uemail).subscribe((data: User)=>{
-        this.senderId = data.id;
-        this.userService.getUserByEmail(form.value.remail).subscribe((data1: User)=>{
-          this.receiverId = data1.id;
+    this.userService.getUserByEmail(form.value.remail).subscribe((data1: User)=>{
+      this.receiverId = data1.id;
 
-          let d = new Date();
-          let message = {
-              sender_id: this.senderId,
-              receiver_id: this.receiverId,
-              date: null,
-              content: form.value.content,
-              time: null,
-              messageType: MessageType.EMAIL,
-              subject: form.value.subject
-          }
-          this.messageService.saveMessage(message).forEach(m => m)
-          window.location.reload();
-        })
-      })
+      let d = new Date();
+      let message = <Message>{
+          sender_id: this.user.id.toString(),
+          receiver_id: this.receiverId,
+          date: null,
+          content: form.value.content,
+          time: null,
+          messageType: MessageType.EMAIL,
+          subject: form.value.subject,
+          viewed: null
+      }
+      this.messageService.saveMessage(message).forEach(m => m)
+      window.location.reload();
+    })
      
   }
 
+  
+  setMessage(m: Message, type: string){
+    this.userService.getUser(m.receiver_id).subscribe((data1: User)=>{
+      this.viewEmail = data1.email;
+      this.viewSubject = m.subject;
+      this.viewContent = m.content;
+      if(type === "received"){
+        this.messageService.viewedMessage(m).subscribe((data)=>{
+          console.log('viewed');
+        });
+      }
+    });
+  }
+
+  closeView(){
+    this.viewEmail = "";
+    this.viewSubject = "";
+    this.viewContent = "";
+  }
+
+  /*
+  Delete needs work will come back to it later if I have time (Faith)
+  deleteMessage(message: Message){
+    this.messageService.deleteMessage(message.id, this.user.id).subscribe((data)=>{
+      this.getMessages();
+      if(this.sent_messages.length === 0){
+        this.sent = false;
+      }
+      if(this.received_messages.length === 0){
+        this.received = false;
+      }
+    });
+  }
+*/
   
   openNav(){
     document.getElementById("mysideBar").style.width = "400px";

@@ -19,4 +19,12 @@ export class MessageService{
         console.log(message)
         return this.http.post(`${this.messageUrl}`, message, {responseType: 'text' as 'json'});
      }
+
+     viewedMessage(message: Message){
+         return this.http.put(`${this.messageUrl}viewed`, message, {responseType: 'text' as 'json'})
+     }
+
+     deleteMessage(id: number, userId: number){
+         return this.http.delete(`${this.messageUrl}id=${id}/userId=${userId}`);
+     }
 }

@@ -92,7 +92,7 @@ export class MessageComponent implements OnInit  {
      */
     submit(){
         let d = new Date();
-        let message = {
+        let message = <Message>{
             sender_id: this.getSenderId(),
             receiver_id: this.getRecieverId(),
             date: null,
@@ -100,6 +100,7 @@ export class MessageComponent implements OnInit  {
             time: null,
             messageType: MessageType.CHAT,
             subject: null,
+            viewed: null
         }
         this.messageService.saveMessage(message).forEach(m => m)
         this.messages.push(message)

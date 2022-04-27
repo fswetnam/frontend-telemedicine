@@ -9,6 +9,8 @@
   <div id = "mysideBar" class = "sidebar">
     <a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav()">&times;</a>
     <div class = "overlay-content">
+      <a href = "doctorp">Home</a>
+      <br>
       <a href = "showappt">Appointments</a>
       <br>
       <a href = "patientlist">Patients</a>
@@ -30,4 +32,6 @@
     <button class = "openbtn" (click) = "openNav()">&#9776;</button>
   </div>
   <h1 class = "title">Doctor Portal Homepage</h1>
+  <br>
+  <h2 class="title" *ngIf="unReadFound">You have {{this.messages}} unread emails in your inbox!</h2>
 </body>

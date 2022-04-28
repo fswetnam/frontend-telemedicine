@@ -19,6 +19,7 @@ import { UserSession } from "../user/UserSession";
       this.admin = UserSession.getUserSession();
     }
 
+      //Found a bug where if you update the site logs the user out.
     updateAdmin(form: NgForm) {
         const response = this.adminService.updateAdmin(form.value as Admin, this.admin.id).subscribe((data: Admin) => {
           alert("Admin details updated!");

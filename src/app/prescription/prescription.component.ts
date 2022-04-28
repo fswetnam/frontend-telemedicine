@@ -2,9 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { BehaviorSubject, Observable } from "rxjs";
 import { Doctor } from "../doctor/Doctor";
-import { DoctorService } from "../doctor/doctor.service";
+import { MessageType } from "../enumeration/MessageType";
 import { RequestStatus } from "../enumeration/RequestStatus";
 import { RequestType } from "../enumeration/RequestType";
+import { Message } from "../message/message";
+import { MessageService } from "../message/message.service";
 import { Patient } from "../patient/Patient";
 import { PatientService } from "../patient/patient.service";
 import { RequestService } from "../requests/request.service";
@@ -25,20 +27,17 @@ export class PrescriptionComponent implements OnInit{
     prescriptions!: Prescription[];
     prescription!: Prescription;
     doctors!: Doctor[];
-    message: any;
+    mess: any;
     patient: Patient;
     allRequests!: Requests[];
     userRequests: Requests[] = [];
-    constructor(private prescriptionService: PrescriptionService, 
-        private patientService: PatientService, private doctorService: DoctorService,
-        private requestService: RequestService) {}
+    constructor(private prescriptionService: PrescriptionService, private messageService: MessageService,
+        private patientService: PatientService,private requestService: RequestService) {}
 
     ngOnInit(): void {
         this.patient = UserSession.getUserSession();
         this.getRequests();
         this.getPrescriptions();
-        console.log(this.prescriptions);
-        console.log(this.userRequests);
     }
 
     public getRequests() {
@@ -71,7 +70,7 @@ export class PrescriptionComponent implements OnInit{
         let pS = form.value as Prescription;
         pS.patient = this.patient;
         const response =  this.prescriptionService.savePrescription(form.value as Prescription).subscribe((data) => {
-            this.message = data;
+            this.mess = data;
             form.reset();
             window.location.reload;
         });
@@ -80,21 +79,42 @@ export class PrescriptionComponent implements OnInit{
 
     public cancelRequest(request: Requests){
         this.requestService.deleteRequest(request.id).subscribe((data) => {
-            this.message = data;
-            window.location.reload();
+            this.mess = data;
+            if(request.requestStatus == RequestStatus.WAITING){
+                let d = new Date();
+                let message = <Message>{
+                    sender_id: this.patient.id.toString(),
+                    receiver_id: request.doctor.id.toString(),
+                    date: null,
+                    content: this.patient.fname + " " + this.patient.lname + " has canceled their refill request for prescription: Name: " + request.prescriptionRequest.name + ", Dosage:" + request.prescriptionRequest.dosages + ".",
+                    time: null,
+                    messageType: MessageType.EMAIL,
+                    subject: "PRECRIPTION REFILL REQUEST CANCELED",
+                    viewed: null
+                }
+                this.messageService.saveMessage(message).forEach(m => m)
+                alert("Request canceled")
+                this.ngOnInit();
+                window.location.reload();
+            } else {
+                alert("Request deleted")
+                this.ngOnInit();
+                window.location.reload();
+            }
+            
         });
     }
 
     public delete(prescription: Prescription){
         this.prescriptionService.deletePrescription(prescription.id).subscribe((data) => {
-            this.message = data;
+            this.mess = data;
             window.location.reload();
         });
     }
 
     public update(form: NgForm){
         const response = this.prescriptionService.updatePrescription(form.value as Prescription, this.prescription.id).subscribe((data) => {
-            this.message = data;
+            this.mess = data;
             form.reset();
             window.location.reload;
         });
@@ -115,10 +135,21 @@ export class PrescriptionComponent implements OnInit{
         doctor: prescription.doctorPrescribed,
         }
         const response =  this.requestService.saveRequest(req).subscribe((data) => {
-            this.message = data
-            this.ngOnInit();
-            window.location.reload;
+            this.mess = data
+            let d = new Date();
+            let message = <Message>{
+                sender_id: this.patient.id.toString(),
+                receiver_id: prescription.doctorPrescribed.id.toString(),
+                date: null,
+                content: this.patient.fname + " " + this.patient.lname + " has requested a refill for prescription: Name: " + prescription.name + ", Dosage: " + prescription.dosages,
+                time: null,
+                messageType: MessageType.EMAIL,
+                subject: "PRECRIPTION REFILL REQUESTED",
+                viewed: null
+            }
+        this.messageService.saveMessage(message).forEach(m => m)
             alert("Requested");
+            window.location.reload();
         });
         return response;
     }

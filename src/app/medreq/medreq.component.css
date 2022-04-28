@@ -10,13 +10,6 @@ body {
     margin: auto;
   }
 
-  .modal-fade{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
   /* Full-width input fields */
 input[type=text]{
   width: 100%;

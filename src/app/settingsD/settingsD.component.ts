@@ -24,6 +24,7 @@ import { UserSession } from "../user/UserSession";
       this.getAddress();
     }
 
+      //Found a bug where if you update the site logs the user out.
     updateDoctor(form: NgForm) {
         const response = this.doctorService.updateDoctor(form.value as Doctor, this.doctor.id).subscribe((data: Doctor) => {
             alert("Doctor details updated!");

@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Doctor } from '../doctor/Doctor';
 import { DoctorService } from '../doctor/doctor.service';
+import { MessageType } from '../enumeration/MessageType';
 import { RequestStatus } from '../enumeration/RequestStatus';
 import { RequestType } from '../enumeration/RequestType';
+import { Message } from '../message/message';
+import { MessageService } from '../message/message.service';
 import { Patient } from '../patient/Patient';
 import { PatientService } from '../patient/patient.service';
 import { Prescription } from '../prescription/Prescription';
@@ -22,11 +25,13 @@ export class MedreqComponent implements OnInit {
   patients: Patient[];
   prescriptions: Prescription[];
   userRequests: Requests[] = [];
-  message: any;
+  mess: any;
   prescription: Prescription;
+  confirmed = RequestStatus.CONFIRMED;
+  denied = RequestStatus.DENIED;
 
   constructor(private requestService: RequestService, private doctorService: DoctorService,
-     private patientService: PatientService, private prescriptionService: PrescriptionService) { }
+     private patientService: PatientService, private prescriptionService: PrescriptionService, private messageService: MessageService) { }
 
   
 
@@ -41,16 +46,40 @@ export class MedreqComponent implements OnInit {
   public denyRequest(request: Requests){
     request.requestStatus = RequestStatus.DENIED;
     this.requestService.updateRequest(request, request.id).subscribe((data) => {
-        this.message = data
-        window.location.reload;
+        this.mess = data
+        let d = new Date();
+      let message = <Message>{
+          sender_id: this.doctor.id.toString(),
+          receiver_id: request.requestingPatient.id.toString(),
+          date: null,
+          content: "Your refill request for " + request.prescriptionRequest.name + ", " + request.prescriptionRequest.dosages + " has been denied!",
+          time: null,
+          messageType: MessageType.EMAIL,
+          subject: "PRECRIPTION REFILL REQUEST DENIED",
+          viewed: null
+      }
+      this.messageService.saveMessage(message).forEach(m => m)
+      window.location.reload();
     });
 }
 
 public fulfillRequest(request: Requests){
   request.requestStatus = RequestStatus.CONFIRMED;
   this.requestService.updateRequest(request, request.id).subscribe((data) => {
-      this.message = data
-      window.location.reload;
+      this.mess = data
+      let d = new Date();
+      let message = <Message>{
+          sender_id: this.doctor.id.toString(),
+          receiver_id: request.requestingPatient.id.toString(),
+          date: null,
+          content: "Your refill request for " + request.prescriptionRequest.name + ", " + request.prescriptionRequest.dosages + " has been fulfilled!",
+          time: null,
+          messageType: MessageType.EMAIL,
+          subject: "PRECRIPTION REFILL REQUEST FULFILLED",
+          viewed: null
+      }
+      this.messageService.saveMessage(message).forEach(m => m)
+      window.location.reload();
   });
 }
 
@@ -93,7 +122,7 @@ public getPrescriptions(){
 }
 
 public prescribe(form: NgForm){
-  let myDoc = this.doctor;
+  //let myDoc = this.doctor;
   let myPat = this.patients.find(p => p.email === form.value.patientEmail) as Patient;
 
   let prescription = form.value as Prescription;
@@ -101,33 +130,84 @@ public prescribe(form: NgForm){
   prescription.doctorPrescribed = this.doctor;
   
   const response =  this.prescriptionService.savePrescription(prescription).subscribe((data) => {
-      this.message = data
-      window.location.reload;
+      this.mess = data
       form.reset();
-      this.ngOnInit();
+      let d = new Date();
+      let message = <Message>{
+          sender_id: this.doctor.id.toString(),
+          receiver_id: myPat.id.toString(),
+          date: null,
+          content: "Dr. " +  this.doctor.fname + " " + this.doctor.lname + " prescribed a new prescription!\n Prescription name: " 
+          + prescription.name + ", Dosage: " + prescription.dosages,
+          time: null,
+          messageType: MessageType.EMAIL,
+          subject: "NEW PRESCRIPTION",
+          viewed: null
+      }
+      this.messageService.saveMessage(message).forEach(m => m)
       window.location.reload();
   });
   return response;
 }
 
 public update(form: NgForm){
-  const response = this.prescriptionService.updatePrescription(form.value as Prescription, this.prescription.id).subscribe((data) => {
-      this.message = data;
+  let content = this.setContent(form);
+  this.prescriptionService.updatePrescription(form.value as Prescription, this.prescription.id).subscribe((data: Prescription) => {
+    let d = new Date();
+    let message = <Message>{
+        sender_id: this.doctor.id.toString(),
+        receiver_id: this.prescription.patient.id.toString(),
+        date: null,
+        content: content,
+        time: null,
+        messageType: MessageType.EMAIL,
+        subject: "PRESCRIPTION UPDATE",
+        viewed: null
+    }
+    this.messageService.saveMessage(message).forEach(m => m)
+      this.mess = data;
       form.reset();
       this.prescriptions = [];
       this.ngOnInit();
       window.location.reload();
   });
-  return response;
+}
+
+setContent(form: NgForm): string{
+  let content = "Dr. " +  this.doctor.fname + " " + this.doctor.lname + " updated a prescription!\n Prescription name: " 
+  + this.prescription.name + ", Dosage: " + this.prescription.dosages + "\nUpdated Prescription: " 
+  if(form.value.name != null && form.value.name != ""){
+    content = content + "Name: " + form.value.name;
+  }
+  if(form.value.dosages != null && form.value.dosages != ""){
+    content = content + ", Dosage: " + form.value.dosages;
+  }
+  if(form.value.description != null && form.value.description != ""){
+    content = content + ", Description: " + form.value.description;
+  }
+  return content;
 }
 
 public deletePrescription(prescription: Prescription){
+  let d = new Date();
+  let message = <Message>{
+      sender_id: this.doctor.id.toString(),
+      receiver_id: prescription.patient.id.toString(),
+      date: null,
+      content: "Dr. " +  this.doctor.fname + " " + this.doctor.lname + " removed a prescription!\n Prescription name: " 
+      + prescription.name + ", Dosage: " + prescription.dosages,
+      time: null,
+      messageType: MessageType.EMAIL,
+      subject: "PRESCRIPTION REMOVED",
+      viewed: null
+  }
+  this.messageService.saveMessage(message).forEach(m => m)
   let found = false;
   this.userRequests.forEach(req => {
     if(req.prescriptionRequest.id === prescription.id){
       this.requestService.deleteRequest(req.id).subscribe((data) => {
           this.prescriptionService.deletePrescription(prescription.id).subscribe((data) => {});
-          this.message = data;
+          this.mess = data;
           this.ngOnInit();
           window.location.reload();
       })
@@ -136,12 +216,34 @@ public deletePrescription(prescription: Prescription){
   })
   if(found == false){
     this.prescriptionService.deletePrescription(prescription.id).subscribe((data) => {
-      this.message = data;
+      this.mess = data;
       this.ngOnInit();
       window.location.reload();
     });
   }
 }
+
+public cancelRequest(request: Requests){
+  this.requestService.deleteRequest(request.id).subscribe((data) => {
+      this.mess = data;
+          let d = new Date();
+          let message = <Message>{
+              sender_id: this.doctor.id.toString(),
+              receiver_id: request.requestingPatient.id.toString(),
+              date: null,
+              content: "Dr. " + this.doctor.fname + " " + this.doctor.lname + " has deleted your request for prescription: Name: " + request.prescriptionRequest.name + ", Dosage:" + request.prescriptionRequest.dosages + ".",
+              time: null,
+              messageType: MessageType.EMAIL,
+              subject: "PRECRIPTION REFILL REQUEST DELETED",
+              viewed: null
+          }
+          this.messageService.saveMessage(message).forEach(m => m)
+          alert("Request deleted")
+          this.ngOnInit();
+          window.location.reload();
+  });
+}
+
 
 public setPrescription(prescription: Prescription){
   this.prescription = prescription;

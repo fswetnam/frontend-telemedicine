@@ -12,6 +12,12 @@ input[type=text], input[type=password] {
     background-color: #ddd;
     outline: none;
   }
+
+    
+  .title {
+    font-family: "Montserrat", sans-serif;
+    margin-left: 35%;
+  }
   
   /* Overwrite default styles of hr */
   hr {

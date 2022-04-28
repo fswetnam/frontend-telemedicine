@@ -111,6 +111,7 @@ export class SettingsPComponent implements OnInit {
     });  
   }
 
+  //Found a bug where if you update the site logs the user out.
   updatePatient(form: NgForm) {
     this.patientService.updatePatient(form.value as Patient, this.patient.id).subscribe((data: Patient) => {
       alert("Patient details updated!");

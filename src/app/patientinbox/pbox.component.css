@@ -1,6 +1,6 @@
 
 /* Full-width input fields */
-input[type=remail], input[type=subject], input[type=uemail] {
+input[type=semail], input[type=subject], input[type=uemail] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -61,6 +61,7 @@ button:hover {
     padding: 10px 18px;
     float: right;
     background-color: rgb(12, 165, 248);
+    color: white;
   }
 
   .message .viewedbtn {

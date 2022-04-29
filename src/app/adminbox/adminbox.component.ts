@@ -92,16 +92,23 @@ export class aBoxComponent implements OnInit {
 
   
   setMessage(m: Message, type: string){
-    this.userService.getUser(m.receiver_id).subscribe((data1: User)=>{
+    if(type === "received"){
+      this.userService.getUser(m.sender_id).subscribe((data1: User)=>{
       this.viewEmail = data1.email;
       this.viewSubject = m.subject;
       this.viewContent = m.content;
-      if(type === "received"){
-        this.messageService.viewedMessage(m).subscribe((data)=>{
-          console.log('viewed');
-        });
-      }
+      this.messageService.viewedMessage(m).subscribe((data)=>{
+      console.log('viewed');
+      });
     });
+  } else {
+    this.userService.getUser(m.receiver_id).subscribe((data2: User)=>{
+      this.viewEmail = data2.email;
+      this.viewSubject = m.subject;
+      this.viewContent = m.content;
+    });
+  }
+
   }
 
   closeView(){

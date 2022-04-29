@@ -3,6 +3,16 @@ body {
   margin: 0;
 }
 
+a:link, a:visited {
+  color: white;
+  text-align: center;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: red;
+}
+
 .sidebar {
   height: 100%;
   width: 0;
@@ -68,13 +78,13 @@ body {
   margin-left: 35%;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=selectFile], select {
   width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
+  padding: 12px 20px;
+  margin: 8px 0;
   display: inline-block;
-  border: none;
-  background: #f1f1f1;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
 input[type=text]:focus, input[type=password]:focus {
@@ -86,6 +96,14 @@ input[type=text]:focus, input[type=password]:focus {
 hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
+}
+
+.btn {
+  width: auto;
+  padding: 10px 18px;
+  float: right;
+  background-color: #1e6de2;
+  color: white;
 }
 
 .returnbtn{

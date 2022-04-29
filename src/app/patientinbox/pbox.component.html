@@ -70,104 +70,103 @@
   <br>
   <br>
 
-<div style="display:none" id="id02" class="container" name="mailReceived">
-  <h3 *ngIf="!received" class="message">No emails recieved</h3>
-  <ul *ngIf="received" class="message"  style="list-style-type:none;">
-    <li class="uemail">Sender</li>
-    <li class="date">Date</li>
-    <li class="subject">Subject</li>
-    <li class="content">Content</li>
-    <hr>
-  </ul>
-  <ul *ngFor="let message of this.received_messages; let i = index" style="list-style-type:none;">
-    <ul class="message" *ngIf="sentName[i] != '' && sentName[i] != null && sentName[i] != undefined "  style="list-style-type:none;">
-      <li *ngIf="!message.viewed" style="color:#f44336">NEW!</li>
-      <li class="uemail" >{{sentName[i]}}</li>
-      <li class="date">{{message?.date}}</li>
-      <li class="subject">{{message?.subject}}</li>
-      <li class="content" >
-        <input style="background: #bbd0e4; width:500px;" maxlength="25" placeholder={{message?.content}} readonly>
-      </li>
-      <li class="view">
-        <button *ngIf="!message.viewed" type="button" style="top:45px;" class="viewedbtn" onclick="document.getElementById('view').style.display='block';" (click)="setMessage(message, 'received')">View</button>
-        <button *ngIf="message.viewed" type="button" class="viewedbtn" onclick="document.getElementById('view').style.display='block';" (click)="setMessage(message, 'received')">View</button>
-        <!--<button type="button" class="viewedbtn" (click)="deleteMessage(message)">Delete</button>-->
-      </li>
-      <br>
-      <br>
-      <br>
+  <div style="display:none" id="id02" class="container" name="mailReceived">
+    <h3 *ngIf="!received" class="message">No emails recieved</h3>
+    <ul *ngIf="received" class="message"  style="list-style-type:none;">
+      <li class="uemail">Sender</li>
+      <li class="date">Date</li>
+      <li class="subject">Subject</li>
+      <li class="content">Content</li>
+      <hr>
     </ul>
-  </ul>
-</div>
-
-<div style="display:none" id="id03" class="container" name="mailSent">
-  <h3 *ngIf="!sent" class="message">No emails sent</h3>
-  <ul *ngIf="sent" class="message"  style="list-style-type:none;">
-    <li class="uemail">Receiver</li>
-    <li class="date">Date</li>
-    <li class="subject">Subject</li>
-    <li class="content">Content</li>
-    <hr>
-  </ul>
-  <ul *ngFor="let message of this.sent_messages; let i = index" style="list-style-type:none;">
-    <ul class="message" *ngIf="recieverName[i] != '' && recieverName[i] != null && recieverName[i] != undefined "  style="list-style-type:none;">
-      <li class="uemail">{{recieverName[i]}}</li>
-      <li class="date">{{message?.date}}</li>
-      <li class="subject">{{message?.subject}}</li>
-      <li class="content">
-        <input style="background: #bbd0e4; width:500px;" maxlength="25" placeholder={{message?.content}} readonly>
-      </li>
-      <li class="view">
-        <button type="button" class="viewedbtn" onclick="document.getElementById('view').style.display='block';" (click)="setMessage(message, 'sent')">View</button>
-        <!--<button type="button" class="viewedbtn" (click)="deleteMessage(message)">Delete</button>-->
-      </li>
-      <br>
-            <br>
-            <br>
+    <ul *ngFor="let message of this.received_messages; let i = index" style="list-style-type:none;">
+      <ul class="message" *ngIf="sentName[i] != '' && sentName[i] != null && sentName[i] != undefined "  style="list-style-type:none;">
+        <li *ngIf="!message.viewed" style="color:#f44336">NEW!</li>
+        <li class="uemail" >{{sentName[i]}}</li>
+        <li class="date">{{message?.date}}</li>
+        <li class="subject">{{message?.subject}}</li>
+        <li class="content" >
+          <input style="background: #bbd0e4; width:500px;" maxlength="25" placeholder={{message?.content}} readonly>
+        </li>
+        <li class="view">
+          <button *ngIf="!message.viewed" type="button" style="top:45px;" class="viewedbtn" onclick="document.getElementById('viewSender').style.display='block';" (click)="setMessage(message, 'received')">View</button>
+          <button *ngIf="message.viewed" type="button" class="viewedbtn" onclick="document.getElementById('viewSender').style.display='block';" (click)="setMessage(message, 'received')">View</button>
+          <!--<button type="button" class="viewedbtn" (click)="deleteMessage(message)">Delete</button>-->
+        </li>
+        <br>
+        <br>
+        <br>
+      </ul>
     </ul>
-  </ul>
-</div>
-</div>
-
-
-<div id="viewSender" class="modal" style="display:none;">
-  <div class="modal-content">
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('view').style.display='none'; window.location.reload();" (click)="closeView()" class="close" title="Close Modal">&times;</span>
-    </div>
-
-    <div class="container">
-
-      <label for="semail"><b>From:</b></label>
-      <br>
-      <input ngModel type="semail" placeholder="{{this.viewEmail}}" name="semail" readonly>
-      <br>
-      <label for="subject"><b>Subject:</b></label>
-      <input ngModel type="subject" placeholder="{{this.viewSubject}}" name="subject" readonly>
-      <br>
-      <label for="content"><b></b></label>
-      <textarea ngModel name="content" rows="10" cols="130" wrap="soft" maxlength="5000" placeholder="{{this.viewContent}}" readonly></textarea>
-    </div>
-    </div>
-</div>
-
-<div id="viewReceiver" class="modal" style="display:none;">
-  <div class="modal-content">
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('view').style.display='none'; window.location.reload();" (click)="closeView()" class="close" title="Close Modal">&times;</span>
-    </div>
-
-    <div class="container">
-
-      <label for="remail"><b>To:</b></label>
-      <input ngModel type="remail" placeholder="{{this.viewEmail}}" name="remail" readonly>
-      <label for="subject"><b>Subject:</b></label>
-      <input ngModel type="subject" placeholder="{{this.viewSubject}}" name="subject" readonly>
-      <label for="content"><b></b></label>
-      <textarea ngModel name="content" rows="10" cols="130" wrap="soft" maxlength="5000" placeholder="{{this.viewContent}}" readonly></textarea>
-    </div>
-    </div>
-</div>
-
+  </div>
+  
+  <div style="display:none" id="id03" class="container" name="mailSent">
+    <h3 *ngIf="!sent" class="message">No emails sent</h3>
+    <ul *ngIf="sent" class="message"  style="list-style-type:none;">
+      <li class="uemail">Receiver</li>
+      <li class="date">Date</li>
+      <li class="subject">Subject</li>
+      <li class="content">Content</li>
+      <hr>
+    </ul>
+    <ul *ngFor="let message of this.sent_messages; let i = index" style="list-style-type:none;">
+      <ul class="message" *ngIf="recieverName[i] != '' && recieverName[i] != null && recieverName[i] != undefined "  style="list-style-type:none;">
+        <li class="uemail">{{recieverName[i]}}</li>
+        <li class="date">{{message?.date}}</li>
+        <li class="subject">{{message?.subject}}</li>
+        <li class="content">
+          <input style="background: #bbd0e4; width:500px;" maxlength="25" placeholder={{message?.content}} readonly>
+        </li>
+        <li class="view">
+          <button type="button" class="viewedbtn" onclick="document.getElementById('viewReceiver').style.display='block';" (click)="setMessage(message, 'sent')">View</button>
+          <!--<button type="button" class="viewedbtn" (click)="deleteMessage(message)">Delete</button>-->
+        </li>
+        <br>
+              <br>
+              <br>
+      </ul>
+    </ul>
+  </div>
+  </div>
+  
+  
+  <div id="viewSender" class="modal" style="display:none;">
+    <div class="modal-content">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('viewSender').style.display='none'; window.location.reload();" (click)="closeView()" class="close" title="Close Modal">&times;</span>
+      </div>
+  
+      <div class="container">
+  
+        <label for="semail"><b>From:</b></label>
+        <br>
+        <input ngModel type="semail" placeholder="{{this.viewEmail}}" name="semail" readonly>
+        <br>
+        <label for="subject"><b>Subject:</b></label>
+        <input ngModel type="subject" placeholder="{{this.viewSubject}}" name="subject" readonly>
+        <br>
+        <label for="content"><b></b></label>
+        <textarea ngModel name="content" rows="10" cols="130" wrap="soft" maxlength="5000" placeholder="{{this.viewContent}}" readonly></textarea>
+      </div>
+      </div>
+  </div>
+  
+  <div id="viewReceiver" class="modal" style="display:none;">
+    <div class="modal-content">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('viewReceiver').style.display='none'; window.location.reload();" (click)="closeView()" class="close" title="Close Modal">&times;</span>
+      </div>
+  
+      <div class="container">
+  
+        <label for="remail"><b>To:</b></label>
+        <input ngModel type="remail" placeholder="{{this.viewEmail}}" name="remail" readonly>
+        <label for="subject"><b>Subject:</b></label>
+        <input ngModel type="subject" placeholder="{{this.viewSubject}}" name="subject" readonly>
+        <label for="content"><b></b></label>
+        <textarea ngModel name="content" rows="10" cols="130" wrap="soft" maxlength="5000" placeholder="{{this.viewContent}}" readonly></textarea>
+      </div>
+      </div>
+  </div>
   </body>
   </html>

@@ -97,7 +97,7 @@ export class dBoxComponent implements OnInit {
 
   setMessage(m: Message, type: string){
     if(type === "received"){
-      this.userService.getUser(m.receiver_id).subscribe((data1: User)=>{
+      this.userService.getUser(m.sender_id).subscribe((data1: User)=>{
       this.viewEmail = data1.email;
       this.viewSubject = m.subject;
       this.viewContent = m.content;
@@ -106,7 +106,7 @@ export class dBoxComponent implements OnInit {
       });
     });
   } else {
-    this.userService.getUser(m.sender_id).subscribe((data2: User)=>{
+    this.userService.getUser(m.receiver_id).subscribe((data2: User)=>{
       this.viewEmail = data2.email;
       this.viewSubject = m.subject;
       this.viewContent = m.content;

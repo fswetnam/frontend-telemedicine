@@ -99,22 +99,22 @@ export class pBoxComponent implements OnInit {
   }
 
   setMessage(m: Message, type: string){
-      if(type === "received"){
-        this.userService.getUser(m.receiver_id).subscribe((data1: User)=>{
-        this.viewEmail = data1.email;
-        this.viewSubject = m.subject;
-        this.viewContent = m.content;
-        this.messageService.viewedMessage(m).subscribe((data)=>{
-        console.log('viewed');
-        });
+    if(type === "received"){
+      this.userService.getUser(m.sender_id).subscribe((data1: User)=>{
+      this.viewEmail = data1.email;
+      this.viewSubject = m.subject;
+      this.viewContent = m.content;
+      this.messageService.viewedMessage(m).subscribe((data)=>{
+      console.log('viewed');
       });
-    } else {
-      this.userService.getUser(m.sender_id).subscribe((data2: User)=>{
-        this.viewEmail = data2.email;
-        this.viewSubject = m.subject;
-        this.viewContent = m.content;
-      });
-    }
+    });
+  } else {
+    this.userService.getUser(m.receiver_id).subscribe((data2: User)=>{
+      this.viewEmail = data2.email;
+      this.viewSubject = m.subject;
+      this.viewContent = m.content;
+    });
+  }
 
   }
 

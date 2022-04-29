@@ -1,6 +1,6 @@
 
 /* Full-width input fields */
-input[type=semail], input[type=subject], input[type=uemail] {
+input[type=semail], input[type=remail], input[type=subject], input[type=uemail] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;

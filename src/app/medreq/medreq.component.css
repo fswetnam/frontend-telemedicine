@@ -11,13 +11,13 @@ body {
   }
 
   /* Full-width input fields */
-input[type=text]{
+input[type=text], select{
   width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
+  padding: 12px 20px;
+  margin: 8px 0;
   display: inline-block;
-  border: none;
-  background: #f1f1f1;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
 input[type=text]:focus, input[type=password]:focus {
@@ -95,4 +95,23 @@ hr {
   .title {
     font-family: "Montserrat", sans-serif;
     margin-left: 35%;
+  }
+
+  .btn {
+    width: auto;
+    padding: 10px 18px;
+    float: right;
+    background-color: #1e6de2;
+    color: white;
+  }
+
+  .returnbtn{
+    background-color: #1e6de2;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 500px;
+    opacity: 0.9;
   }

@@ -33,7 +33,7 @@
   </div>
   <h1 class = "title">Medication Requests</h1>
   <div class ="container">
-    <div class = "card">
+    <div>
         <h3 class="title" style="display:inline;"> Requested Refills</h3>
         <div style="display: block; margin: 0 auto;">
             <table class="table">
@@ -52,17 +52,17 @@
                         <td> {{ r?.requestingPatient?.fname + " " + r.requestingPatient?.lname }}</td>
                         <td>
                           <div *ngIf="r?.requestStatus != confirmed && r?.requestStatus != denied">
-                            <span><button name="deny" style="margin: 5px 10px;" (click)="denyRequest(r)">Deny</button></span>
-                            <span><button name="fulfill" style="margin: 5px 10px;" (click)="fulfillRequest(r)">Fulfill</button></span>
+                            <span><button class="btn" name="deny" style="margin: 5px 10px;" (click)="denyRequest(r)">Deny</button></span>
+                            <span><button class="btn" name="fulfill" style="margin: 5px 10px;" (click)="fulfillRequest(r)">Fulfill</button></span>
                           </div>
                           <div *ngIf="r?.requestStatus == confirmed || r?.requestStatus == denied">
-                            <span><button name="delete" style="margin: 5px 10px;" (click)="cancelRequest(r)">Delete</button></span>
+                            <span><button class="btn" name="delete" style="margin: 5px 10px;" (click)="cancelRequest(r)">Delete</button></span>
                           </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <span><button name="viewPrescriptions" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewPrescriptions">View Prescribed Prescriptions</button></span>
+            <span><button class="returnbtn" name="viewPrescriptions" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewPrescriptions">View Prescribed Prescriptions</button></span>
         </div>
     </div>
   </div>
@@ -76,7 +76,7 @@
         </div>
         <div class="body">
           <div class ="container">
-            <div class = "card">
+            <div>
                 <h3 class="title" style="display:inline;"> Medication List</h3>
                 <div style="display: block; margin: 0 auto;">
                     <table class="table">
@@ -94,8 +94,8 @@
                                 <td> {{ ps?.description }}</td>
                                 <td> {{ ps?.patient?.fname + " " + ps.patient?.lname }}</td>
                                 <td>
-                                    <span><button name="update"  style="margin: 5px 10px;" (click)="setPrescription(ps)" data-toggle="modal" data-target="#updatePrescription">Update Prescription</button></span>
-                                    <span><button name="delete" style="margin: 5px 10px;" (click)="deletePrescription(ps)">Delete</button></span>
+                                    <span><button class="btn" name="delete" style="margin: 5px 10px;" (click)="deletePrescription(ps)">Delete</button></span>
+                                    <span><button class="btn" name="update"  style="margin: 5px 10px;" (click)="setPrescription(ps)" data-toggle="modal" data-target="#updatePrescription">Update Prescription</button></span>
                                 </td>
                             </tr>
                         </tbody>
@@ -104,7 +104,7 @@
             </div>
         </div>
         <div class="footer">
-          <span><button name="newPrescription" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newPrescription">New Prescription</button></span>
+          <span><button class="returnbtn" name="newPrescription" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newPrescription">New Prescription</button></span>
         </div>
       </div>
   
@@ -129,7 +129,7 @@
             <select ngModel name="patientEmail" id="patients" required>
             <option *ngFor="let patient of patients" [value]="patient.email">{{patient?.fname + " " + patient?.lname}}</option>
             </select>
-
+            <br>
             <label for="name"><b>Name</b></label>
             <input type="text" ngModel placeholder="Enter name of prescription..." name="name" id="name" required>
             <br>
@@ -142,7 +142,7 @@
           </form>
         </div>
         <div class="footer">
-          <button type="submit" data-dismiss="modal" [disabled]="newPrescriptionForm.invalid" (click)="prescribe(newPrescriptionForm)">Prescribe</button>
+          <button class="returnbtn" type="submit" data-dismiss="modal" [disabled]="newPrescriptionForm.invalid" (click)="prescribe(newPrescriptionForm)">Prescribe</button>
         </div>
       </div>
   
@@ -171,7 +171,7 @@
         </form>
       </div>
       <div class="footer">
-        <button type="submit" data-dismiss="modal" (click)="update(updatePrescriptionForm)">Update</button>
+        <button class="returnbtn" type="submit" data-dismiss="modal" (click)="update(updatePrescriptionForm)">Update</button>
       </div>
     </div>
 

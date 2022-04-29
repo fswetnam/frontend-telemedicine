@@ -31,7 +31,7 @@
   </div>
 
   <div class ="container">
-    <div class = "card">
+    <div>
         <h3 class="title" style="display:inline;"> Medication List</h3>
         <div style="display: block; margin: 0 auto;">
             <table class="table">
@@ -49,7 +49,7 @@
                         <td> {{ ps.description }}</td>
                         <td> {{ ps.doctorPrescribed.lname + " " + ps.doctorPrescribed.fname }}</td>
                         <td>
-                            <span><button name="request" style="margin: 5px 10px;" data-toggle="modal" data-target="#requestPrescription" (click)="refillPrescriptions(ps)">Request Refill</button></span>
+                            <span><button class="btn" name="request" style="margin: 5px 10px;" data-toggle="modal" data-target="#requestPrescription" (click)="refillPrescriptions(ps)">Request Refill</button></span>
                         </td>
                     </tr>
                 </tbody>
@@ -71,7 +71,7 @@
         </div>
         <div class="body">
           <div class ="container">
-            <div class = "card">
+            <div>
                 <h3 class="title" style="display:inline;"> Requested Refills</h3>
                 <div style="display: block; margin: 0 auto;">
                     <table class="table">
@@ -89,7 +89,7 @@
                                 <td> {{r.requestStatus }}</td>
                                 <td> {{ "Dr. " + r.doctor.fname + " " + r.doctor.lname }}</td>
                                 <td>
-                                    <span><button name="delete" style="margin: 5px 10px;" (click)="cancelRequest(r)">Cancel Request</button></span>
+                                    <span><button class="btn" name="delete" style="margin: 5px 10px;" (click)="cancelRequest(r)">Cancel Request</button></span>
                                 </td>
                             </tr>
                         </tbody>

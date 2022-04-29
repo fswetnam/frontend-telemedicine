@@ -18,6 +18,14 @@ input[type=text], input[type=password] {
     font-family: "Montserrat", sans-serif;
     margin-left: 35%;
   }
+
+  .btn {
+    width: auto;
+    padding: 10px 18px;
+    float: right;
+    background-color: #1e6de2;
+    color: white;
+  }
   
   /* Overwrite default styles of hr */
   hr {
@@ -35,13 +43,6 @@ input[type=text], input[type=password] {
     position: absolute;
     width: 750px;
     margin: auto;
-  }
-
-  .modal-fade{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
   }
 
   .sidebar {

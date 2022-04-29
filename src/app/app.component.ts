@@ -11,9 +11,11 @@ import { HttpClient} from "@angular/common/http";
 export class AppComponent {
   title = 'frontend';
   dashboardRoute = 'patientp';
+  username = '';
 
   constructor(private http: HttpClient) {
     this.dashboardRoute = this.getDashboardPath()
+    this.username = this.getUsername()
   }
 
   isLoggedIn() {
@@ -27,8 +29,18 @@ export class AppComponent {
   logout() {
     UserSession.setUserSession(null)
     localStorage.clear()
+  }
 
-
+  getUsername() {
+    let user = UserSession.getUserSession();
+    
+    if(user.fname) {
+      return user.fname + " " + user.lname;
+    } else if(user.email) {
+      return user.email
+    } else {
+      "User Options"
+    }
   }
 
   getDashboardPath() {

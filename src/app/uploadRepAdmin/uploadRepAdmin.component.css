@@ -9,7 +9,7 @@ a:link, a:visited {
   display: inline-block;
 }
 
-a:hover, a:active {
+a:active {
   background-color: red;
 }
 

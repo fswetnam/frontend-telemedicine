@@ -33,20 +33,23 @@ export class AppComponent {
 
   getUsername() {
     let user = UserSession.getUserSession();
-    
+    if(user === null || user === undefined){
+      return "User Options"
+    }
+
     if(user.fname) {
       return user.fname + " " + user.lname;
     } else if(user.email) {
       return user.email
     } else {
-      "User Options"
+      return "User Options"
     }
   }
 
   getDashboardPath() {
     let user = UserSession.getUserSession()
-    if(user === null){
-      return 'home';
+    if(user === null || user === undefined){
+      return 'home'; 
     }
     if(user.userType === UserType.PATIENT) {
       return 'patientp'

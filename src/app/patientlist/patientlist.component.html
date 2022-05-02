@@ -54,15 +54,13 @@
   </form>
 
   <div id="viewPatient" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-  
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Patient Information</h4>
+          <h4 class="title">Patient Information</h4>
         </div>
-        <div class="modal-body">
+        <div class="body">
           <hr>
           <br>
           <h4>Details</h4> <br>
@@ -77,10 +75,9 @@
           <br>
           <hr>
           <h4>Prescriptions</h4> <br>
-            <hr>
-            <ul *ngFor="let pre of this.patient.prescriptions" class="list-group" >
+            <ul *ngFor="let pre of this.patient.prescriptions" class="list-group" style="list-style-type:none;">
               <li>Name: {{pre.name}} </li>
-              <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
+              <ol style="list-style-type:none; padding-bottom: 0;">
                 <li>Dosage: {{pre.dosages}}</li> 
                 <li>Description: {{pre.description}}</li>
               </ol>
@@ -100,7 +97,6 @@
             </ul>
       </div>
       </div>
-    </div>
   </div>
 
 </body>

@@ -12,6 +12,9 @@ import { ReportService } from '../report/report.service';
 import { HttpClient} from "@angular/common/http";
 import { UserSession } from '../user/UserSession';
 import { User } from '../user/User';
+import { MessageType } from '../enumeration/MessageType';
+import { Message } from '../message/message';
+import { MessageService } from '../message/message.service';
 
 @Component({
   selector: 'app-uploadrep',
@@ -28,13 +31,12 @@ export class UploadrepComponent implements OnInit {
 
   selectedFiles?: FileList;
   currentFile?: File;
-  progress = 0;
-  message = '';
+  repLength = 0;
 
 
   constructor(private doctorService: DoctorService, private reportService: ReportService, 
     private patientService: PatientService, private adminService: AdminService,
-    private http: HttpClient) { }
+    private http: HttpClient, private messageService: MessageService) { }
 
 
   openNav(){
@@ -61,6 +63,7 @@ export class UploadrepComponent implements OnInit {
 
   getReports(){
     this.reports = [];
+    this.repLength = 0;
     this.reportService.getReports().subscribe((data: Report[])=>{
       console.log(data);
       this.doctorService.getReportIds(this.doctor.id).subscribe((repIds) => {
@@ -69,6 +72,7 @@ export class UploadrepComponent implements OnInit {
           repIds.forEach(id =>{
             if(rep.id == id){
               this.reports.push(rep);
+              this.repLength++;
             }
           })
         })
@@ -143,17 +147,55 @@ export class UploadrepComponent implements OnInit {
   sendReport(form: NgForm){
     if(form.value.adminId !== null && form.value.adminId !== undefined && form.value.adminId != ''){
       this.reportService.sendReport(form.value.adminId, this.report).subscribe((data) => {
+        let d = new Date();
+          let message = <Message>{
+            sender_id: this.doctor.id.toString(),
+            receiver_id: form.value.adminId.toString(),
+            date: null,
+            content: "Dr. " + this.doctor.fname + " " + this.doctor.lname + " has sent a report. Name: " + this.report.name,
+            time: null,
+            messageType: MessageType.EMAIL,
+            subject: "NEW REPORT(DOCTOR)",
+            viewed: null
+        }
+        this.messageService.saveMessage(message).forEach(m => m)
         if(form.value.patientId !== null && form.value.patientId !== undefined && form.value.patientId != ''){
           this.reportService.sendReport(form.value.patientId, this.report).subscribe();
+          let d = new Date();
+          let message = <Message>{
+            sender_id: this.doctor.id.toString(),
+            receiver_id: form.value.patientId.toString(),
+            date: null,
+            content: "Dr. " + this.doctor.fname + " " + this.doctor.lname + " has sent a report. Name: " + this.report.name,
+            time: null,
+            messageType: MessageType.EMAIL,
+            subject: "NEW REPORT(DOCTOR)",
+            viewed: null
+        }
+        this.messageService.saveMessage(message).forEach(m => m)
         }
         form.reset();
         alert("Report sent!");
       });
     }
     if(form.value.patientId !== null && form.value.patientId !== undefined && form.value.patientId != ''){
-      this.reportService.sendReport(form.value.patientId, this.report).subscribe();
+      this.reportService.sendReport(form.value.patientId, this.report).subscribe((data) =>{
+        let d = new Date();
+          let message = <Message>{
+            sender_id: this.doctor.id.toString(),
+            receiver_id: form.value.patientId.toString(),
+            date: null,
+            content: "Dr. " + this.doctor.fname + " " + this.doctor.lname + " has sent a report. Name: " + this.report.name,
+            time: null,
+            messageType: MessageType.EMAIL,
+            subject: "NEW REPORT(DOCTOR)",
+            viewed: null
+        }
+        this.messageService.saveMessage(message).forEach(m => m)
       form.reset();
       alert("Report sent!");
+      });
+      
     }
   }
 

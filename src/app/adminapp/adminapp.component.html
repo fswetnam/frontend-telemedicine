@@ -20,10 +20,10 @@
 			<button class = "openbtn" (click) = "openNav()">&#9776;</button>
 		  </div>
 		  <div class ="container">
-			<div class = "card">
-				<h3 class="text-center" style="display:inline;"> Requested Appointments</h3>
-				<div class = "card-body" style="display: block; margin: 0 auto;">
-					<table class="table table-striped">
+			<div>
+				<h3 class="title" style="display:inline;"> Requested Appointments</h3>
+				<div style="display: block; margin: 0 auto;">
+					<table class="table">
 						<thead>
 							<th> Date/Time Scheduled</th>
 							<th> Doctor </th>
@@ -38,13 +38,18 @@
 								<td> {{ r.requestingPatient.fname + " " + r.requestingPatient.lname }}</td>
 								<td> {{ r.requestStatus }}</td>
 								<td>
-									<span><button name="deny" style="margin: 5px 10px;" (click)="denyRequest(r)">Deny</button></span>
-									<span><button name="fulfill" style="margin: 5px 10px;" (click)="fulfillRequest(r)">Fulfill</button></span>
+									<div *ngIf="r.requestStatus == waiting">
+										<span><button class="btn" name="deny" style="margin: 5px 10px;" (click)="denyRequest(r)">Deny</button></span>
+										<span><button class="btn" name="fulfill" style="margin: 5px 10px;" (click)="fulfillRequest(r)">Fulfill</button></span>
+									</div>
+									<div *ngIf="r.requestStatus != waiting">
+										<span><button class="btn" name="remove" style="margin: 5px 10px;" (click)="removeRequest(r)">Remove</button></span>
+									</div>
 								</td>
 							</tr>
 						</tbody>
 					</table>
-					<span><button name="newAppointment" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newAppointment">New Appointment</button></span>
+					<span><button class="sapp" name="newAppointment" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newAppointment">New Appointment</button></span>
 				</div>
 			</div>
 		  </div>
@@ -54,9 +59,9 @@
 		  
 			  <!-- Modal content-->
 			  <div class="modal-content">
-				<div class="modal-header">
+				<div class="header">
 				  <button type="button" class="close" data-dismiss="modal">&times;</button>
-				  <h4 class="modal-title">Save Appointment</h4>
+				  <h4 class="title">Save Appointment</h4>
 				</div>
 				<div class="modal-body">
 				  <form #newAppointmentForm="ngForm">
@@ -72,7 +77,7 @@
 					<input type="time" ngModel placeholder="Select Time" name="timeScheduled" id="timeScheduled" required>
 					<br>
 
-					<label for="appointmentType"><b>RequestType</b></label>
+					<label for="appointmentType"><b>Appointment Type</b></label>
 					<select name="appointmentType" ngModel id="appointmentType" placeHolder="Select an Appointment Type..." required>
 					<option value = "ONLINE">Online</option>
 					<option value="IN_PERSON">In-Person</option>
@@ -81,20 +86,20 @@
 					<label for="purpose"><b>Purpose</b></label>
 					<input type="text" ngModel placeholder="Enter Purpose" name="purpose" id="purpose" required>
 					<br>
-					<label for="doctorEmail">Select the doctor: </label>
+					<label for="doctorEmail"><b>Doctor: </b></label>
 					<select ngModel name="doctorEmail" id="doctors" required>
-					<option *ngFor="let doctor of doctors" [value]="doctor.email">Dr.{{doctor.lname}}</option>
+					<option *ngFor="let doctor of doctors" [value]="doctor?.email">Dr.{{doctor?.fname}} {{doctor?.lname}}</option>
 				   </select>
 				   <br>
-				   <label for="patientEmail">Select the patient: </label>
+				   <label for="patientEmail"><b>Patient: </b></label>
 				   <select ngModel name="patientEmail" id="patients" required>
-				   <option *ngFor="let patient of patients" [value]="patient.email">{{patient.fname}} {{patient.lname}}</option>
+				   <option *ngFor="let patient of patients" [value]="patient?.email">{{patient?.fname}} {{patient?.lname}}</option>
 				  </select>
 					<br>
 				  </form>
 				</div>
-				<div class="modal-footer">
-				  <button type="submit" data-dismiss="modal" [disabled]="newAppointmentForm.invalid" (click)="save(newAppointmentForm)">Save</button>
+				<div class="footer">
+				  <button class="sapp" type="submit" data-dismiss="modal" [disabled]="newAppointmentForm.invalid" (click)="save(newAppointmentForm)">Save</button>
 				</div>
 			  </div>
 		  

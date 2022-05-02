@@ -56,7 +56,7 @@
                             <span><button class="btn" name="fulfill" style="margin: 5px 10px;" (click)="fulfillRequest(r)">Fulfill</button></span>
                           </div>
                           <div *ngIf="r?.requestStatus == confirmed || r?.requestStatus == denied">
-                            <span><button class="btn" name="delete" style="margin: 5px 10px;" (click)="cancelRequest(r)">Delete</button></span>
+                            <span><button class="btn" name="delete" style="margin: 5px 10px;" (click)="removeRequest(r)">Remove</button></span>
                           </div>
                         </td>
                     </tr>

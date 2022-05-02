@@ -14,6 +14,10 @@ import { UserSession } from '../user/UserSession';
 import { RequestStatus } from '../enumeration/RequestStatus';
 import { NgForm } from '@angular/forms';
 import { RequestType } from '../enumeration/RequestType';
+import { MessageType } from '../enumeration/MessageType';
+import { Message } from '../message/message';
+import { MessageService } from '../message/message.service';
+import { parseISO } from 'date-fns';
 @Component({
   selector: "app-adminapp",
   templateUrl: "./adminapp.component.html",
@@ -25,12 +29,16 @@ export class AdminappComponent implements OnInit{
     patients!: Patient[];
     appointments: Appointment[] = [];
     requests: Requests[];
-    message: any;
+    mess: any;
     doctors!: Doctor[];
     admin: Admin;
+    waiting = RequestStatus.WAITING;
+    confirmed = RequestStatus.CONFIRMED;
+    denied = RequestStatus.DENIED;
+  
 
     constructor(private requestService: RequestService, private doctorService: DoctorService,
-      private patientService: PatientService, private adminService: AdminService) { }
+      private patientService: PatientService, private adminService: AdminService, private messageService: MessageService) { }
  
    
  
@@ -70,16 +78,51 @@ export class AdminappComponent implements OnInit{
     public denyRequest(request: Requests){
       request.requestStatus = RequestStatus.DENIED;
       this.requestService.updateRequest(request, request.id).subscribe((data) => {
-          this.message = data
-          window.location.reload;
+          this.mess = data
+          let d = new Date();
+          let message = <Message>{
+              sender_id: this.admin.id.toString(),
+              receiver_id: request.requestingPatient.id.toString(),
+              date: null,
+              content: "Your " + request.appointmentRequest.appointmentType + " appointment request for " + parseISO(request.appointmentRequest.dateScheduled) + " with Dr. " + request.doctor.fname + " " + request.doctor.lname + " has been denied!",
+              time: null,
+              messageType: MessageType.EMAIL,
+              subject: "APPOINTMENT REQUEST DENIED",
+              viewed: null
+          }
+          this.messageService.saveMessage(message).forEach(m => m)
+          this.ngOnInit();
       });
   }
   
   public fulfillRequest(request: Requests){
     request.requestStatus = RequestStatus.CONFIRMED;
     this.requestService.updateRequest(request, request.id).subscribe((data) => {
-        this.message = data
-        window.location.reload;
+        this.mess = data
+        let d = new Date();
+      let message = <Message>{
+          sender_id: this.admin.id.toString(),
+          receiver_id: request.requestingPatient.id.toString(),
+          date: null,
+          content: "Your " + request.appointmentRequest.appointmentType + " appointment request for " + parseISO(request.appointmentRequest.dateScheduled) + " with Dr. " + request.doctor.fname + " " + request.doctor.lname + " has been fulfilled!",
+          time: null,
+          messageType: MessageType.EMAIL,
+          subject: "APPOINTMENT REQUEST FULFILLED",
+          viewed: null
+      }
+      let message1 = <Message>{
+        sender_id: this.admin.id.toString(),
+        receiver_id: request.doctor.id.toString(),
+        date: null,
+        content: "You have have an " + request.appointmentRequest.appointmentType + " appointment scheduled with " + request.requestingPatient.fname + " " + request.requestingPatient.lname + " on " + parseISO(request.appointmentRequest.dateScheduled),
+        time: null,
+        messageType: MessageType.EMAIL,
+        subject: "APPOINTMENT SCHEDULED",
+        viewed: null
+    }
+      this.messageService.saveMessage(message).forEach(m => m)
+      this.messageService.saveMessage(message1).forEach(m => m)
+      this.ngOnInit();
     });
   }
   
@@ -108,16 +151,44 @@ export class AdminappComponent implements OnInit{
         admin: this.admin
     }
 
-    console.log(r);
+    
     
     const response =  this.requestService.saveRequest(r).subscribe((data) => {
-        this.message = data;
+        this.mess = data;
+        let d = new Date();
+        let message = <Message>{
+            sender_id: this.admin.id.toString(),
+            receiver_id: r.requestingPatient.id.toString(),
+            date: null,
+            content: "You have have an " + r.appointmentRequest.appointmentType + " appointment with Dr. " + r.doctor.fname + " " + r.doctor.lname + " on " + parseISO(r.appointmentRequest.dateScheduled),
+            time: null,
+            messageType: MessageType.EMAIL,
+            subject: "APPOINTMENT SCHEDULED",
+            viewed: null
+        }
+        let message1 = <Message>{
+          sender_id: this.admin.id.toString(),
+          receiver_id: r.doctor.id.toString(),
+          date: null,
+          content: "You have have an " + r.appointmentRequest.appointmentType + " appointment with " + r.requestingPatient.fname + " " +  r.requestingPatient.lname + " on " + parseISO(r.appointmentRequest.dateScheduled),
+          time: null,
+          messageType: MessageType.EMAIL,
+          subject: "APPOINTMENT SCHEDULED",
+          viewed: null
+      }
+        this.messageService.saveMessage(message).forEach(m => m)
+        this.messageService.saveMessage(message1).forEach(m => m)
+        window.location.reload();
         form.reset();
-        this.getRequests();
-        window.location.reload;
     });
     return response;
 }
+
+  removeRequest(request: Requests){
+    this.requestService.hideRequestFromAdmin(request.id).subscribe((data) => {
+      this.ngOnInit();
+  });
+  }
 
 
     openNav(){

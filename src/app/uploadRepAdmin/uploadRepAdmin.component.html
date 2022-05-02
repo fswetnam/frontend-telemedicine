@@ -24,7 +24,7 @@
 			<div>
 				<h3 class="title" style="display:inline;"> Files </h3>
 				<div style="display: block; margin: 0 auto;">
-					<table class="table">
+					<table *ngIf="repLength > 0" class="table">
 						<thead>
 							<th>Name</th>
 							<th>Type</th>
@@ -42,6 +42,8 @@
 							</tr>
 						</tbody>
 					</table>
+					<br>
+					<h3 *ngIf="repLength == 0" class="title" style="display:inline;"> No Files Found </h3>
 					<span><button class="returnbtn" name="newReport" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newReport">Upload New File</button></span>
 				</div>
 			</div>
@@ -82,8 +84,8 @@
 					<br> -->
 				</form>
 			  </div>
-			  <div class="modal-footer">
-				<button class="returnbtn" type="submit" data-dismiss="modal" [disabled]="newReportForm.invalid" (click)="uploadReport(newReportForm)">Upload File</button>
+			  <div class="footer">
+				<button class="returnbtn" type="submit" style="text-align: center;" data-dismiss="modal" [disabled]="newReportForm.invalid" (click)="uploadReport(newReportForm)">Upload File</button>
 			  </div>
 			</div>
 		

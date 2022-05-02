@@ -244,6 +244,12 @@ public cancelRequest(request: Requests){
   });
 }
 
+removeRequest(request: Requests){
+  this.requestService.hideRequestFromDoctor(request.id).subscribe((data) => {
+    this.ngOnInit();
+});
+}
+
 
 public setPrescription(prescription: Prescription){
   this.prescription = prescription;

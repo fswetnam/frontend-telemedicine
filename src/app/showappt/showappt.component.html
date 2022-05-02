@@ -74,7 +74,7 @@
     <mwl-calendar-month-view (dayClicked)="dayClicked($event.day)" *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="eventList">
     </mwl-calendar-month-view>
   
-    <mwl-calendar-week-view (eventClicked)="eventClicked($event)" *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="eventList" [dayStartHour]="9" [dayEndHour]="21" [weekStartsOn]="1" [excludeDays]="[0,6]">
+    <mwl-calendar-week-view (eventClicked)="eventClicked($event)" *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="eventList" [dayStartHour]="9" [dayEndHour]="21">
     </mwl-calendar-week-view>
   
     <mwl-calendar-day-view (eventClicked)="eventClicked($event)" *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="eventList" [dayStartHour]="9" [dayEndHour]="21">

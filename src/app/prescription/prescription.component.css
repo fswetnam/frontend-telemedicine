@@ -41,8 +41,18 @@ input[type=text], input[type=password] {
   .modal-content{
     text-align: center;
     position: absolute;
-    width: 750px;
-    margin: auto;
+    width: 1000px;
+    left: 50%;
+    right: 50%;
+    top: 400px;
+    transform: translate(-50%, -50%);
+  }
+
+  .modal-fade{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .sidebar {

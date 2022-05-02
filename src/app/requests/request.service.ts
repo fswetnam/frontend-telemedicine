@@ -48,4 +48,12 @@ export class RequestService{
     public updateRequest(request: Requests, id: number) {
         return this.http.put(`${this.url}/id=${id}`, request, {responseType: 'text' as 'json'});
     }
+
+    public hideRequestFromAdmin(id: number){
+        return this.http.put(`${this.url}/id=${id}/hide-admin`, {responseType: 'text' as 'json'});
+    }
+
+    public hideRequestFromDoctor(id: number){
+        return this.http.put(`${this.url}/id=${id}/hide-doctor`, {responseType: 'text' as 'json'});
+    }
 }

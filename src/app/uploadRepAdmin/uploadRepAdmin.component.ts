@@ -5,6 +5,9 @@ import { Admin } from '../admin/Admin';
 import { AdminService } from '../admin/admin.service';
 import { Doctor } from '../doctor/Doctor';
 import { DoctorService } from '../doctor/doctor.service';
+import { MessageType } from '../enumeration/MessageType';
+import { Message } from '../message/message';
+import { MessageService } from '../message/message.service';
 import { Patient } from '../patient/Patient';
 import { PatientService } from '../patient/patient.service';
 import { Report } from '../report/Report';
@@ -26,13 +29,13 @@ export class UploadRepAdmin implements OnInit {
 
   selectedFiles?: FileList;
   currentFile?: File;
-  progress = 0;
-  message = '';
+  repLength = 0;
+
 
 
   constructor(private doctorService: DoctorService, private reportService: ReportService, 
     private patientService: PatientService, private adminService: AdminService,
-    private http: HttpClient) { }
+    private http: HttpClient, private messageService: MessageService) { }
 
 
   openNav(){
@@ -59,6 +62,7 @@ export class UploadRepAdmin implements OnInit {
 
   getReports(){
     this.reports = [];
+    this.repLength = 0;
     this.reportService.getReports().subscribe((data: Report[])=>{
       console.log(data);
       this.adminService.getReportIds(this.admin.id).subscribe((repIds) => {
@@ -67,6 +71,7 @@ export class UploadRepAdmin implements OnInit {
           repIds.forEach(id =>{
             if(rep.id == id){
               this.reports.push(rep);
+              this.repLength++;
             }
           })
         })
@@ -129,17 +134,55 @@ export class UploadRepAdmin implements OnInit {
   sendReport(form: NgForm){
     if(form.value.doctorId !== null && form.value.doctorId !== undefined && form.value.doctorId != ''){
       this.reportService.sendReport(form.value.doctorId, this.report).subscribe((data) => {
+        let d = new Date();
+          let message = <Message>{
+            sender_id: this.admin.id.toString(),
+            receiver_id: form.value.doctorId.toString(),
+            date: null,
+            content: "Administrator " + this.admin.fname + " " + this.admin.lname + " has sent a report. Name: " + this.report.name,
+            time: null,
+            messageType: MessageType.EMAIL,
+            subject: "NEW REPORT(ADMIN)",
+            viewed: null
+        }
+        this.messageService.saveMessage(message).forEach(m => m)
         if(form.value.patientId !== null && form.value.patientId !== undefined && form.value.patientId != ''){
           this.reportService.sendReport(form.value.patientId, this.report).subscribe();
+          let d = new Date();
+          let message = <Message>{
+            sender_id: this.admin.id.toString(),
+            receiver_id: form.value.patientId.toString(),
+            date: null,
+            content: "Administrator " + this.admin.fname + " " + this.admin.lname + " has sent a report. Name: " + this.report.name,
+            time: null,
+            messageType: MessageType.EMAIL,
+            subject: "NEW REPORT(ADMIN)",
+            viewed: null
+        }
+        this.messageService.saveMessage(message).forEach(m => m)
         }
         form.reset();
         alert("Report sent!");
       });
     }
     if(form.value.patientId !== null && form.value.patientId !== undefined && form.value.patientId != ''){
-      this.reportService.sendReport(form.value.patientId, this.report).subscribe();
-      form.reset();
-      alert("Report sent!");
+      this.reportService.sendReport(form.value.patientId, this.report).subscribe((data)=>{
+        let d = new Date();
+          let message = <Message>{
+            sender_id: this.admin.id.toString(),
+            receiver_id: form.value.patientId.toString(),
+            date: null,
+            content: "Administrator " + this.admin.fname + " " + this.admin.lname + " has sent a report. Name: " + this.report.name,
+            time: null,
+            messageType: MessageType.EMAIL,
+            subject: "NEW REPORT(ADMIN)",
+            viewed: null
+        }
+        this.messageService.saveMessage(message).forEach(m => m) 
+        form.reset();
+        alert("Report sent!");
+      });
+     
     }
   }
 

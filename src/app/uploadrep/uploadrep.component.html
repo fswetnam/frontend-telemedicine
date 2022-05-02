@@ -32,11 +32,12 @@
     <button class = "openbtn" (click) = "openNav()">&#9776;</button>
   </div>
 
-  <div class ="container">
+  <div  class ="container">
     <div>
-        <h3 class="title" style="display:inline;"> Files </h3>
+        <h3 class="title" style="display:inline; text-align: center;"> Files </h3>
+        <hr>
         <div style="display: block; margin: 0 auto;">
-            <table class="table">
+            <table *ngIf="repLength > 0" class="table">
                 <thead>
                     <th>Name</th>
                     <th>Type</th>
@@ -54,6 +55,8 @@
                     </tr>
                 </tbody>
             </table>
+            <h3 *ngIf="repLength == 0" class="title" style="display:inline;"> No Files Found </h3>
+            <br>
             <span><button class="returnbtn" name="newReport" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newReport">Upload New File</button></span>
         </div>
     </div>
@@ -93,8 +96,8 @@
           -->
         </form>
       </div>
-      <div class="modal-footer">
-        <button class="returnbtn" type="submit" data-dismiss="modal" [disabled]="newReportForm.invalid" (click)="uploadReport(newReportForm)">Upload File</button>
+      <div class="footer">
+        <button class="returnbtn" style="text-align: center;" type="submit" data-dismiss="modal" [disabled]="newReportForm.invalid" (click)="uploadReport(newReportForm)">Upload File</button>
       </div>
     </div>
 

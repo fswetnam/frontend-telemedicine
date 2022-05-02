@@ -8,8 +8,11 @@ import { Appointment } from '../appointment/Appointment';
 import { AppointmentService } from '../appointment/appointment.service';
 import { Doctor } from '../doctor/Doctor';
 import { DoctorService } from '../doctor/doctor.service';
+import { MessageType } from '../enumeration/MessageType';
 import { RequestStatus } from '../enumeration/RequestStatus';
 import { RequestType } from '../enumeration/RequestType';
+import { Message } from '../message/message';
+import { MessageService } from '../message/message.service';
 import { Patient } from '../patient/Patient';
 import { PatientService } from '../patient/patient.service';
 import { RequestService } from '../requests/request.service';
@@ -32,9 +35,12 @@ export class SappComponent implements OnInit {
   appointments: Appointment[] = [];
   admins!: Admin[];
   requests: Requests[] = [];
-  message: any;
+  mess: any;
   patient: Patient;
   eventList: CalendarEvent[] = [];
+  waiting = RequestStatus.WAITING;
+  confirmed = RequestStatus.CONFIRMED;
+  denied = RequestStatus.DENIED;
 
   viewDate: Date = new Date();
   specifiedDay: Date;
@@ -53,7 +59,8 @@ export class SappComponent implements OnInit {
   }
 
   constructor(private doctorService: DoctorService, private appointmentService: AppointmentService,
-     private patientService: PatientService, private adminService: AdminService, private requestService: RequestService) { }
+     private patientService: PatientService, private adminService: AdminService, private requestService: RequestService,
+     private messageService: MessageService) { }
 
   
   ngOnInit() {
@@ -134,9 +141,45 @@ public getRequests(){
 }
 
 public cancelRequest(request: Requests){
+  let ad = this.admins.find(a => a.email === "fswetnam@gmail.com");
   this.requestService.deleteRequest(request.id).subscribe((data) => {
-      this.message = data;
-      this.getRequests();
+      this.mess = data;
+      if(request.requestStatus == RequestStatus.WAITING){
+          let d = new Date();
+          let message = <Message>{
+              sender_id: this.patient.id.toString(),
+              receiver_id: ad.id.toString(),
+              date: null,
+              content: this.patient.fname + " " + this.patient.lname + " has canceled their request for an " + request.appointmentRequest.appointmentType + " appointment with Dr. " + request.doctor.fname + " " + request.doctor.lname + 
+              " at " + parseISO(request.appointmentRequest.dateScheduled),
+              time: null,
+              messageType: MessageType.EMAIL,
+              subject: "APPOINTMENT REQUEST CANCELED",
+              viewed: null
+          }
+          this.messageService.saveMessage(message).forEach(m => m)
+          alert("Request canceled")
+          window.location.reload();
+      } else if(request.requestStatus == RequestStatus.CONFIRMED){
+          let d = new Date();
+          let message = <Message>{
+              sender_id: this.patient.id.toString(),
+              receiver_id: request.doctor.id.toString(),
+              date: null,
+              content: this.patient.fname + " " + this.patient.lname + " has canceled their " + request.appointmentRequest.appointmentType + " appointment on " + parseISO(request.appointmentRequest.dateScheduled),
+              time: null,
+              messageType: MessageType.EMAIL,
+              subject: "APPOINTMENT CANCELED",
+              viewed: null
+          }
+          this.messageService.saveMessage(message).forEach(m => m)
+          alert("Appointment Canceled")
+          window.location.reload();
+      } else {
+        alert("Request Deleted")
+          window.location.reload();
+      }
+      
   });
 }
 
@@ -159,8 +202,22 @@ public newRequest(form: NgForm){
   admin: ad
   }
   const response =  this.requestService.saveRequest(req).subscribe((data) => {
-      this.message = data;
+    let d = new Date();
+    let message = <Message>{
+        sender_id: this.patient.id.toString(),
+        receiver_id: ad.id.toString(),
+        date: null,
+        content: this.patient.fname + " " + this.patient.lname + " has requested an " + app.appointmentType  + " appointment with Dr. " +
+        doctor.fname + " " + doctor.lname + " at " + parseISO(app.dateScheduled),
+        time: null,
+        messageType: MessageType.EMAIL,
+        subject: "NEW APPOINTMENT REQUEST",
+        viewed: null
+    }
+    this.messageService.saveMessage(message).forEach(m => m)
+      this.mess = data;
       this.getRequests();
+      form.reset();
       alert("Requested");
   });
   return response;
@@ -194,7 +251,7 @@ public delete(req: Requests){
     };
     const response =  this.appointmentService.saveAppointment(app).subscribe((data) => {
       this.doctorService.addPatient(myDoc.id, this.patient).subscribe((data) => {});
-      this.message = data
+      this.mess = data
       form.reset();
       this.getAppointments();
       alert("Appointment has been set!")

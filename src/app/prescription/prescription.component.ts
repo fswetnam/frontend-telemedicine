@@ -31,6 +31,8 @@ export class PrescriptionComponent implements OnInit{
     patient: Patient;
     allRequests!: Requests[];
     userRequests: Requests[] = [];
+    waiting = RequestStatus.WAITING;
+
     constructor(private prescriptionService: PrescriptionService, private messageService: MessageService,
         private patientService: PatientService,private requestService: RequestService) {}
 

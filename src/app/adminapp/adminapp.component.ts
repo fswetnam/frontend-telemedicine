@@ -18,6 +18,7 @@ import { MessageType } from '../enumeration/MessageType';
 import { Message } from '../message/message';
 import { MessageService } from '../message/message.service';
 import { parseISO } from 'date-fns';
+import { CalendarView, CalendarEvent } from 'angular-calendar';
 @Component({
   selector: "app-adminapp",
   templateUrl: "./adminapp.component.html",
@@ -36,6 +37,27 @@ export class AdminappComponent implements OnInit{
     confirmed = RequestStatus.CONFIRMED;
     denied = RequestStatus.DENIED;
     reqLength = 0;
+    doctor: Doctor;
+    doctorRequests: Requests[];
+    request: Requests;
+
+    //Scheduler
+    viewDate: Date = new Date();
+    specifiedDay: Date;
+    
+    view: CalendarView;
+    CalendarView = CalendarView;
+  
+    events: CalendarEvent[] = [];
+  
+    displayStyle = "none";
+  
+    $event: any;
+    eventList: CalendarEvent[] = [];
+  
+    setViewDate(view: CalendarView) {
+      this.view = view;
+    }
   
 
     constructor(private requestService: RequestService, private doctorService: DoctorService,
@@ -191,6 +213,64 @@ export class AdminappComponent implements OnInit{
     this.requestService.hideRequestFromAdmin(request.id).subscribe((data) => {
       this.ngOnInit();
   });
+  }
+
+  setView(doctor: Doctor, request: Requests){
+    this.doctor = doctor;
+    this.request = request;
+    this.getDoctorsAppointment();
+    this.events = this.eventList;
+    alert("Select view on right: Month, Week, Day");
+  }
+
+  viewDoctorSchedule(form: NgForm){
+    if(form.value.doctorEmail == null || form.value.doctorEmail == undefined || form.value.doctorEmail == ""){
+      alert("Select a doctor!");
+    } else {
+      this.doctor = this.doctors.find(d => d.email === form.value.doctorEmail) as Doctor;
+      this.getDoctorsAppointment();
+      this.events = this.eventList;
+      alert("Select view on right: Month, Week, Day");
+    }
+    
+  }
+
+  resetView(){
+    this.doctor = null;
+    this.request = null;
+    this.eventList = [];
+    this.events = [];
+  }
+
+  public getDoctorsAppointment(){
+    this.doctorRequests = [];
+    this.doctorService.getRequests(this.doctor.id).subscribe((data: Requests[]) =>{
+      this.doctorRequests = data;
+      data.forEach(d=>{
+        if(d.requestStatus === RequestStatus.CONFIRMED && d.requestType === RequestType.APPOINTMENT_REQUEST){
+          this.requestService.getAppointmentRequest(d.id).subscribe((data: Appointment) => {
+            this.requestService.getPatient(d.id).subscribe((p: Patient) => {
+              this.eventList.push(<CalendarEvent>  {
+                start: parseISO(data.dateScheduled),
+                title: data.appointmentType + " " + data.purpose + " " + p.fname + " " + p.lname + ", " + p.email,
+                allDay: false
+              })
+                })
+            
+          })
+        }
+    });
+    })
+} 
+
+  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    console.log(date);
+    this.specifiedDay = date;
+  }
+  
+  eventClicked({event}: {event: CalendarEvent}): void {
+    this.$event = event;
+    console.log(this.$event);
   }
 
 

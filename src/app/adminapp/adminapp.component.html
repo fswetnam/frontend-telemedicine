@@ -1,7 +1,7 @@
 <html>
 	<body>
 		<div id = "mysideBar" class = "sidebar">
-			<a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav()">&times;</a>
+			<a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav();">&times;</a>
 			<div class = "overlay-content">
 				<a href = "adminp">Home</a>
                 <br>
@@ -39,10 +39,12 @@
 								<td> {{ r.requestStatus }}</td>
 								<td>
 									<div *ngIf="r.requestStatus == waiting">
+										<span><button class="btn" name="view" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewSchedule" (click)="setView(r?.doctor, r);">View Doctor's Schedule</button></span>
 										<span><button class="btn" name="deny" style="margin: 5px 10px;" (click)="denyRequest(r)">Deny</button></span>
 										<span><button class="btn" name="fulfill" style="margin: 5px 10px;" (click)="fulfillRequest(r)">Fulfill</button></span>
 									</div>
 									<div *ngIf="r.requestStatus != waiting">
+										<!--<span><button class="btn" name="view" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewSchedule" (click)="setView(r?.doctor, r);">View Doctor's Schedule</button></span>-->
 										<span><button class="btn" name="remove" style="margin: 5px 10px;" (click)="removeRequest(r)">Remove</button></span>
 									</div>
 								</td>
@@ -89,11 +91,13 @@
 					<br>
 					<label for="purpose"><b>Purpose</b></label>
 					<input type="text" ngModel placeholder="Enter Purpose" name="purpose" id="purpose" required>
-					<br>
 					<label for="doctorEmail"><b>Doctor: </b></label>
-					<select ngModel name="doctorEmail" id="doctors" required>
+					<select onchange="document.getElementById('v').style.display='block';" ngModel name="doctorEmail" id="docs" required>
 					<option *ngFor="let doctor of doctors" [value]="doctor?.email">Dr.{{doctor?.fname}} {{doctor?.lname}}</option>
 				   </select>
+				   <br>
+				   <label for="v"><b>Select Doctor before trying to view schedule! </b></label>
+				   <span><button id="v"  class="sapp" name="view" style="display:'none';" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewDoctorSchedule" (click)="viewDoctorSchedule(newAppointmentForm)">View Doctor's Schedule</button></span>
 				   <br>
 				   <label for="patientEmail"><b>Patient: </b></label>
 				   <select ngModel name="patientEmail" id="patients" required>
@@ -110,7 +114,150 @@
 			</div>
 		</div>
 			  
+		<div *ngIf="doctor != null && doctor != undefined" id="viewSchedule" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+			<div class="modal-dialog">
+		  
+			  <!-- Modal content-->
+			  <div class="modal-content">
+				<div class="header">
+				  <button type="button" class="close" data-dismiss="modal" (click)="resetView()" onclick="window.location.reload()">&times;</button>
+				  <h4 class="title">View Dr. {{this.doctor?.fname}} {{this.doctor?.lname}}'s Schedule</h4>
+				  <h4 class="title">Potential Appointment Date</h4>
+					<h3 class="title">{{request?.appointmentRequest.schedule | date:"short" }}</h3>
+				</div>
+				<div class="modal-body">
+
+					<div class="row text-center">
+
+						<div class="col-md-4">
+							<div class="btn-group">
+								<div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+									Previous
+								</div>
+								<div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+									Today
+								</div>
+								<div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+									Next
+								</div>
+							</div>
+						</div>
+					  
+						<div class="col-md-4">
+							<h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+						</div>
+					  
+						<div class="col-md-4">
+							<div class="btn-group">
+								<div class="btn btn-primary" (click)="setViewDate(CalendarView.Month)" [class.active]="view === CalendarView.Month">
+									Month
+								</div>
+								<div class="btn btn-primary" (click)="setViewDate(CalendarView.Week)" [class.active]="view === CalendarView.Week">
+									Week
+								</div>
+								<div class="btn btn-primary" (click)="setViewDate(CalendarView.Day)" [class.active]="view === CalendarView.Day">
+									Day
+								</div>
+							</div>
+						</div>
+					  
+					  
+					  </div>
+					  <div [ngSwitch]="view">
+					  
+						<mwl-calendar-month-view (dayClicked)="dayClicked($event.day)" *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="eventList">
+						</mwl-calendar-month-view>
+					  
+						<mwl-calendar-week-view (eventClicked)="eventClicked($event)" *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="eventList" [dayStartHour]="9" [dayEndHour]="21">
+						</mwl-calendar-week-view>
+					  
+						<mwl-calendar-day-view (eventClicked)="eventClicked($event)" *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="eventList" [dayStartHour]="9" [dayEndHour]="21">
+						</mwl-calendar-day-view>
+					  
+					  </div>
+					
+
+				</div>
+				<div class="footer">
+				  <button class="sapp" data-dismiss="modal" (click)="resetView()" onclick="window.location.reload()">Close</button>
+				</div>
+			  </div>
+		  
+			</div>
+		</div>
 		
+
+		<div *ngIf="doctor != null && doctor != undefined" id="viewDoctorSchedule" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+			<div class="modal-dialog">
+		  
+			  <!-- Modal content-->
+			  <div class="modal-content">
+				<div class="header">
+				  <button type="button" class="close" data-dismiss="modal" (click)="resetView()">&times;</button>
+				  <h4 class="title">View Dr. {{this.doctor?.fname}} {{this.doctor?.lname}}'s Schedule</h4>
+				  <h4 class="title">Potential Appointment Date</h4>
+					<h3 class="title">{{request?.appointmentRequest.schedule | date:"short" }}</h3>
+				</div>
+				<div class="modal-body">
+
+					<div class="row text-center">
+
+						<div class="col-md-4">
+							<div class="btn-group">
+								<div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+									Previous
+								</div>
+								<div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+									Today
+								</div>
+								<div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+									Next
+								</div>
+							</div>
+						</div>
+					  
+						<div class="col-md-4">
+							<h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+						</div>
+					  
+						<div class="col-md-4">
+							<div class="btn-group">
+								<div class="btn btn-primary" (click)="setViewDate(CalendarView.Month)" [class.active]="view === CalendarView.Month">
+									Month
+								</div>
+								<div class="btn btn-primary" (click)="setViewDate(CalendarView.Week)" [class.active]="view === CalendarView.Week">
+									Week
+								</div>
+								<div class="btn btn-primary" (click)="setViewDate(CalendarView.Day)" [class.active]="view === CalendarView.Day">
+									Day
+								</div>
+							</div>
+						</div>
+					  
+					  
+					  </div>
+					  <div [ngSwitch]="view">
+					  
+						<mwl-calendar-month-view (dayClicked)="dayClicked($event.day)" *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="eventList">
+						</mwl-calendar-month-view>
+					  
+						<mwl-calendar-week-view (eventClicked)="eventClicked($event)" *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="eventList" [dayStartHour]="9" [dayEndHour]="21">
+						</mwl-calendar-week-view>
+					  
+						<mwl-calendar-day-view (eventClicked)="eventClicked($event)" *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="eventList" [dayStartHour]="9" [dayEndHour]="21">
+						</mwl-calendar-day-view>
+					  
+					  </div>
+					
+
+				</div>
+				<div class="footer">
+				  <button class="sapp" data-dismiss="modal" (click)="resetView()">Close</button>
+				</div>
+			  </div>
+		  
+			</div>
+		</div>
 		
 </body>
 </html>

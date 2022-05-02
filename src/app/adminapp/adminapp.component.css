@@ -108,6 +108,8 @@ body {
   }
 
   .modal-content{
+    height: 80vh;
+    overflow-y: auto;
     text-align: center;
     position: absolute;
     width: 1000px;

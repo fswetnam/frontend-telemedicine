@@ -52,6 +52,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ResourceComponent } from './resources/resources.component';
 import {AuthInterceptor} from "./auth.interceptor";
 import { pBoxComponent } from './patientinbox/pbox.component';
+import { SearchComponent } from './search/search.component';
+import { SearchResultsComponent } from './search/searchResults.component';
 
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
@@ -94,6 +96,7 @@ const Routs: Routes = [
   {path: 'dBox', component:dBoxComponent},
   {path: 'resources', component:ResourceComponent},
   {path: 'pBox', component:pBoxComponent},
+  {path: 'search', component:SearchResultsComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 
@@ -144,6 +147,8 @@ export const interceptorProviders=
     dBoxComponent,
     ResourceComponent,
     pBoxComponent,
+    SearchComponent,
+    SearchResultsComponent
   ],
   imports: [
     BrowserModule,

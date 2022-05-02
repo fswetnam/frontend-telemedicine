@@ -18,7 +18,12 @@
               <li><a href = "#">COVID-19</a></li>
             </span>
             <span *ngIf="isLoggedIn()">
+              <li>
+                <search-component></search-component>
+              </li>
+              <span class="badge badge-info">
               <li class="nav-item dropdown">
+         
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{username}}</a>
                 <div class="dropdown-menu">
                   <a class="dropdown-item text-info" href="#" routerLink = {{dashboardRoute}}>Dashboard</a>
@@ -27,11 +32,14 @@
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item text-info" href="#" routerLink = "home" (click)="logout()">Logout</a>
                 </div>
+              
               </li>
+            </span>
+
             </span>
         </ul>
     </nav>
-    <a class = "cta" href= "#"><button>Contact Us</button></a>
+    <!-- <a class = "cta" href= "#"><button>Contact Us</button></a> -->
     </header>
   </body>
 

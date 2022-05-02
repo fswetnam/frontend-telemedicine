@@ -1,0 +1,44 @@
+* {
+    font-family: "Montserrat", sans-serif;
+}
+
+
+.welcome-message {
+    padding-top: 60px;
+    font-size: 16px;
+    margin-left: 35%;
+}
+
+.users {
+    padding-top: 10px;
+    margin-left: 15%;
+}
+
+.mid-page {
+    margin-left: 20px;
+    padding-top: 75px;
+    display: inline-block;
+    padding-bottom: 65px;
+}
+
+.covid-msg {
+    font-size: 30px;
+    margin-left: 450px;
+    text-align: center;
+    border: 3px solid rgba(0, 136, 169, 1);
+    padding: 10px;
+}
+
+.health-vid{
+    font-size: 25px;
+    margin-left: 33%;
+    padding-bottom: 10px;
+}
+
+.video {
+    padding-left: 10px;
+}
+
+.vid-1 {
+    margin-left: 5%;
+}

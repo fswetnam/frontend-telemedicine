@@ -32,6 +32,8 @@ export class PrescriptionComponent implements OnInit{
     allRequests!: Requests[];
     userRequests: Requests[] = [];
     waiting = RequestStatus.WAITING;
+    reqLength = 0;
+    presLength = 0;
 
     constructor(private prescriptionService: PrescriptionService, private messageService: MessageService,
         private patientService: PatientService,private requestService: RequestService) {}
@@ -44,6 +46,7 @@ export class PrescriptionComponent implements OnInit{
 
     public getRequests() {
         this.userRequests=[];
+        this.reqLength = 0;
         this.patientService.getRequests(this.patient.id).subscribe((data: Requests[]) => {
             data.forEach(req => {
                 this.requestService.getDoctor(req.id).subscribe((data: Doctor)=>{
@@ -51,6 +54,7 @@ export class PrescriptionComponent implements OnInit{
                 });
                 if(req.requestType === RequestType.PRESCRIPTION_REQUEST){
                     this.userRequests.push(<Requests> req);
+                    this.reqLength++;
                 }
             });
         });
@@ -65,6 +69,7 @@ export class PrescriptionComponent implements OnInit{
                     pre.doctorPrescribed = <Doctor> data;
                 });
             });
+            this.presLength = data.length;
         });
     }
 

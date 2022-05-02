@@ -39,6 +39,7 @@ export class pBoxComponent implements OnInit {
   ngOnInit() {
     this.user = UserSession.getUserSession();
     this.getMessages();
+    document.getElementById('startClick').click();
   }
 
    /**

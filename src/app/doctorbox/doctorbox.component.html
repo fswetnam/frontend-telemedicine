@@ -63,14 +63,16 @@
   <div class="buttonBox">
     <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Compose</button>
     <button onclick="document.getElementById('id03').style.display='block'; document.getElementById('id02').style.display='none';"  style="width:auto;">Sent Mail</button>
-    <button onclick="document.getElementById('id02').style.display='block'; document.getElementById('id03').style.display='none';"  style="width:auto;">Received Mail</button>
+    <button id="startClick" onclick="document.getElementById('id02').style.display='block'; document.getElementById('id03').style.display='none';"  style="width:auto;">Received Mail</button>
   </div>
 
   <br>
   <br>
-  <br>
 
   <div style="display:none" id="id02" class="container" name="mailReceived">
+    <h3 class="title" style="text-align: center;">Received Mail</h3>
+    <br>
+    <br>
     <h3 *ngIf="!received" class="message">No emails recieved</h3>
     <ul *ngIf="received" class="message"  style="list-style-type:none;">
       <li class="uemail">Sender</li>
@@ -101,6 +103,9 @@
   </div>
   
   <div style="display:none" id="id03" class="container" name="mailSent">
+    <h3 class="title" style="text-align: center;">Sent Mail</h3>
+    <br>
+    <br>
     <h3 *ngIf="!sent" class="message">No emails sent</h3>
     <ul *ngIf="sent" class="message"  style="list-style-type:none;">
       <li class="uemail">Receiver</li>

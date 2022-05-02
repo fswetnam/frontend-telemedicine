@@ -29,6 +29,7 @@ export class MedreqComponent implements OnInit {
   prescription: Prescription;
   confirmed = RequestStatus.CONFIRMED;
   denied = RequestStatus.DENIED;
+  reqLength = 0;
 
   constructor(private requestService: RequestService, private doctorService: DoctorService,
      private patientService: PatientService, private prescriptionService: PrescriptionService, private messageService: MessageService) { }
@@ -39,7 +40,6 @@ export class MedreqComponent implements OnInit {
     this.doctor = UserSession.getUserSession();
     this.getPatients();
     this.getRequests();
-    console.log(this.userRequests);
     this.getPrescriptions();
   }
 
@@ -86,16 +86,18 @@ public fulfillRequest(request: Requests){
 
 public getRequests() {
   this.userRequests = [];
+  this.reqLength = 0;
     this.doctorService.getRequests(this.doctor.id).subscribe((data: Requests[]) => {
       data.forEach(req => {
         if(req.requestType === RequestType.PRESCRIPTION_REQUEST && !this.userRequests.includes(req)){
           this.userRequests.push(<Requests> req);
+          this.reqLength++;
         }
         this.requestService.getPatient(req.id).subscribe((data: Patient)=>{
           req.requestingPatient = <Patient> data;
         });
-    });
-        window.location.reload;
+      });
+
     });
 }
 

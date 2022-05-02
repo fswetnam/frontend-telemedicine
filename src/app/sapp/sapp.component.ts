@@ -41,6 +41,7 @@ export class SappComponent implements OnInit {
   waiting = RequestStatus.WAITING;
   confirmed = RequestStatus.CONFIRMED;
   denied = RequestStatus.DENIED;
+  reqLength = 0;
 
   viewDate: Date = new Date();
   specifiedDay: Date;
@@ -113,10 +114,12 @@ export class SappComponent implements OnInit {
 
 public getRequests(){
   this.requests = [];
+  this.reqLength = 0;
   this.patientService.getRequests(this.patient.id).subscribe((data: Requests[])=>{
     data.forEach(d => {
       if(d.requestType === RequestType.APPOINTMENT_REQUEST){
         this.requests.push(d);
+        this.reqLength++;
       }
       if(d.requestStatus === RequestStatus.CONFIRMED && d.requestType === RequestType.APPOINTMENT_REQUEST){
         this.requestService.getAppointmentRequest(d.id).subscribe((data: Appointment) => {

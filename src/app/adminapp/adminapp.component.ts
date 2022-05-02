@@ -35,6 +35,7 @@ export class AdminappComponent implements OnInit{
     waiting = RequestStatus.WAITING;
     confirmed = RequestStatus.CONFIRMED;
     denied = RequestStatus.DENIED;
+    reqLength = 0;
   
 
     constructor(private requestService: RequestService, private doctorService: DoctorService,
@@ -62,8 +63,10 @@ export class AdminappComponent implements OnInit{
     }
 
     public getRequests(){
+      this.reqLength = 0;
       this.adminService.getAppointments(this.admin.id).subscribe((data: Requests[]) => {
           this.requests = data;
+          this.reqLength = data.length;
           this.requests.forEach(r => {
             this.requestService.getDoctor(r.id).subscribe((data: Doctor) => {
               r.doctor = data;

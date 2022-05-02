@@ -54,6 +54,7 @@
   </form>
 
   <div id="viewPatient" class="modal fade" role="dialog">
+    <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
         <div class="header">
@@ -88,7 +89,7 @@
           <h4>Medical Conditions</h4> <br>
             <ul *ngFor="let hist of this.patient.medicalHistory" class="list-group" >
               <li>Name: {{hist.name}} </li>
-              <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
+              <ol style="list-style-type:none; padding-bottom: 0;">
                 <li>Doctor Diagnosed: {{hist.doctorDiagnosed}}</li>
                 <li>Date Diagnosed: {{hist.dateDiagnosed}}</li>
                 <li>Description: {{hist.description}}</li>
@@ -97,6 +98,7 @@
             </ul>
       </div>
       </div>
+    </div>
   </div>
 
 </body>

@@ -32,7 +32,7 @@
   </div>
 
   <div>
-  <span><button class="sapp" name="viewRequest" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewRequests">View Requests</button></span> <br>
+  <span *ngIf="reqLength > 0"><button class="sapp" name="viewRequest" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#viewRequests">View Requests</button></span> <br>
   <span><button class="sapp" name="newRequests" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#requestAppointment">New Appointment Request</button></span>
           <br>
 

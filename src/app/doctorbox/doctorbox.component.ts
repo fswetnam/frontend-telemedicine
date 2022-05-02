@@ -36,6 +36,7 @@ export class dBoxComponent implements OnInit {
   ngOnInit() {
     this.user = UserSession.getUserSession();
     this.getMessages();
+    document.getElementById('startClick').click();
   }
 
    /**

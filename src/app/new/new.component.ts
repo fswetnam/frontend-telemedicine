@@ -26,7 +26,7 @@ export class NewComponent implements OnInit {
         this.message = data;
         UserSession.setUserSession(data);
         alert("Account Successfully Created!");
-        window.location.href="home";
+        window.location.href="patientp";
         this.message = data;
       });
       return response;

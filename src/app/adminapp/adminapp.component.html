@@ -21,8 +21,8 @@
 		  </div>
 		  <div class ="container">
 			<div>
-				<h3 class="title" style="display:inline;"> Requested Appointments</h3>
-				<div style="display: block; margin: 0 auto;">
+				<div *ngIf="reqLength > 0" style="display: block; margin: 0 auto;">
+					<h3 class="title" style="display:inline;"> Requested Appointments</h3>
 					<table class="table">
 						<thead>
 							<th> Date/Time Scheduled</th>
@@ -49,6 +49,10 @@
 							</tr>
 						</tbody>
 					</table>
+					<span><button class="sapp" name="newAppointment" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newAppointment">New Appointment</button></span>
+				</div>
+				<div *ngIf="reqLength == 0">
+					<h3 class="title" style="display:inline;"> There are no current appointment requests!</h3>
 					<span><button class="sapp" name="newAppointment" style="display: block; margin: 0 auto;" data-toggle="modal" data-target="#newAppointment">New Appointment</button></span>
 				</div>
 			</div>

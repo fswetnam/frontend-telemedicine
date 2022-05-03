@@ -54,6 +54,7 @@ import {AuthInterceptor} from "./auth.interceptor";
 import { pBoxComponent } from './patientinbox/pbox.component';
 import { SearchResultsComponent } from './search/searchResults.component';
 import { SearchComponent } from './search/search.component';
+import { CovidComponent } from './covid/covid.component';
 
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
@@ -97,6 +98,7 @@ const Routs: Routes = [
   {path: 'resources', component:ResourceComponent},
   {path: 'pBox', component:pBoxComponent},
   {path: 'search', component:SearchResultsComponent},
+  {path: 'covid', component:CovidComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 
@@ -148,6 +150,7 @@ export const interceptorProviders=
     ResourceComponent,
     pBoxComponent,
     SearchResultsComponent,
+    CovidComponent,
     SearchComponent
   ],
   imports: [

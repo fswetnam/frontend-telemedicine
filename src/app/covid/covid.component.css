@@ -1,0 +1,18 @@
+h1 {
+    padding-left: 86px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    background-color: white;
+  }
+
+  p {
+    background-color: white;
+  }
+
+  div {
+    color:black;
+    width: 1000px;
+    padding: 10px;
+    border: 5px solid rgba(0, 136, 169, 1);
+    margin-left: 150px;
+  }

@@ -53,6 +53,7 @@ import { ResourceComponent } from './resources/resources.component';
 import {AuthInterceptor} from "./auth.interceptor";
 import { pBoxComponent } from './patientinbox/pbox.component';
 import { SearchResultsComponent } from './search/searchResults.component';
+import { SearchComponent } from './search/search.component';
 
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
@@ -146,7 +147,8 @@ export const interceptorProviders=
     dBoxComponent,
     ResourceComponent,
     pBoxComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

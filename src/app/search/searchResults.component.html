@@ -1,3 +1,41 @@
-<h1>
-    Results
-</h1>
+<html>
+<body>
+    <div id = "mysideBar" class = "sidebar">
+        <a href = "javascript:void(0)" class = "closebtn" (click) = "closeNav()">&times;</a>
+        <div class = "overlay-content">
+            <a href = "patientp">Home</a>
+                <br>
+          <a href = "sapp">Request an Appointment</a>
+          <br>
+          <a href = "message">Messages</a>
+          <br>
+          <a href = "prescription">My Medications</a>
+          <br>
+          <a href = "precords">Files</a>
+          <br>
+          <a href = "pBox">Inbox</a>
+        <br>
+          <a href = "settingsP">Account Details</a>
+          <br>
+          <a href = "vchat">Video Chat</a>
+        </div>
+      </div>
+      <div class = "main">
+        <button class = "openbtn" (click) = "openNav()">&#9776;</button>
+      </div>
+  <div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Results</h1>
+            <h2>Users:</h2>
+            <hr/>
+            <ul>
+                <li *ngFor="let user of users" >
+                    {{user['fname']}}
+                </li>
+            </ul>
+        </div>
+    </div>
+  </div>
+</body>
+</html>

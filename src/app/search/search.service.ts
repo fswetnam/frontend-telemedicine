@@ -5,8 +5,12 @@ import { Observable} from "rxjs";
 @Injectable({providedIn: 'root'})
 export class SearchService{
     
-    public messageUrl = "http://localhost:8080/message/";
+    public searchUrl = "http://localhost:8080/search/";
  
     constructor(private http: HttpClient){}
+
+    searchTerm(term) {
+        return this.http.get(`${this.searchUrl}` + term);
+    }
 
 }

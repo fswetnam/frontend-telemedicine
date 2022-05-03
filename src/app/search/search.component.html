@@ -1,0 +1,17 @@
+<div>
+  <form [formGroup]="form" (submit)="submit()" class="form-inline">
+    <div class="form-group mr-2">
+      <input 
+          placeholder="Search"
+          #searchInput
+          formControlName="search"
+          name="search"
+          id="search" 
+          type="text" 
+          class="form-control">
+    </div>
+    <div>
+        <button type="submit" class="btn btn-info">Search</button>
+    </div>
+  </form>
+</div>

@@ -36,7 +36,7 @@
         <div class="col-3">
             <div class="row mt-5">
                 <div class="col-12">
-                    <h2>Patients</h2>
+                    <h2>Select Patient from below to view chats:</h2>
                       <div class="list-group" >
                         <a *ngFor="let patient of patients" (click)="selectPatient($event, patient)" class="list-group-item list-group-item-action patient-select" id="{{ 'patient-' + patient.id }}" >
                             {{patient.fname}}

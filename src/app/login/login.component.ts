@@ -4,6 +4,7 @@ import { HttpClient} from "@angular/common/http";
 import { User } from '../user/User';
 import { UserSession } from '../user/UserSession';
 import { UserType } from '../enumeration/UserType';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -12,13 +13,19 @@ import { UserType } from '../enumeration/UserType';
 
 export class LoginComponent implements OnInit  {
 
+<<<<<<< HEAD
     private loginUrl = 'https://glacial-dusk-86085.herokuapp.com/login'
+=======
+
+    private loginUrl = 'http://localhost:8080/login'
+>>>>>>> a81faddcffd83b6b99221f7739c3161cba321b81
 
     form = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.minLength(1)]),
         password: new FormControl('', [Validators.required, Validators.minLength(1)]),
     });
 
+    reload: any;
     messageThreads = []
     messages = []
 
@@ -26,9 +33,10 @@ export class LoginComponent implements OnInit  {
     @ViewChild('passwordInput') passwordInput;
 
     response:any;
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient,private router: Router){}
 
     ngOnInit(): void {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
 
     get f(){
@@ -49,7 +57,7 @@ export class LoginComponent implements OnInit  {
             userpassword: this.form.value.password
         }
 
-        this.getAccessToken(authDetails);
+
 
 
         this.http.post(`${this.loginUrl}`, authDetails, {responseType: 'text' as 'json'}).subscribe((data) => {
@@ -66,7 +74,8 @@ export class LoginComponent implements OnInit  {
             let errorMsg = JSON.parse(error.error)
             alert(errorMsg.message)
         });
-
+      this.getAccessToken(authDetails);
 
     }
+
 }

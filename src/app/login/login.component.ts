@@ -13,12 +13,7 @@ import {Router} from "@angular/router";
 
 export class LoginComponent implements OnInit  {
 
-<<<<<<< HEAD
     private loginUrl = 'https://glacial-dusk-86085.herokuapp.com/login'
-=======
-
-    private loginUrl = 'http://localhost:8080/login'
->>>>>>> a81faddcffd83b6b99221f7739c3161cba321b81
 
     form = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.minLength(1)]),

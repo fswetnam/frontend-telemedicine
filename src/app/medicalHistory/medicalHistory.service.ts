@@ -6,7 +6,7 @@ import { MedicalHistory } from "./MedicalHistory";
 @Injectable({providedIn: 'root'})
 export class MedicalHistoryService{
     
-    public url = "https://glacial-dusk-86085.herokuapp.com/medical_history";
+    public url = "http://localhost:8080/medical_history";
 
     constructor(private http: HttpClient){}
 

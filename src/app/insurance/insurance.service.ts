@@ -6,7 +6,7 @@ import { Insurance } from "./Insurance";
 @Injectable({providedIn: 'root'})
 export class InsuranceService{
     
-    public url = "https://glacial-dusk-86085.herokuapp.com/insurance";
+    public url = "http://localhost:8080/insurance";
 
     constructor(private http: HttpClient){}
 

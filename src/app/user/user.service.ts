@@ -7,8 +7,8 @@ import { User } from "./User";
 @Injectable({providedIn: 'root'})
 export class UserService{
     
-    public url = "https://glacial-dusk-86085.herokuapp.com/user";
-    public registerUrl = "https://glacial-dusk-86085.herokuapp.com/register"
+    public url = "http://localhost:8080/user";
+    public registerUrl = "http://localhost:8080/register"
 
     constructor(private http: HttpClient){}
 
@@ -41,6 +41,6 @@ export class UserService{
     }
 
     public getVideoChatRoomIdByDoctor(doctor_id, patient_id) {
-        return this.http.get("https://glacial-dusk-86085.herokuapp.com/video-chat-room/" + doctor_id + "/" + patient_id);
+        return this.http.get("http://localhost:8080/video-chat-room/" + doctor_id + "/" + patient_id);
     }
 }

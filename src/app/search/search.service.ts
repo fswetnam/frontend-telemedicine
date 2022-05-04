@@ -5,7 +5,7 @@ import { Observable} from "rxjs";
 @Injectable({providedIn: 'root'})
 export class SearchService{
     
-    public searchUrl = "https://glacial-dusk-86085.herokuapp.com/search/";
+    public searchUrl = "http://localhost:8080/search/";
  
     constructor(private http: HttpClient){}
 

@@ -8,7 +8,7 @@ import { Prescription } from "./Prescription";
 @Injectable({providedIn: 'root'})
 export class PrescriptionService{
     
-    public url = "https://glacial-dusk-86085.herokuapp.com/prescription";
+    public url = "http://localhost:8080/prescription";
 
     constructor(private http: HttpClient){}
 

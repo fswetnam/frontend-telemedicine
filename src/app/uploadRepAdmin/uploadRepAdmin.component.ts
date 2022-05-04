@@ -96,7 +96,7 @@ export class UploadRepAdmin implements OnInit {
         password: form.value.password
     }
 
-    this.http.post('https://glacial-dusk-86085.herokuapp.com/login', authDetails, {responseType: 'text' as 'json'}).subscribe((data: User) => {
+    this.http.post('http://localhost:8080/login', authDetails, {responseType: 'text' as 'json'}).subscribe((data: User) => {
       console.log(data.id);
       console.log(UserSession.getUserSession().id);
         if(data.id == UserSession.getUserSession().id){

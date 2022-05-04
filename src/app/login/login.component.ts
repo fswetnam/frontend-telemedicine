@@ -12,7 +12,7 @@ import { UserType } from '../enumeration/UserType';
 
 export class LoginComponent implements OnInit  {
 
-    private loginUrl = 'http://localhost:8080/login'
+    private loginUrl = 'https://glacial-dusk-86085.herokuapp.com/login'
 
     form = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.minLength(1)]),
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit  {
         return this.form.controls;
     }
     public generateToken(request){
-      return this.http.post('http://localhost:8080/authenticate',request,{responseType: 'text'as 'json'});
+      return this.http.post('https://glacial-dusk-86085.herokuapp.com/authenticate',request,{responseType: 'text'as 'json'});
     }
     public getAccessToken(authRequest){
       let resp = this.generateToken(authRequest);

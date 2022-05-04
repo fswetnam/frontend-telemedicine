@@ -6,8 +6,8 @@ import { Message } from "./message";
 @Injectable({providedIn: 'root'})
 export class MessageService{
     
-    public messageUrl = "http://localhost:8080/message/";
-    public messagesUrl = "http://localhost:8080/messages/";
+    public messageUrl = "https://glacial-dusk-86085.herokuapp.com/message/";
+    public messagesUrl = "https://glacial-dusk-86085.herokuapp.com/messages/";
 
     constructor(private http: HttpClient){}
 

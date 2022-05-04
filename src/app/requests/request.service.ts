@@ -9,7 +9,7 @@ import { Requests } from "./Requests";
 @Injectable({providedIn: 'root'})
 export class RequestService{
     
-    public url = "http://localhost:8080/request"
+    public url = "https://glacial-dusk-86085.herokuapp.com/request"
 
     constructor(private http: HttpClient){}
 

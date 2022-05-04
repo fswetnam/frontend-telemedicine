@@ -8,7 +8,7 @@ import { Admin } from "./Admin";
 @Injectable({providedIn: 'root'})
 export class AdminService{
     
-    public url = "http://localhost:8080/admin";
+    public url = "https://glacial-dusk-86085.herokuapp.com/admin";
 
     constructor(private http: HttpClient){}
 

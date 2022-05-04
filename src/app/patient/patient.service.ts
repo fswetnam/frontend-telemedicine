@@ -13,7 +13,7 @@ import { Patient } from "./Patient";
 @Injectable({providedIn: 'root'})
 export class PatientService{
     
-    public url = "http://localhost:8080/patient";
+    public url = "https://glacial-dusk-86085.herokuapp.com/patient";
 
     constructor(private http: HttpClient){}
 

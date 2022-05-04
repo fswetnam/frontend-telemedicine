@@ -6,7 +6,7 @@ import { Report } from "./Report";
 @Injectable({providedIn: 'root'})
 export class ReportService{
     
-    public url = "http://localhost:8080/report";
+    public url = "https://glacial-dusk-86085.herokuapp.com/report";
 
     constructor(private http: HttpClient){}
 

@@ -6,7 +6,7 @@ import { Address } from "./Address";
 @Injectable({providedIn: 'root'})
 export class AddressService{
     
-    public url = "http://localhost:8080/address";
+    public url = "https://glacial-dusk-86085.herokuapp.com/address";
 
     constructor(private http: HttpClient){}
 

@@ -6,7 +6,6 @@ import {Routes, RouterModule } from '@angular/router'
 import { AppRoutingModule } from './app-routing.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { ScheduleModule, RecurrenceEditorAllModule, DayService, WeekService, MonthService, AgendaService } from '@syncfusion/ej2-angular-schedule';
-
 import { AppComponent } from './app.component';
 import { HomeComponent } from 'src/home/home.component';
 import { NewComponent } from './new/new.component';
@@ -55,6 +54,7 @@ import { pBoxComponent } from './patientinbox/pbox.component';
 import { SearchResultsComponent } from './search/searchResults.component';
 import { SearchComponent } from './search/search.component';
 import { CovidComponent } from './covid/covid.component';
+import { ContactUsComponent } from './contactUs/contactUs.component';
 
 const Routs: Routes = [
   {path: 'home', component:HomeComponent},
@@ -99,6 +99,7 @@ const Routs: Routes = [
   {path: 'pBox', component:pBoxComponent},
   {path: 'search', component:SearchResultsComponent},
   {path: 'covid', component:CovidComponent},
+  {path: 'contactUs', component:ContactUsComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'},
 ];
 
@@ -151,6 +152,7 @@ export const interceptorProviders=
     pBoxComponent,
     SearchResultsComponent,
     CovidComponent,
+    ContactUsComponent,
     SearchComponent
   ],
   imports: [

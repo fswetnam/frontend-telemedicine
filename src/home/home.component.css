@@ -6,7 +6,7 @@
 .welcome-message {
     padding-top: 60px;
     font-size: 16px;
-    margin-left: 35%;
+    margin-left: 30%;
 }
 
 .users {
@@ -16,14 +16,13 @@
 
 .mid-page {
     margin-left: 20px;
+    margin-right: 20px;
     padding-top: 75px;
-    display: inline-block;
     padding-bottom: 65px;
 }
 
 .covid-msg {
     font-size: 30px;
-    margin-left: 450px;
     text-align: center;
     border: 3px solid rgba(0, 136, 169, 1);
     padding: 10px;
@@ -31,7 +30,7 @@
 
 .health-vid{
     font-size: 25px;
-    margin-left: 33%;
+    margin-left: 337.5px;
     padding-bottom: 10px;
 }
 
@@ -41,4 +40,8 @@
 
 .vid-1 {
     margin-left: 5%;
+}
+
+.vid-3 {
+    margin-left: 337.5px;
 }

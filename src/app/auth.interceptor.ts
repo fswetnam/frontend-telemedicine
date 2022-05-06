@@ -20,9 +20,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     //console.log(request)
-    //const re = '/login';
+    const re = '/login';
     const re1 = '/authenticate';
-    if (/*request.url.search(re) === -1 &&*/ request.url.search(re1) === -1) {
+    if (request.url.search(re) === -1 && request.url.search(re1) === -1) {
       //console.log(localStorage.getItem("JWT-TOKEN"));
       let tokenReq = request.clone({
         setHeaders: {
@@ -32,12 +32,12 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(tokenReq).pipe(tap(()=> {},
         (err: any) => {
           if( err instanceof HttpErrorResponse){
-            if (err.status === 401) {
+            if (err.status === 401)
               return;
-              alert("Your session has expired. Please login.");
-              UserSession.setUserSession(null);
-              this.router.navigateByUrl("/login");
-            }
+             alert("Your session has expired. Please login.");
+            UserSession.setUserSession(null);
+            this.router.navigateByUrl("/login");
+
           }
 
         }));

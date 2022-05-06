@@ -4,7 +4,6 @@ import { HttpClient} from "@angular/common/http";
 import { User } from '../user/User';
 import { UserSession } from '../user/UserSession';
 import { UserType } from '../enumeration/UserType';
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -20,7 +19,6 @@ export class LoginComponent implements OnInit  {
         password: new FormControl('', [Validators.required, Validators.minLength(1)]),
     });
 
-    reload: any;
     messageThreads = []
     messages = []
 
@@ -28,10 +26,9 @@ export class LoginComponent implements OnInit  {
     @ViewChild('passwordInput') passwordInput;
 
     response:any;
-    constructor(private http: HttpClient,private router: Router){}
+    constructor(private http: HttpClient){}
 
     ngOnInit(): void {
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
 
     get f(){
@@ -52,7 +49,7 @@ export class LoginComponent implements OnInit  {
             userpassword: this.form.value.password
         }
 
-
+        this.getAccessToken(authDetails);
 
 
         this.http.post(`${this.loginUrl}`, authDetails, {responseType: 'text' as 'json'}).subscribe((data) => {
@@ -69,8 +66,7 @@ export class LoginComponent implements OnInit  {
             let errorMsg = JSON.parse(error.error)
             alert(errorMsg.message)
         });
-      this.getAccessToken(authDetails);
+
 
     }
-
 }

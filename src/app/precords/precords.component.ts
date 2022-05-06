@@ -150,7 +150,7 @@ public getDoctors(){
         if(form.value.doctorId !== null && form.value.doctorId !== undefined && form.value.doctorId != ''){
           this.reportService.sendReport(form.value.doctorId, this.report).subscribe();
           let d = new Date();
-          let message = <Message>{
+          let message1 = <Message>{
             sender_id: this.patient.id.toString(),
             receiver_id: form.value.doctorId.toString(),
             date: null,
@@ -160,7 +160,7 @@ public getDoctors(){
             subject: "NEW REPORT(PATIENT)",
             viewed: null
         }
-        this.messageService.saveMessage(message).forEach(m => m)
+        this.messageService.saveMessage(message1).forEach(m => m)
         }
         form.reset();
         alert("Report sent!");
@@ -169,7 +169,7 @@ public getDoctors(){
     if(form.value.doctorId !== null && form.value.doctorId !== undefined && form.value.doctorId != ''){
       this.reportService.sendReport(form.value.doctorId, this.report).subscribe((data) =>{
         let d = new Date();
-          let message = <Message>{
+          let message2 = <Message>{
             sender_id: this.patient.id.toString(),
             receiver_id: form.value.doctorId.toString(),
             date: null,
@@ -179,7 +179,7 @@ public getDoctors(){
             subject: "NEW REPORT(PATIENT)",
             viewed: null
         }
-        this.messageService.saveMessage(message).forEach(m => m)
+        this.messageService.saveMessage(message2).forEach(m => m)
       form.reset();
       alert("Report sent!");
       });
